@@ -31,6 +31,8 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.Label warehouseLabel;
             System.Windows.Forms.Label truckLabel;
+            System.Windows.Forms.Label oOSLabel;
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Records));
             this.recordsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.gHBWFMDataSet = new FM.GHBWFMDataSet();
             this.recordsTableAdapter = new FM.GHBWFMDataSetTableAdapters.RecordsTableAdapter();
@@ -59,13 +61,18 @@
             this.label6 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.oOSListBox = new System.Windows.Forms.ListBox();
+            this.oOSBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.oOSTableAdapter = new FM.GHBWFMDataSetTableAdapters.OOSTableAdapter();
             warehouseLabel = new System.Windows.Forms.Label();
             truckLabel = new System.Windows.Forms.Label();
+            oOSLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.recordsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gHBWFMDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.statusBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.typeBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.statusBindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.oOSBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // warehouseLabel
@@ -80,11 +87,20 @@
             // truckLabel
             // 
             truckLabel.AutoSize = true;
-            truckLabel.Location = new System.Drawing.Point(17, 55);
+            truckLabel.Location = new System.Drawing.Point(17, 53);
             truckLabel.Name = "truckLabel";
             truckLabel.Size = new System.Drawing.Size(38, 13);
             truckLabel.TabIndex = 6;
             truckLabel.Text = "Truck:";
+            // 
+            // oOSLabel
+            // 
+            oOSLabel.AutoSize = true;
+            oOSLabel.Location = new System.Drawing.Point(26, 186);
+            oOSLabel.Name = "oOSLabel";
+            oOSLabel.Size = new System.Drawing.Size(73, 13);
+            oOSLabel.TabIndex = 41;
+            oOSLabel.Text = "OOS Reason:";
             // 
             // recordsBindingSource
             // 
@@ -105,6 +121,7 @@
             this.tableAdapterManager.BackupDataSetBeforeUpdate = false;
             this.tableAdapterManager.DatesTableAdapter = null;
             this.tableAdapterManager.DutyTableAdapter = null;
+            this.tableAdapterManager.OOSTableAdapter = null;
             this.tableAdapterManager.RecordsTableAdapter = this.recordsTableAdapter;
             this.tableAdapterManager.StatusTableAdapter = null;
             this.tableAdapterManager.TruckTableAdapter = null;
@@ -159,7 +176,7 @@
             // listBox1
             // 
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(74, 55);
+            this.listBox1.Location = new System.Drawing.Point(69, 53);
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(68, 56);
             this.listBox1.TabIndex = 0;
@@ -177,7 +194,7 @@
             this.statusListBox.FormattingEnabled = true;
             this.statusListBox.Location = new System.Drawing.Point(77, 123);
             this.statusListBox.Name = "statusListBox";
-            this.statusListBox.Size = new System.Drawing.Size(85, 43);
+            this.statusListBox.Size = new System.Drawing.Size(101, 43);
             this.statusListBox.TabIndex = 1;
             this.statusListBox.ValueMember = "ID";
             this.statusListBox.SelectedIndexChanged += new System.EventHandler(this.statusListBox_SelectedIndexChanged);
@@ -194,7 +211,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(376, 130);
+            this.label3.Location = new System.Drawing.Point(384, 130);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(65, 13);
             this.label3.TabIndex = 30;
@@ -203,7 +220,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(184, 130);
+            this.label4.Location = new System.Drawing.Point(194, 130);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(90, 13);
             this.label4.TabIndex = 31;
@@ -238,7 +255,7 @@
             // 
             // galsTextBox
             // 
-            this.galsTextBox.Location = new System.Drawing.Point(279, 127);
+            this.galsTextBox.Location = new System.Drawing.Point(289, 127);
             this.galsTextBox.Name = "galsTextBox";
             this.galsTextBox.Size = new System.Drawing.Size(71, 20);
             this.galsTextBox.TabIndex = 2;
@@ -288,7 +305,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(221, 178);
+            this.button1.Location = new System.Drawing.Point(323, 194);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 4;
@@ -298,7 +315,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(366, 178);
+            this.button2.Location = new System.Drawing.Point(448, 194);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 5;
@@ -306,11 +323,34 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // oOSListBox
+            // 
+            this.oOSListBox.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.recordsBindingSource, "OOS", true));
+            this.oOSListBox.DataSource = this.oOSBindingSource;
+            this.oOSListBox.DisplayMember = "Description";
+            this.oOSListBox.FormattingEnabled = true;
+            this.oOSListBox.Location = new System.Drawing.Point(102, 186);
+            this.oOSListBox.Name = "oOSListBox";
+            this.oOSListBox.Size = new System.Drawing.Size(180, 43);
+            this.oOSListBox.TabIndex = 42;
+            this.oOSListBox.ValueMember = "ID";
+            // 
+            // oOSBindingSource
+            // 
+            this.oOSBindingSource.DataMember = "OOS";
+            this.oOSBindingSource.DataSource = this.gHBWFMDataSet;
+            // 
+            // oOSTableAdapter
+            // 
+            this.oOSTableAdapter.ClearBeforeFill = true;
+            // 
             // Records
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(566, 239);
+            this.ClientSize = new System.Drawing.Size(566, 249);
+            this.Controls.Add(oOSLabel);
+            this.Controls.Add(this.oOSListBox);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label6);
@@ -332,6 +372,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(warehouseLabel);
             this.Controls.Add(truckLabel);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Records";
             this.Text = "Enter Daily Records";
             this.Load += new System.EventHandler(this.Records_Load);
@@ -340,6 +381,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.statusBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.typeBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.statusBindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.oOSBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -375,5 +417,8 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.ListBox oOSListBox;
+        private System.Windows.Forms.BindingSource oOSBindingSource;
+        private GHBWFMDataSetTableAdapters.OOSTableAdapter oOSTableAdapter;
     }
 }

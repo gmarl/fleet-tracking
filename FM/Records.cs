@@ -1,13 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Data.Sql;
 using System.Data.SqlClient;
 
 namespace FM
@@ -33,6 +27,8 @@ namespace FM
 
         private void Records_Load(object sender, EventArgs e)
         {
+            // TODO: This line of code loads data into the 'gHBWFMDataSet.OOS' table. You can move, or remove it, as needed.
+            this.oOSTableAdapter.Fill(this.gHBWFMDataSet.OOS);
             // TODO: This line of code loads data into the 'gHBWFMDataSet.Type' table. You can move, or remove it, as needed.
             this.typeTableAdapter.Fill(this.gHBWFMDataSet.Type);
             // TODO: This line of code loads data into the 'gHBWFMDataSet.Status' table. You can move, or remove it, as needed.
@@ -75,6 +71,18 @@ namespace FM
 
             else if (GlobalVar._whse == 10)
             { this.warehouseTextBox.Text = "Wilton"; }
+
+            else if (GlobalVar._whse == 11)
+            { this.warehouseTextBox.Text = "Liverpool"; }
+
+            else if (GlobalVar._whse == 12)
+            { this.warehouseTextBox.Text = "Kingston"; }
+
+            else if (GlobalVar._whse == 13)
+            { this.warehouseTextBox.Text = "Tonawanda"; }
+
+            else if (GlobalVar._whse == 14)
+            { this.warehouseTextBox.Text = "Youngwood"; }
         }
 
 
@@ -108,17 +116,18 @@ namespace FM
 
                             cmd.ExecuteNonQuery();
 
-                            c.Close();
+                            //c.Close();
 
                             MessageBox.Show("This completes the entries for this date.");
-                            this.Close();
+                           this.Close();
 
                         }
                         catch (Exception ex)
                         {
                             MessageBox.Show("Error" + ex.Message);
-                            c.Close();
+                           // c.Close();
                         }
+                        
                     }
 
                     else
@@ -126,33 +135,45 @@ namespace FM
                         listBox1.DisplayMember = "Num";
                         listBox1.ValueMember = "Num";
                         listBox1.DataSource = t;
-                        c.Close();
+                       // c.Close();
 
                         //Prepare remaining text boxes
 
                         this.galsTextBox.Text = "0";
                         this.mileTextBox.Text = "0";
-
+                        
                         if (this.statusListBox.SelectedValue == null)
                         {
                             this.galsTextBox.Text = "0";
                             this.mileTextBox.Text = "0";
                             this.galsTextBox.Enabled = false;
                             this.mileTextBox.Enabled = false;
+                            this.oOSListBox.Enabled = false;
                         }
                         else
                         { string _status = this.statusListBox.SelectedValue.ToString();
 
-                            if (_status == "0" || _status == "S")
+                            if (_status == "0")
                             {
                                 this.galsTextBox.Enabled = false;
                                 this.mileTextBox.Enabled = false;
+                                this.oOSListBox.Enabled = false;
 
                             }
+
+                            else if ( _status == "S")
+                            {
+                                this.galsTextBox.Enabled = false;
+                                this.mileTextBox.Enabled = false;
+                                this.oOSListBox.Enabled = true;
+
+                            }
+
                             else
                             {
                                 this.galsTextBox.Enabled = true;
                                 this.mileTextBox.Enabled = true;
+                                this.oOSListBox.Enabled = false;
                                 if (capacityTextBox.Text.ToString() == "n/a" || capacityTextBox.Text.ToString() == "0")
                                 {
                                     galsTextBox.Enabled = false;
@@ -169,6 +190,8 @@ namespace FM
 
 
                 }
+
+                c.Close();
             }
         }
 
@@ -230,6 +253,13 @@ namespace FM
                 this.galsTextBox.Select();
             }
 
+            else if ((statusListBox.GetItemText(statusListBox.SelectedItem).Trim() == "Out Of Service" ) && (oOSListBox.SelectedValue == null))
+            {
+                this.oOSListBox.Enabled = true;
+                MessageBox.Show("You must select the reason the truck was out of service.");
+                this.oOSListBox.Select();
+            }
+
             else
             {
                 string _status = this.statusListBox.SelectedValue.ToString();
@@ -251,6 +281,8 @@ namespace FM
                 int _whse = GlobalVar._whse;
                 string _date = GlobalVar._date.ToShortDateString();
                 string _num = this.listBox1.SelectedValue.ToString().Trim();
+                string _capacity = this.capacityTextBox.Text.Trim();
+                
 
                 if ((_type == 1 || _type == 4) && (_status == "1" || _status == "P"))
                      { if (MessageBox.Show("Truck " + _num + " drove " + _miles + " miles and delivered " + _gals + " gallons on " + _date + "?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -263,7 +295,7 @@ namespace FM
 
                         cmd.Connection = cn;
                         cn.Open();
-                        cmd.CommandText = "Insert into Records (Date, Warehouse, Truck, Status, Miles, Gallons, Type, UserID, Duty) Values(@Date, @Warehouse, @Truck, @Status, @Miles, @Gallons, @Type, @UserID, @Duty)";
+                        cmd.CommandText = "Insert into Records (Date, Warehouse, Truck, Status, Miles, Gallons, Type, UserID, Duty, Capacity) Values(@Date, @Warehouse, @Truck, @Status, @Miles, @Gallons, @Type, @UserID, @Duty, @Capacity)";
                         cmd.Parameters.AddWithValue("@Date", _date);
                         cmd.Parameters.AddWithValue("@Warehouse", _whse);
                         cmd.Parameters.AddWithValue("@Truck", _num);
@@ -273,6 +305,7 @@ namespace FM
                         cmd.Parameters.AddWithValue("@Type", _type);
                         cmd.Parameters.AddWithValue("@UserID", _user);
                         cmd.Parameters.AddWithValue("@Duty", _duty);
+                        cmd.Parameters.AddWithValue("@Capacity", _capacity);
 
 
 
@@ -281,17 +314,18 @@ namespace FM
 
                             cmd.ExecuteNonQuery();
 
-                            cn.Close();
+                            //cn.Close();
 
-                            MessageBox.Show("Record added");
+                            
                             fillTrucks();
 
                         }
                         catch (Exception ex)
                         {
                             MessageBox.Show("Error" + ex.Message);
-                            cn.Close();
+                           // cn.Close();
                         }
+                        cn.Close();
                     }
                     else
                     {
@@ -312,7 +346,61 @@ namespace FM
 
                         cmd.Connection = cn;
                         cn.Open();
-                        cmd.CommandText = "Insert into Records (Date, Warehouse, Truck, Status, Miles, Gallons, Type, UserID, Duty) Values(@Date, @Warehouse, @Truck, @Status, @Miles, @Gallons, @Type, @UserID, @Duty)";
+                        cmd.CommandText = "Insert into Records (Date, Warehouse, Truck, Status, Miles, Gallons, Type, UserID, Duty, Capacity) Values(@Date, @Warehouse, @Truck, @Status, @Miles, @Gallons, @Type, @UserID, @Duty, @Capacity)";
+                        cmd.Parameters.AddWithValue("@Date", _date);
+                        cmd.Parameters.AddWithValue("@Warehouse", _whse);
+                        cmd.Parameters.AddWithValue("@Truck", _num);
+                        cmd.Parameters.AddWithValue("@Status", _status);
+                        cmd.Parameters.AddWithValue("@Miles", _miles);
+                        cmd.Parameters.AddWithValue("@Gallons", 0);
+                        cmd.Parameters.AddWithValue("@Type", _type);
+                        cmd.Parameters.AddWithValue("@UserID", _user);
+                        cmd.Parameters.AddWithValue("@Duty", _duty);
+                        cmd.Parameters.AddWithValue("@Capacity", _capacity);
+
+
+
+                        try
+                        {
+
+                            cmd.ExecuteNonQuery();
+
+                            //cn.Close();
+
+                            
+                            fillTrucks();
+
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Error" + ex.Message);
+                            //cn.Close();
+                        }
+                        cn.Close();
+
+                    }
+                    else
+                    {
+                        // user clicked no
+                    }
+
+
+                }
+
+
+                else if ( _status == "S")
+                {
+                    if (MessageBox.Show("Truck " + _num + " was out of service on " + _date + " because of "+oOSListBox.Text.TrimEnd()+"?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    {
+                        // user clicked yes
+                        var connString = GlobalVar.conString;
+                        SqlConnection cn = new SqlConnection(connString);
+                        SqlCommand cmd = new SqlCommand();
+
+
+                        cmd.Connection = cn;
+                        cn.Open();
+                        cmd.CommandText = "Insert into Records (Date, Warehouse, Truck, Status, Miles, Gallons, Type, UserID, Duty, OOS, Capacity) Values(@Date, @Warehouse, @Truck, @Status, @Miles, @Gallons, @Type, @UserID, @Duty, @OOS, @Capacity)";
                         cmd.Parameters.AddWithValue("@Date", _date);
                         cmd.Parameters.AddWithValue("@Warehouse", _whse);
                         cmd.Parameters.AddWithValue("@Truck", _num);
@@ -322,6 +410,8 @@ namespace FM
                         cmd.Parameters.AddWithValue("@Type", _type);
                         cmd.Parameters.AddWithValue("@UserID", _user);
                         cmd.Parameters.AddWithValue("@Duty", _duty);
+                        cmd.Parameters.AddWithValue("@OOS", oOSListBox.SelectedValue);
+                        cmd.Parameters.AddWithValue("@Capacity", _capacity);
 
 
 
@@ -330,17 +420,19 @@ namespace FM
 
                             cmd.ExecuteNonQuery();
 
-                            cn.Close();
+                            //cn.Close();
 
-                            MessageBox.Show("Record added");
+                           
                             fillTrucks();
 
                         }
                         catch (Exception ex)
                         {
                             MessageBox.Show("Error" + ex.Message);
-                            cn.Close();
+                            //cn.Close();
                         }
+
+                        cn.Close();
                     }
                     else
                     {
@@ -349,6 +441,8 @@ namespace FM
 
 
                 }
+
+
                 else  
                 { if (MessageBox.Show("Truck " + _num + " was not used on " + _date + "?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
@@ -360,7 +454,7 @@ namespace FM
 
                         cmd.Connection = cn;
                         cn.Open();
-                        cmd.CommandText = "Insert into Records (Date, Warehouse, Truck, Status, Miles, Gallons, Type, UserID, Duty) Values(@Date, @Warehouse, @Truck, @Status, @Miles, @Gallons, @Type, @UserID, @Duty)";
+                        cmd.CommandText = "Insert into Records (Date, Warehouse, Truck, Status, Miles, Gallons, Type, UserID, Duty,  Capacity) Values(@Date, @Warehouse, @Truck, @Status, @Miles, @Gallons, @Type, @UserID, @Duty,  @Capacity)";
                         cmd.Parameters.AddWithValue("@Date", _date);
                         cmd.Parameters.AddWithValue("@Warehouse", _whse);
                         cmd.Parameters.AddWithValue("@Truck", _num);
@@ -370,6 +464,7 @@ namespace FM
                         cmd.Parameters.AddWithValue("@Type", _type);
                         cmd.Parameters.AddWithValue("@UserID", _user);
                         cmd.Parameters.AddWithValue("@Duty", _duty);
+                        cmd.Parameters.AddWithValue("@Capacity", _capacity);
 
 
 
@@ -378,17 +473,19 @@ namespace FM
 
                             cmd.ExecuteNonQuery();
 
-                            cn.Close();
+                           // cn.Close();
 
-                            MessageBox.Show("Record added");
+                           
                             fillTrucks();
 
                         }
                         catch (Exception ex)
                         {
                             MessageBox.Show("Error" + ex.Message);
-                            cn.Close();
+                           // cn.Close();
                         }
+
+                        cn.Close();
                     }
                     else
                     {
@@ -412,14 +509,23 @@ namespace FM
                 string _status = this.statusListBox.SelectedValue.ToString();
                 this.galsTextBox.Text = "0";
                 this.mileTextBox.Text = "0";
-                if (_status == "0" || _status == "S")
+                if (_status == "S")
                 {
+                    this.oOSListBox.Enabled = true;
+                    this.galsTextBox.Enabled = false;
+                    this.mileTextBox.Enabled = false;
+
+                }
+                else if (_status == "0" )
+                {
+                    this.oOSListBox.Enabled = false;
                     this.galsTextBox.Enabled = false;
                     this.mileTextBox.Enabled = false;
 
                 }
                 else
                 {
+                    this.oOSListBox.Enabled = false;
                     this.galsTextBox.Enabled = true;
                     this.mileTextBox.Enabled = true;
                     if (capacityTextBox.Text.ToString().Trim() == "n/a" || capacityTextBox.Text.ToString().Trim() == "0")

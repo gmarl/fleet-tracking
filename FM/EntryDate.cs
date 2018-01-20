@@ -1,13 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Data.Sql;
 using System.Data.SqlClient;
 
 namespace FM
@@ -56,10 +48,11 @@ namespace FM
                             GlobalVar._date = trialDateOnly;
                             con.Close();
                             this.Close();
-                            this.Dispose();
+                        // Analyzer suggesting removing this to avoid disposing
+                        // more than one     this.Dispose();
                             Form inst = new Records();
                             inst.Show();
-
+                         
                         }
                     }
 

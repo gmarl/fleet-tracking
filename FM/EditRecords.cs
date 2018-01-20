@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace FM
@@ -16,5 +9,47 @@ namespace FM
         {
             InitializeComponent();
         }
-    }
+
+        private void recordsBindingNavigatorSaveItem_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Save changes?", "Confirm", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+            {
+                try
+                {
+                    this.Validate();
+                    this.recordsBindingSource.EndEdit();
+                    this.tableAdapterManager.UpdateAll(this.gHBWFMDataSet);
+                    MessageBox.Show("Records successfully updated.");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error" + ex.Message);
+
+                }
+
+            }
+            else
+            {
+
+
+
+            }
+
+        }
+
+        private void EditRecords_Load(object sender, EventArgs e)
+        {
+            // TODO: This line of code loads data into the 'gHBWFMDataSet.Records' table. You can move, or remove it, as needed.
+
+            this.recordsTableAdapter.FillBy2(this.gHBWFMDataSet.Records, GlobalVar.__date.ToShortDateString(), GlobalVar._whse);
+
+           // this.recordsTableAdapter.Fill(this.gHBWFMDataSet.Records);
+
+        }
+
+        
+        
+
+       
+        }
 }

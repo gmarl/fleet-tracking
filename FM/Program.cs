@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace FM
@@ -12,9 +9,9 @@ namespace FM
         /// <summary>
         /// Global variable that is constant.
         /// </summary>
-        public const string conString = "Data Source=GREG-HP\\SQLEXPRESS;Initial Catalog=GHBWFM;Integrated Security=True";
+        public const string conString = "Data Source=GHB-RNET-01\\FLEETMGMNT;Initial Catalog=GHBWFM;Integrated Security=True";
 
-
+       // public const string conString = "Data Source=GREG-HP\\MSSQLSERVER08;Initial Catalog=GHBWFM; Integrated Security = True";
         /// <summary>
         /// Access routine for global variable.
         /// </summary>
@@ -24,7 +21,8 @@ namespace FM
         public static int _security;
 
         public static int _whse;
-    }
+        public static DateTime __date = DateTime.Now; // used for edit records section
+          }
     static class Program
     {
         /// <summary>

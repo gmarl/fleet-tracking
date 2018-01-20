@@ -1,13 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Data.Sql;
 using System.Data.SqlClient;
 
 namespace FM
@@ -140,7 +132,7 @@ namespace FM
 
                         cmd.ExecuteNonQuery();
 
-                        cn.Close();
+                        //cn.Close();
 
                         MessageBox.Show("Record updated");
                         oldNumTextBox.Text = "";
@@ -153,8 +145,9 @@ namespace FM
                     catch (Exception ex)
                     {
                         MessageBox.Show("Error" + ex.Message);
-                        cn.Close();
+                       
                     }
+                    cn.Close();
                 }
             }
         }

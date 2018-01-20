@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditTrucks));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.oldNumTextBox = new System.Windows.Forms.TextBox();
@@ -50,23 +51,23 @@
             this.label10 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
             this.newWhseListBox = new System.Windows.Forms.ListBox();
+            this.warehouseBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.gHBWFMDataSet = new FM.GHBWFMDataSet();
             this.newTypeListBox = new System.Windows.Forms.ListBox();
+            this.typeBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.newDutyListBox = new System.Windows.Forms.ListBox();
+            this.dutyBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.gHBWFMDataSet = new FM.GHBWFMDataSet();
-            this.typeBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.typeTableAdapter = new FM.GHBWFMDataSetTableAdapters.TypeTableAdapter();
-            this.dutyBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dutyTableAdapter = new FM.GHBWFMDataSetTableAdapters.DutyTableAdapter();
-            this.warehouseBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.warehouseTableAdapter = new FM.GHBWFMDataSetTableAdapters.WarehouseTableAdapter();
             this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.warehouseBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gHBWFMDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.typeBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dutyBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.warehouseBindingSource)).BeginInit();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -270,6 +271,16 @@
             this.newWhseListBox.TabIndex = 25;
             this.newWhseListBox.ValueMember = "ID";
             // 
+            // warehouseBindingSource
+            // 
+            this.warehouseBindingSource.DataMember = "Warehouse";
+            this.warehouseBindingSource.DataSource = this.gHBWFMDataSet;
+            // 
+            // gHBWFMDataSet
+            // 
+            this.gHBWFMDataSet.DataSetName = "GHBWFMDataSet";
+            this.gHBWFMDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
             // newTypeListBox
             // 
             this.newTypeListBox.DataSource = this.typeBindingSource;
@@ -282,6 +293,11 @@
             this.newTypeListBox.ValueMember = "ID";
             this.newTypeListBox.SelectedIndexChanged += new System.EventHandler(this.listBox2_SelectedIndexChanged);
             // 
+            // typeBindingSource
+            // 
+            this.typeBindingSource.DataMember = "Type";
+            this.typeBindingSource.DataSource = this.gHBWFMDataSet;
+            // 
             // newDutyListBox
             // 
             this.newDutyListBox.DataSource = this.dutyBindingSource;
@@ -292,6 +308,11 @@
             this.newDutyListBox.Size = new System.Drawing.Size(100, 43);
             this.newDutyListBox.TabIndex = 27;
             this.newDutyListBox.ValueMember = "ID";
+            // 
+            // dutyBindingSource
+            // 
+            this.dutyBindingSource.DataMember = "Duty";
+            this.dutyBindingSource.DataSource = this.gHBWFMDataSet;
             // 
             // groupBox2
             // 
@@ -322,33 +343,13 @@
             this.label11.TabIndex = 29;
             this.label11.Text = "Make your changes and click Update.";
             // 
-            // gHBWFMDataSet
-            // 
-            this.gHBWFMDataSet.DataSetName = "GHBWFMDataSet";
-            this.gHBWFMDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // typeBindingSource
-            // 
-            this.typeBindingSource.DataMember = "Type";
-            this.typeBindingSource.DataSource = this.gHBWFMDataSet;
-            // 
             // typeTableAdapter
             // 
             this.typeTableAdapter.ClearBeforeFill = true;
             // 
-            // dutyBindingSource
-            // 
-            this.dutyBindingSource.DataMember = "Duty";
-            this.dutyBindingSource.DataSource = this.gHBWFMDataSet;
-            // 
             // dutyTableAdapter
             // 
             this.dutyTableAdapter.ClearBeforeFill = true;
-            // 
-            // warehouseBindingSource
-            // 
-            this.warehouseBindingSource.DataMember = "Warehouse";
-            this.warehouseBindingSource.DataSource = this.gHBWFMDataSet;
             // 
             // warehouseTableAdapter
             // 
@@ -363,17 +364,18 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "EditTrucks";
             this.Text = "Edit Trucks";
             this.Load += new System.EventHandler(this.EditTrucks_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.warehouseBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gHBWFMDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.typeBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dutyBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.warehouseBindingSource)).EndInit();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

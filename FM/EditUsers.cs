@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace FM
@@ -17,13 +10,7 @@ namespace FM
             InitializeComponent();
         }
 
-        private void userBindingNavigatorSaveItem_Click(object sender, EventArgs e)
-        {
-            this.Validate();
-            this.usersBindingSource.EndEdit();
-            this.tableAdapterManager.UpdateAll(this.gHBWFMDataSet);
-
-        }
+       
 
         private void EditUsers_Load(object sender, EventArgs e)
         {
@@ -34,9 +21,35 @@ namespace FM
 
         private void usersBindingNavigatorSaveItem_Click(object sender, EventArgs e)
         {
-            this.Validate();
-            this.usersBindingSource.EndEdit();
-            this.tableAdapterManager.UpdateAll(this.gHBWFMDataSet);
+            if (MessageBox.Show("Save changes?", "Confirm", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+            {
+                try
+                {
+                    this.Validate();
+                    this.usersBindingSource.EndEdit();
+                    this.tableAdapterManager.UpdateAll(this.gHBWFMDataSet);
+                    MessageBox.Show("Record successfully updated.");
+                }
+                    catch (Exception ex)
+            {
+                MessageBox.Show("Error" + ex.Message);
+                
+            }
+            
+            }
+            else
+            {
+
+            }
+        }
+
+        private void bindingNavigatorDeleteItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
 
         }
     }

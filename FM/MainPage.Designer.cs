@@ -34,13 +34,13 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.trucksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.dailyEntriesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.enterDailyInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.usersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.recordsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dailyEntriesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.enterDailyInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sQLReportingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.builtReportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.reportsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -68,7 +68,7 @@
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -85,9 +85,23 @@
             // trucksToolStripMenuItem
             // 
             this.trucksToolStripMenuItem.Name = "trucksToolStripMenuItem";
-            this.trucksToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.trucksToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.trucksToolStripMenuItem.Text = "Trucks";
             this.trucksToolStripMenuItem.Click += new System.EventHandler(this.trucksToolStripMenuItem_Click);
+            // 
+            // usersToolStripMenuItem
+            // 
+            this.usersToolStripMenuItem.Name = "usersToolStripMenuItem";
+            this.usersToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.usersToolStripMenuItem.Text = "Users";
+            this.usersToolStripMenuItem.Click += new System.EventHandler(this.usersToolStripMenuItem_Click);
+            // 
+            // recordsToolStripMenuItem
+            // 
+            this.recordsToolStripMenuItem.Name = "recordsToolStripMenuItem";
+            this.recordsToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.recordsToolStripMenuItem.Text = "Records";
+            this.recordsToolStripMenuItem.Click += new System.EventHandler(this.recordsToolStripMenuItem_Click);
             // 
             // dailyEntriesToolStripMenuItem
             // 
@@ -104,25 +118,11 @@
             this.enterDailyInfoToolStripMenuItem.Text = "Enter Daily Info";
             this.enterDailyInfoToolStripMenuItem.Click += new System.EventHandler(this.enterDailyInfoToolStripMenuItem_Click);
             // 
-            // usersToolStripMenuItem
-            // 
-            this.usersToolStripMenuItem.Name = "usersToolStripMenuItem";
-            this.usersToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.usersToolStripMenuItem.Text = "Users";
-            this.usersToolStripMenuItem.Click += new System.EventHandler(this.usersToolStripMenuItem_Click);
-            // 
-            // recordsToolStripMenuItem
-            // 
-            this.recordsToolStripMenuItem.Name = "recordsToolStripMenuItem";
-            this.recordsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.recordsToolStripMenuItem.Text = "Records";
-            this.recordsToolStripMenuItem.Click += new System.EventHandler(this.recordsToolStripMenuItem_Click);
-            // 
             // reportsToolStripMenuItem
             // 
             this.reportsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.sQLReportingToolStripMenuItem,
-            this.builtReportsToolStripMenuItem});
+            this.reportsToolStripMenuItem1});
             this.reportsToolStripMenuItem.Name = "reportsToolStripMenuItem";
             this.reportsToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
             this.reportsToolStripMenuItem.Text = "Reports";
@@ -134,12 +134,12 @@
             this.sQLReportingToolStripMenuItem.Text = "SQL Reporting";
             this.sQLReportingToolStripMenuItem.Click += new System.EventHandler(this.sQLReportingToolStripMenuItem_Click);
             // 
-            // builtReportsToolStripMenuItem
+            // reportsToolStripMenuItem1
             // 
-            this.builtReportsToolStripMenuItem.Name = "builtReportsToolStripMenuItem";
-            this.builtReportsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.builtReportsToolStripMenuItem.Text = "Built Reports";
-            this.builtReportsToolStripMenuItem.Click += new System.EventHandler(this.builtReportsToolStripMenuItem_Click);
+            this.reportsToolStripMenuItem1.Name = "reportsToolStripMenuItem1";
+            this.reportsToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.reportsToolStripMenuItem1.Text = "Reports";
+            this.reportsToolStripMenuItem1.Click += new System.EventHandler(this.reportsToolStripMenuItem1_Click);
             // 
             // MainPage
             // 
@@ -150,6 +150,7 @@
             this.ClientSize = new System.Drawing.Size(640, 415);
             this.Controls.Add(this.menuStrip1);
             this.DoubleBuffered = true;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainPage";
             this.Text = "Fleet Tracking";
@@ -175,6 +176,6 @@
         private System.Windows.Forms.ToolStripMenuItem recordsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem reportsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sQLReportingToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem builtReportsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem reportsToolStripMenuItem1;
     }
 }

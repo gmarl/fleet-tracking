@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.Label nameLabel;
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SelectWarehouse));
             this.gHBWFMDataSet = new FM.GHBWFMDataSet();
             this.warehouseBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.warehouseTableAdapter = new FM.GHBWFMDataSetTableAdapters.WarehouseTableAdapter();
@@ -95,6 +96,7 @@
             this.ClientSize = new System.Drawing.Size(344, 160);
             this.Controls.Add(this.nameListBox);
             this.Controls.Add(nameLabel);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SelectWarehouse";
             this.Text = "Select Warehouse";
             this.Load += new System.EventHandler(this.SelectWarehouse_Load);

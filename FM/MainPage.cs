@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace FM
@@ -45,7 +38,7 @@ namespace FM
 
         private void trucksToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (GlobalVar._security != 1 && GlobalVar._security != 2)
+            if (GlobalVar._security != 1 )
             { MessageBox.Show("You do not have permission to perform this task."); }
             else
             {
@@ -55,26 +48,51 @@ namespace FM
 
         private void usersToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EditUsers frm = new EditUsers();
-            frm.Show();
+            if (GlobalVar._security != 1)
+            {
+                MessageBox.Show("You do not have permission to perform this task.");
+            }
+            else
+            {
+                EditUsers frm = new EditUsers();
+                frm.Show();
+            }
         }
 
         private void recordsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EditRecords rcrd = new EditRecords();
-            rcrd.Show();
+            if (GlobalVar._security != 1 && GlobalVar._security != 2)
+            {
+                MessageBox.Show("You do not have permission to perform this task.");
+            }
+            else
+            {
+                DateSelection2 sel = new DateSelection2();
+                sel.Show();
+            }
+
         }
 
-        private void builtReportsToolStripMenuItem_Click(object sender, EventArgs e)
+       
+        private void sQLReportingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            if (GlobalVar._security != 1)
+            {
+                MessageBox.Show("You do not have permission to perform this task.");
+            }
+            else
+            {
+                SQL_Reports sqlrprt = new SQL_Reports();
+                sqlrprt.Show();
+            }
+        }
+
+        private void reportsToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             Reports rprt = new Reports();
             rprt.Show();
-        }
 
-        private void sQLReportingToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            SQL_Reports sqlrprt = new SQL_Reports();
-            sqlrprt.Show();
         }
     }
 }
