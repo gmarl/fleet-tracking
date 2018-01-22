@@ -110,7 +110,7 @@ namespace FM
             }
 
             
-            xlWorkBook.SaveAs(@"C:\Users\Greg\Desktop\SQLOutput.xls", Excel.XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue, misValue, Excel.XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
+            xlWorkBook.SaveAs(@"P:\SQLOutput.xls", Excel.XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue, misValue, Excel.XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
 
             MessageBox.Show("Exported as P:\\SQLOutput.xlsx");
              xlWorkBook.Close(true, misValue, misValue);

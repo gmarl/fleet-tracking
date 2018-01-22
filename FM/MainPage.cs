@@ -38,7 +38,7 @@ namespace FM
 
         private void trucksToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (GlobalVar._security != 1 )
+            if (GlobalVar._security != 1 && GlobalVar._security != 2)
             { MessageBox.Show("You do not have permission to perform this task."); }
             else
             {

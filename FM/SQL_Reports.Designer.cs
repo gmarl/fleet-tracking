@@ -18,7 +18,12 @@
                 components.Dispose();
             }
             base.Dispose(disposing);
-            this.strFormat.Dispose();
+
+
+            if (disposing && (this.strFormat != null))
+            {
+                this.strFormat.Dispose();
+            }
         }
 
         #region Windows Form Designer generated code

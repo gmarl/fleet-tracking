@@ -69,6 +69,7 @@
             this.tableAdapterManager.BackupDataSetBeforeUpdate = false;
             this.tableAdapterManager.DatesTableAdapter = null;
             this.tableAdapterManager.DutyTableAdapter = null;
+            this.tableAdapterManager.OOSTableAdapter = null;
             this.tableAdapterManager.RecordsTableAdapter = null;
             this.tableAdapterManager.StatusTableAdapter = null;
             this.tableAdapterManager.TruckTableAdapter = null;
@@ -84,7 +85,7 @@
             this.nameListBox.FormattingEnabled = true;
             this.nameListBox.Location = new System.Drawing.Point(113, 66);
             this.nameListBox.Name = "nameListBox";
-            this.nameListBox.Size = new System.Drawing.Size(120, 43);
+            this.nameListBox.Size = new System.Drawing.Size(120, 95);
             this.nameListBox.TabIndex = 2;
             this.nameListBox.ValueMember = "ID";
             this.nameListBox.SelectedIndexChanged += new System.EventHandler(this.nameListBox_SelectedIndexChanged);
@@ -93,7 +94,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(344, 160);
+            this.ClientSize = new System.Drawing.Size(344, 204);
             this.Controls.Add(this.nameListBox);
             this.Controls.Add(nameLabel);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
