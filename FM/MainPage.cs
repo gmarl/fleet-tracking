@@ -1,10 +1,15 @@
 ﻿using System;
 using System.Windows.Forms;
 
+
 namespace FM
 {
     public partial class MainPage : Form
     {
+
+       
+            
+
         public MainPage()
         {
             InitializeComponent();
@@ -38,7 +43,7 @@ namespace FM
 
         private void trucksToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (GlobalVar._security != 1 )
+            if (GlobalVar._security != 1 && GlobalVar._security != 2)
             { MessageBox.Show("You do not have permission to perform this task."); }
             else
             {

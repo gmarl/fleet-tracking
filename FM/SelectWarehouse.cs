@@ -32,8 +32,9 @@ namespace FM
 
         private void nameListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (nameListBox == null)
-            { }
+            if (nameListBox.GetItemText(nameListBox.SelectedItem).Trim() == null)
+            { MessageBox.Show("Please select a warehouse.");
+            }
             else
             {
                 if (MessageBox.Show("Use warehouse " + nameListBox.GetItemText(nameListBox.SelectedItem).Trim() + " for this session?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
