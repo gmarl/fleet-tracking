@@ -130,14 +130,14 @@
             // sQLReportingToolStripMenuItem
             // 
             this.sQLReportingToolStripMenuItem.Name = "sQLReportingToolStripMenuItem";
-            this.sQLReportingToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.sQLReportingToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.sQLReportingToolStripMenuItem.Text = "SQL Reporting";
             this.sQLReportingToolStripMenuItem.Click += new System.EventHandler(this.sQLReportingToolStripMenuItem_Click);
             // 
             // reportsToolStripMenuItem1
             // 
             this.reportsToolStripMenuItem1.Name = "reportsToolStripMenuItem1";
-            this.reportsToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.reportsToolStripMenuItem1.Size = new System.Drawing.Size(150, 22);
             this.reportsToolStripMenuItem1.Text = "Reports";
             this.reportsToolStripMenuItem1.Click += new System.EventHandler(this.reportsToolStripMenuItem1_Click);
             // 
@@ -146,7 +146,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
-            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(640, 415);
             this.Controls.Add(this.menuStrip1);
             this.DoubleBuffered = true;

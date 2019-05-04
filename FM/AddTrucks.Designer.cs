@@ -201,6 +201,7 @@
             this.capacityTextBox.Name = "capacityTextBox";
             this.capacityTextBox.Size = new System.Drawing.Size(75, 20);
             this.capacityTextBox.TabIndex = 12;
+            this.capacityTextBox.Text = "n/a";
             // 
             // typeTableAdapter
             // 

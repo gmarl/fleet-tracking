@@ -759,7 +759,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>="Gallons delivered (bulk trucks) from " &amp; ReportItems!first2.Value</Value>
+                  <Value>="Gallons delivered (bulk trucks) from " &amp; min(ReportItems!date.Value)</Value>
                   <Style />
                 </TextRun>
               </TextRuns>
@@ -789,7 +789,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>="to " &amp; ReportItems!first3.Value</Value>
+                  <Value>="to " &amp; max(ReportItems!date.Value)</Value>
                   <Style />
                 </TextRun>
               </TextRuns>

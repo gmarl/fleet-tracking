@@ -2,6 +2,8 @@
 using System.Windows.Forms;
 using System.Data.SqlClient;
 
+
+
 namespace FM
 {
     public partial class Login : Form
@@ -66,6 +68,7 @@ namespace FM
                         {
                             con.Close();
                             this.Hide();
+                            
                             MainPage frm = new MainPage();
                             frm.Show();
                         }

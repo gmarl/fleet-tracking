@@ -30,14 +30,19 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditRecords));
-            this.gHBWFMDataSet = new FM.GHBWFMDataSet();
-            this.recordsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.recordsTableAdapter = new FM.GHBWFMDataSetTableAdapters.RecordsTableAdapter();
-            this.tableAdapterManager = new FM.GHBWFMDataSetTableAdapters.TableAdapterManager();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.recordsBindingNavigator = new System.Windows.Forms.BindingNavigator(this.components);
-            this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
+            this.recordsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.gHBWFMDataSet = new FM.GHBWFMDataSet();
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
-            this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator = new System.Windows.Forms.ToolStripSeparator();
@@ -48,62 +53,130 @@
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.recordsBindingNavigatorSaveItem = new System.Windows.Forms.ToolStripButton();
             this.recordsDataGridView = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.recordsTableAdapter = new FM.GHBWFMDataSetTableAdapters.RecordsTableAdapter();
+            this.tableAdapterManager = new FM.GHBWFMDataSetTableAdapters.TableAdapterManager();
             this.label5 = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            ((System.ComponentModel.ISupportInitialize)(this.gHBWFMDataSet)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.recordsBindingSource)).BeginInit();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.recordsBindingNavigator)).BeginInit();
             this.recordsBindingNavigator.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.recordsBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gHBWFMDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.recordsDataGridView)).BeginInit();
-            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // gHBWFMDataSet
+            // label2
             // 
-            this.gHBWFMDataSet.DataSetName = "GHBWFMDataSet";
-            this.gHBWFMDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(10, 24);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(99, 13);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "0 (Zero)  - Not used";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // recordsBindingSource
+            // label3
             // 
-            this.recordsBindingSource.DataMember = "Records";
-            this.recordsBindingSource.DataSource = this.gHBWFMDataSet;
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(10, 37);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(61, 13);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "1 - Full Run";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // recordsTableAdapter
+            // label4
             // 
-            this.recordsTableAdapter.ClearBeforeFill = true;
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(10, 50);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(116, 13);
+            this.label4.TabIndex = 5;
+            this.label4.Text = "P (Capital) - Partial Run";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // tableAdapterManager
+            // groupBox1
             // 
-            this.tableAdapterManager.BackupDataSetBeforeUpdate = false;
-            this.tableAdapterManager.DatesTableAdapter = null;
-            this.tableAdapterManager.DutyTableAdapter = null;
-            this.tableAdapterManager.RecordsTableAdapter = this.recordsTableAdapter;
-            this.tableAdapterManager.StatusTableAdapter = null;
-            this.tableAdapterManager.TruckTableAdapter = null;
-            this.tableAdapterManager.TypeTableAdapter = null;
-            this.tableAdapterManager.UpdateOrder = FM.GHBWFMDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
-            this.tableAdapterManager.UsersTableAdapter = null;
-            this.tableAdapterManager.WarehouseTableAdapter = null;
+            this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Location = new System.Drawing.Point(668, 28);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(170, 72);
+            this.groupBox1.TabIndex = 7;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Status Choices:";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.label5);
+            this.groupBox2.Controls.Add(this.label9);
+            this.groupBox2.Controls.Add(this.label10);
+            this.groupBox2.Controls.Add(this.label1);
+            this.groupBox2.Controls.Add(this.label6);
+            this.groupBox2.Controls.Add(this.label7);
+            this.groupBox2.Controls.Add(this.label8);
+            this.groupBox2.Location = new System.Drawing.Point(668, 136);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(170, 136);
+            this.groupBox2.TabIndex = 9;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "OOS (Not Used) Choices:";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(11, 94);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(76, 13);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "7 - Breakdown";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(10, 107);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(104, 13);
+            this.label6.TabIndex = 6;
+            this.label6.Text = "8 - Physical Damage";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(11, 68);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(138, 13);
+            this.label7.TabIndex = 3;
+            this.label7.Text = "5 - Scheduled Maintenance";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(11, 81);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(150, 13);
+            this.label8.TabIndex = 4;
+            this.label8.Text = "6 - Unscheduled Maintenance";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // recordsBindingNavigator
             // 
-            this.recordsBindingNavigator.AddNewItem = this.bindingNavigatorAddNewItem;
+            this.recordsBindingNavigator.AddNewItem = null;
             this.recordsBindingNavigator.BindingSource = this.recordsBindingSource;
             this.recordsBindingNavigator.CountItem = this.bindingNavigatorCountItem;
-            this.recordsBindingNavigator.DeleteItem = this.bindingNavigatorDeleteItem;
+            this.recordsBindingNavigator.DeleteItem = null;
             this.recordsBindingNavigator.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.bindingNavigatorMoveFirstItem,
             this.bindingNavigatorMovePreviousItem,
@@ -114,8 +187,6 @@
             this.bindingNavigatorMoveNextItem,
             this.bindingNavigatorMoveLastItem,
             this.bindingNavigatorSeparator2,
-            this.bindingNavigatorAddNewItem,
-            this.bindingNavigatorDeleteItem,
             this.recordsBindingNavigatorSaveItem});
             this.recordsBindingNavigator.Location = new System.Drawing.Point(0, 0);
             this.recordsBindingNavigator.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
@@ -124,19 +195,19 @@
             this.recordsBindingNavigator.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
             this.recordsBindingNavigator.Name = "recordsBindingNavigator";
             this.recordsBindingNavigator.PositionItem = this.bindingNavigatorPositionItem;
-            this.recordsBindingNavigator.Size = new System.Drawing.Size(629, 25);
-            this.recordsBindingNavigator.TabIndex = 0;
+            this.recordsBindingNavigator.Size = new System.Drawing.Size(855, 25);
+            this.recordsBindingNavigator.TabIndex = 10;
             this.recordsBindingNavigator.Text = "bindingNavigator1";
             // 
-            // bindingNavigatorAddNewItem
+            // recordsBindingSource
             // 
-            this.bindingNavigatorAddNewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorAddNewItem.Enabled = false;
-            this.bindingNavigatorAddNewItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorAddNewItem.Image")));
-            this.bindingNavigatorAddNewItem.Name = "bindingNavigatorAddNewItem";
-            this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorAddNewItem.Text = "Add new";
+            this.recordsBindingSource.DataMember = "Records";
+            this.recordsBindingSource.DataSource = this.gHBWFMDataSet;
+            // 
+            // gHBWFMDataSet
+            // 
+            this.gHBWFMDataSet.DataSetName = "GHBWFMDataSet";
+            this.gHBWFMDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // bindingNavigatorCountItem
             // 
@@ -144,16 +215,6 @@
             this.bindingNavigatorCountItem.Size = new System.Drawing.Size(35, 22);
             this.bindingNavigatorCountItem.Text = "of {0}";
             this.bindingNavigatorCountItem.ToolTipText = "Total number of items";
-            // 
-            // bindingNavigatorDeleteItem
-            // 
-            this.bindingNavigatorDeleteItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorDeleteItem.Enabled = false;
-            this.bindingNavigatorDeleteItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorDeleteItem.Image")));
-            this.bindingNavigatorDeleteItem.Name = "bindingNavigatorDeleteItem";
-            this.bindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorDeleteItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorDeleteItem.Text = "Delete";
             // 
             // bindingNavigatorMoveFirstItem
             // 
@@ -222,59 +283,29 @@
             this.recordsBindingNavigatorSaveItem.Name = "recordsBindingNavigatorSaveItem";
             this.recordsBindingNavigatorSaveItem.Size = new System.Drawing.Size(23, 22);
             this.recordsBindingNavigatorSaveItem.Text = "Save Data";
-            this.recordsBindingNavigatorSaveItem.Click += new System.EventHandler(this.recordsBindingNavigatorSaveItem_Click);
+            this.recordsBindingNavigatorSaveItem.Click += new System.EventHandler(this.recordsBindingNavigatorSaveItem_Click_3);
             // 
             // recordsDataGridView
             // 
-            this.recordsDataGridView.AllowUserToAddRows = false;
-            this.recordsDataGridView.AllowUserToDeleteRows = false;
-            this.recordsDataGridView.AllowUserToResizeColumns = false;
-            this.recordsDataGridView.AllowUserToResizeRows = false;
             this.recordsDataGridView.AutoGenerateColumns = false;
             this.recordsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.recordsDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1,
-            this.dataGridViewTextBoxColumn2,
-            this.dataGridViewTextBoxColumn3,
             this.dataGridViewTextBoxColumn4,
             this.dataGridViewTextBoxColumn5,
             this.dataGridViewTextBoxColumn6,
             this.dataGridViewTextBoxColumn7,
-            this.dataGridViewTextBoxColumn8,
-            this.dataGridViewTextBoxColumn9,
-            this.dataGridViewTextBoxColumn10});
+            this.dataGridViewTextBoxColumn11,
+            this.dataGridViewTextBoxColumn13});
             this.recordsDataGridView.DataSource = this.recordsBindingSource;
-            this.recordsDataGridView.Location = new System.Drawing.Point(5, 38);
-            this.recordsDataGridView.MultiSelect = false;
+            this.recordsDataGridView.Location = new System.Drawing.Point(12, 41);
             this.recordsDataGridView.Name = "recordsDataGridView";
-            this.recordsDataGridView.Size = new System.Drawing.Size(465, 220);
-            this.recordsDataGridView.TabIndex = 1;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "ID";
-            this.dataGridViewTextBoxColumn1.HeaderText = "ID";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            this.dataGridViewTextBoxColumn1.Visible = false;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "Date";
-            this.dataGridViewTextBoxColumn2.HeaderText = "Date";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.Visible = false;
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.DataPropertyName = "Warehouse";
-            this.dataGridViewTextBoxColumn3.HeaderText = "Warehouse";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.Visible = false;
+            this.recordsDataGridView.Size = new System.Drawing.Size(650, 220);
+            this.recordsDataGridView.TabIndex = 10;
             // 
             // dataGridViewTextBoxColumn4
             // 
             this.dataGridViewTextBoxColumn4.DataPropertyName = "Truck";
+            this.dataGridViewTextBoxColumn4.Frozen = true;
             this.dataGridViewTextBoxColumn4.HeaderText = "Truck";
             this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
             // 
@@ -282,7 +313,6 @@
             // 
             this.dataGridViewTextBoxColumn5.DataPropertyName = "Status";
             this.dataGridViewTextBoxColumn5.HeaderText = "Status";
-            this.dataGridViewTextBoxColumn5.MaxInputLength = 1;
             this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
             // 
             // dataGridViewTextBoxColumn6
@@ -297,116 +327,110 @@
             this.dataGridViewTextBoxColumn7.HeaderText = "Gallons";
             this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
             // 
-            // dataGridViewTextBoxColumn8
+            // dataGridViewTextBoxColumn11
             // 
-            this.dataGridViewTextBoxColumn8.DataPropertyName = "Type";
-            this.dataGridViewTextBoxColumn8.HeaderText = "Type";
-            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
-            this.dataGridViewTextBoxColumn8.ReadOnly = true;
-            this.dataGridViewTextBoxColumn8.Visible = false;
+            this.dataGridViewTextBoxColumn11.DataPropertyName = "OOS";
+            this.dataGridViewTextBoxColumn11.HeaderText = "OOS";
+            this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
             // 
-            // dataGridViewTextBoxColumn9
+            // dataGridViewTextBoxColumn13
             // 
-            this.dataGridViewTextBoxColumn9.DataPropertyName = "UserID";
-            this.dataGridViewTextBoxColumn9.HeaderText = "UserID";
-            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
-            this.dataGridViewTextBoxColumn9.Visible = false;
+            this.dataGridViewTextBoxColumn13.DataPropertyName = "Fuel";
+            this.dataGridViewTextBoxColumn13.HeaderText = "Fuel";
+            this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
             // 
-            // dataGridViewTextBoxColumn10
+            // recordsTableAdapter
             // 
-            this.dataGridViewTextBoxColumn10.DataPropertyName = "Duty";
-            this.dataGridViewTextBoxColumn10.HeaderText = "Duty";
-            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
-            this.dataGridViewTextBoxColumn10.Visible = false;
+            this.recordsTableAdapter.ClearBeforeFill = true;
             // 
-            // label2
+            // tableAdapterManager
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(10, 24);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(90, 13);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "0 (Zero) Not used";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(10, 42);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(58, 13);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "1  Full Run";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(10, 61);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(110, 13);
-            this.label4.TabIndex = 5;
-            this.label4.Text = "P (Capital) Partial Run";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.tableAdapterManager.BackupDataSetBeforeUpdate = false;
+            this.tableAdapterManager.DatesTableAdapter = null;
+            this.tableAdapterManager.DutyTableAdapter = null;
+            this.tableAdapterManager.OOSTableAdapter = null;
+            this.tableAdapterManager.RecordsTableAdapter = this.recordsTableAdapter;
+            this.tableAdapterManager.StatusTableAdapter = null;
+            this.tableAdapterManager.TruckTableAdapter = null;
+            this.tableAdapterManager.TypeTableAdapter = null;
+            this.tableAdapterManager.UpdateOrder = FM.GHBWFMDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
+            this.tableAdapterManager.UsersTableAdapter = null;
+            this.tableAdapterManager.WarehouseTableAdapter = null;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(10, 81);
+            this.label5.Location = new System.Drawing.Point(11, 55);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(126, 13);
-            this.label5.TabIndex = 6;
-            this.label5.Text = "S (Capital) Out of Service";
+            this.label5.Size = new System.Drawing.Size(137, 13);
+            this.label5.TabIndex = 11;
+            this.label5.Text = "3 - Weather Prevented Use";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // groupBox1
+            // label9
             // 
-            this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Location = new System.Drawing.Point(476, 94);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(143, 109);
-            this.groupBox1.TabIndex = 7;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Status Choices:";
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(11, 42);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(127, 13);
+            this.label9.TabIndex = 12;
+            this.label9.Text = "2 - Needed But No Driver";
+            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(10, 29);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(80, 13);
+            this.label10.TabIndex = 13;
+            this.label10.Text = "1 - Not Needed";
+            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // EditRecords
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(629, 272);
-            this.Controls.Add(this.groupBox1);
+            this.ClientSize = new System.Drawing.Size(855, 344);
             this.Controls.Add(this.recordsDataGridView);
             this.Controls.Add(this.recordsBindingNavigator);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.groupBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "EditRecords";
             this.Text = "EditRecords";
             this.Load += new System.EventHandler(this.EditRecords_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.gHBWFMDataSet)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.recordsBindingSource)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.recordsBindingNavigator)).EndInit();
             this.recordsBindingNavigator.ResumeLayout(false);
             this.recordsBindingNavigator.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.recordsBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gHBWFMDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.recordsDataGridView)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
         private GHBWFMDataSet gHBWFMDataSet;
         private System.Windows.Forms.BindingSource recordsBindingSource;
         private GHBWFMDataSetTableAdapters.RecordsTableAdapter recordsTableAdapter;
         private GHBWFMDataSetTableAdapters.TableAdapterManager tableAdapterManager;
         private System.Windows.Forms.BindingNavigator recordsBindingNavigator;
-        private System.Windows.Forms.ToolStripButton bindingNavigatorAddNewItem;
         private System.Windows.Forms.ToolStripLabel bindingNavigatorCountItem;
-        private System.Windows.Forms.ToolStripButton bindingNavigatorDeleteItem;
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveFirstItem;
         private System.Windows.Forms.ToolStripButton bindingNavigatorMovePreviousItem;
         private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator;
@@ -417,20 +441,14 @@
         private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
         private System.Windows.Forms.ToolStripButton recordsBindingNavigatorSaveItem;
         private System.Windows.Forms.DataGridView recordsDataGridView;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label10;
     }
 }

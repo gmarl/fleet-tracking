@@ -1,4 +1,6 @@
-﻿namespace FM
+﻿using FM.DataSet1TableAdapters;
+
+namespace FM
 {
     partial class Reports
     {
@@ -31,17 +33,15 @@
             this.components = new System.ComponentModel.Container();
             Microsoft.Reporting.WinForms.ReportDataSource reportDataSource1 = new Microsoft.Reporting.WinForms.ReportDataSource();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Reports));
-            this.Warehouse2BindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.dataSet1 = new FM.DataSet1();
             this.warehouse1BindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dataSet1 = new FM.DataSet1();
+            this.Warehouse2BindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.warehouse1BindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.dataSet1BindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.button1 = new System.Windows.Forms.Button();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.button2 = new System.Windows.Forms.Button();
-            this.warehouse1TableAdapter = new FM.DataSet1TableAdapters.Warehouse1TableAdapter();
-            this.Warehouse2TableAdapter = new FM.DataSet1TableAdapters.Warehouse2TableAdapter();
             this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -55,32 +55,38 @@
             this.gHBWFMDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.RecordsTableAdapter = new FM.GHBWFMDataSetTableAdapters.RecordsTableAdapter();
             this.button6 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.Warehouse2BindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).BeginInit();
+            this.warehouse1TableAdapter = new FM.DataSet1TableAdapters.Warehouse1TableAdapter();
+            this.Warehouse2TableAdapter = new FM.DataSet1TableAdapters.Warehouse2TableAdapter();
+            this.FuelMileageTableAdapterBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.MissingEntriesNewBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.MissingEntriesNewTableAdapter = new FM.DataSet1TableAdapters.MissingEntriesNewTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.warehouse1BindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Warehouse2BindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.warehouse1BindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1BindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.queriesTableAdapterBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.RecordsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gHBWFMDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gHBWFMDataSetBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.FuelMileageTableAdapterBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.MissingEntriesNewBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
-            // Warehouse2BindingSource
+            // warehouse1BindingSource
             // 
-            this.Warehouse2BindingSource.DataMember = "Warehouse2";
-            this.Warehouse2BindingSource.DataSource = this.dataSet1;
+            this.warehouse1BindingSource.DataMember = "Warehouse1";
+            this.warehouse1BindingSource.DataSource = this.dataSet1;
             // 
             // dataSet1
             // 
             this.dataSet1.DataSetName = "DataSet1";
             this.dataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
-            // warehouse1BindingSource
+            // Warehouse2BindingSource
             // 
-            this.warehouse1BindingSource.DataMember = "Warehouse1";
-            this.warehouse1BindingSource.DataSource = this.dataSet1;
+            this.Warehouse2BindingSource.DataMember = "Warehouse2";
+            this.Warehouse2BindingSource.DataSource = this.dataSet1;
             // 
             // warehouse1BindingSource1
             // 
@@ -128,23 +134,16 @@
             this.button2.Click += new System.EventHandler(this.button2_Click);
             this.button2.MouseHover += new System.EventHandler(this.button2_MouseHover);
             // 
-            // warehouse1TableAdapter
-            // 
-            this.warehouse1TableAdapter.ClearBeforeFill = true;
-            // 
-            // Warehouse2TableAdapter
-            // 
-            this.Warehouse2TableAdapter.ClearBeforeFill = true;
-            // 
             // reportViewer1
             // 
             reportDataSource1.Name = "DataSet1";
-            reportDataSource1.Value = this.Warehouse2BindingSource;
+            reportDataSource1.Value = this.warehouse1BindingSource;
             this.reportViewer1.LocalReport.DataSources.Add(reportDataSource1);
-            this.reportViewer1.LocalReport.ReportEmbeddedResource = "FM.Report1.rdlc";
+            this.reportViewer1.LocalReport.ReportEmbeddedResource = "FM.Reports.Mileage.rdlc";
             this.reportViewer1.LocalReport.ReportPath = "";
             this.reportViewer1.Location = new System.Drawing.Point(21, 117);
             this.reportViewer1.Name = "reportViewer1";
+            this.reportViewer1.ServerReport.BearerToken = null;
             this.reportViewer1.Size = new System.Drawing.Size(615, 405);
             this.reportViewer1.TabIndex = 10;
             this.reportViewer1.Load += new System.EventHandler(this.reportViewer1_Load);
@@ -184,7 +183,7 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 23);
             this.button4.TabIndex = 14;
-            this.button4.Text = "Completions";
+            this.button4.Text = "Fuel MPG";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             this.button4.MouseHover += new System.EventHandler(this.button4_MouseHover);
@@ -244,28 +243,38 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(75, 23);
             this.button6.TabIndex = 16;
-            this.button6.Text = "OOS";
+            this.button6.Text = "Not Used";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             this.button6.MouseHover += new System.EventHandler(this.button6_MouseHover);
             // 
-            // button7
+            // warehouse1TableAdapter
             // 
-            this.button7.Location = new System.Drawing.Point(561, 78);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(75, 23);
-            this.button7.TabIndex = 17;
-            this.button7.Text = "Not Used";
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
-            this.button7.MouseHover += new System.EventHandler(this.button7_MouseHover);
+            this.warehouse1TableAdapter.ClearBeforeFill = true;
+            // 
+            // Warehouse2TableAdapter
+            // 
+            this.Warehouse2TableAdapter.ClearBeforeFill = true;
+            // 
+            // FuelMileageTableAdapterBindingSource
+            // 
+            this.FuelMileageTableAdapterBindingSource.DataMember = "FuelMileageTableAdapter";
+            this.FuelMileageTableAdapterBindingSource.DataSource = this.dataSet1;
+            // 
+            // MissingEntriesNewBindingSource
+            // 
+            this.MissingEntriesNewBindingSource.DataMember = "MissingEntriesNew";
+            this.MissingEntriesNewBindingSource.DataSource = this.dataSet1;
+            // 
+            // MissingEntriesNewTableAdapter
+            // 
+            this.MissingEntriesNewTableAdapter.ClearBeforeFill = true;
             // 
             // Reports
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(657, 558);
-            this.Controls.Add(this.button7);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
@@ -281,15 +290,16 @@
             this.Name = "Reports";
             this.Text = "Reports";
             this.Load += new System.EventHandler(this.Reports_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.Warehouse2BindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.warehouse1BindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Warehouse2BindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.warehouse1BindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1BindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.queriesTableAdapterBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.RecordsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gHBWFMDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gHBWFMDataSetBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.MissingEntriesNewBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -321,6 +331,10 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.BindingSource FuelMileageTableAdapterBindingSource;
+        private System.Windows.Forms.BindingSource MissingEntriesNewBindingSource;
+        private DataSet1TableAdapters.MissingEntriesNewTableAdapter MissingEntriesNewTableAdapter;
+
+        public FuelMileageTableAdapter FuelMileageTableAdapter { get; private set; }
     }
 }

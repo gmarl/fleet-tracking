@@ -17,7 +17,9 @@ namespace FM
 
         private void Reports_Load(object sender, EventArgs e)
         {
-           
+            // TODO: This line of code loads data into the 'dataSet1.FuelMileageTableAdapter' table. You can move, or remove it, as needed.
+            //this.FuelMileageTableAdapterTableAdapter.Fill(this.dataSet1.FuelMileageTableAdapter);
+
 
         }
 
@@ -117,7 +119,7 @@ namespace FM
                 + "concat(year(date), '-', format(month(date), '00')) as Per, records.id, records.truck, "
                 + "records.date FROM  Records INNER JOIN Warehouse ON Records.Warehouse = Warehouse.ID "
                 + "INNER JOIN Type ON Records.Type = Type.ID INNER JOIN Truck ON Records.Truck = Truck.Num"
-                + " WHERE(Records.Date >= '" + start + "') AND(Records.Date < '" + before + "') AND(Truck.Type = 1) AND "
+                + " WHERE(Records.Date >= '" + start + "') AND(Records.Date < '" + before + "') AND(Records.Type = 1) AND "
                 + "(Records.Status = '1' OR Records.Status = 'P') ) REP GROUP BY REP.Name, REP.PER";
 
                
@@ -141,19 +143,19 @@ namespace FM
 
         }
 
+        
+
         private void button5_Click(object sender, EventArgs e)
         {
-            if ((((dateTimePicker2.Value.Date.DayOfYear - dateTimePicker1.Value.Date.DayOfYear) != 1) && (dateTimePicker2.Value.Year == dateTimePicker1.Value.Year)) || (dateTimePicker2.Value.Year != dateTimePicker1.Value.Year)) 
-            { MessageBox.Show("This report must be run for one day only. Please adjust the 'Start' or 'Before' dates accordingly.");
-            }
-            else
-            {
+            
                 string start = dateTimePicker1.Value.ToString("yyyy-MM-dd");
                 string before = dateTimePicker2.Value.ToString("yyyy-MM-dd");
-                String rvSQL = "SELECT Name, '" + start + "' AS Date FROM Warehouse WHERE(ID NOT IN "
-                                + "(SELECT Warehouse FROM Dates WHERE(Date >= '" + start + "') AND "
-                                + "(Date < '" + before + "')))";
-
+            String rvSQL = "select distinct Warehouse.Name, RequiredDate, '" + start + "' AS Start, '" + before + "' AS Before  from RequiredDates, warehouse,Dates "
+            + "where warehouse.id = dates.warehouse and   requiredDate < '" + before + "' and RequiredDate >= '"
+            + start + "' and cast(Dates.Warehouse as varchar(2)) +'-'+convert(varchar(30),RequiredDates.RequiredDate,126)  "
+            + "not in (select cast(dates.Warehouse as varchar(2))+ '-'+cast(dates.date as varchar(10)) from dates "
+            + "where date < '" + before + "' and date >= '" + start + "') order by Name, RequiredDate";
+            
                 using (SqlConnection sqlConn = new SqlConnection(GlobalVar.conString))
                 using (SqlDataAdapter da = new SqlDataAdapter(rvSQL, sqlConn))
                 {
@@ -170,17 +172,21 @@ namespace FM
                     reportDataSource.Value = ds.Tables[0];
                     this.reportViewer1.LocalReport.DataSources.Add(reportDataSource);
                     this.reportViewer1.RefreshReport();
-                }
+                
             }
         }
+
 
         private void button4_Click(object sender, EventArgs e)
         {
             string start = dateTimePicker1.Value.ToString("yyyy-MM-dd");
             string before = dateTimePicker2.Value.ToString("yyyy-MM-dd");
-            String rvSQL = "SELECT CONVERT(VARCHAR(10), DATE, 101) as Date, COUNT(ID) AS Complete FROM Dates"
-                + " WHERE(Date >= '" + start + "') AND(Date < '" + before + "')"
-                + " GROUP BY Date";
+            String rvSQL = "SELECT Warehouse.Name, Records.Truck, SUM(isnull(Records.Fuel,0)) AS Fuel, "
+                + "SUM(Records.Miles) AS Miles, MPG = CASE WHEN SUM(isnull(Records.Fuel,0)) = 0 THEN 0 "
+                + "ELSE SUM(isnull(Records.Miles,0))/ SUM(isnull(Records.Fuel, 0)) END, '" + start + "' AS Start, '" + before + "' AS Before  "
+                + "FROM Warehouse, Records WHERE Records.Warehouse = Warehouse.id and (Records.Date >= '" + start + "')"
+                + "AND (Records.Date < '" + before + "') and records.miles > 0 GROUP BY Warehouse.Name, Records.Truck ORDER BY "
+                + " Warehouse.Name, Records.Truck";
                 
             using (SqlConnection sqlConn = new SqlConnection(GlobalVar.conString))
             using (SqlDataAdapter da = new SqlDataAdapter(rvSQL, sqlConn))
@@ -191,7 +197,7 @@ namespace FM
 
                 this.reportViewer1.Reset();
                 this.reportViewer1.ProcessingMode = ProcessingMode.Local;
-                this.reportViewer1.LocalReport.ReportEmbeddedResource = "FM.Completions.rdlc";
+                this.reportViewer1.LocalReport.ReportEmbeddedResource = "FM.FuelMileage.rdlc";
                 ReportDataSource reportDataSource = new ReportDataSource();
                 // Must match the DataSet in the RDLC
                 reportDataSource.Name = "DataSet1";
@@ -206,11 +212,11 @@ namespace FM
         {
             string start = dateTimePicker1.Value.ToString("yyyy-MM-dd");
             string before = dateTimePicker2.Value.ToString("yyyy-MM-dd");
-            String rvSQL = "SELECT Warehouse.Name, OOS.Description, COUNT(Records.Truck) "
+            String rvSQL = "SELECT Warehouse.Name, OOS.Description, Records.Truck, COUNT(Records.Truck) "
                 + "AS Truck_OOS_Days, '" + start + "' AS Start, '" + before + "' AS Before FROM Records INNER JOIN Warehouse ON Records.Warehouse"
                 + "= Warehouse.ID INNER JOIN OOS ON Records.OOS = OOS.ID WHERE(Records.Date"
                 + ">= '" + start + "') AND(Records.Date < '" + before + "') AND (Records."
-                + "Status = 'S') GROUP BY Warehouse.Name, OOS.Description";
+                + "Status = '0') GROUP BY Warehouse.Name, OOS.Description, Records.Truck";
                 
             using (SqlConnection sqlConn = new SqlConnection(GlobalVar.conString))
             using (SqlDataAdapter da = new SqlDataAdapter(rvSQL, sqlConn))
@@ -284,31 +290,25 @@ namespace FM
         private void button6_MouseHover(object sender, EventArgs e)
         {
             ToolTip OOS = new ToolTip();
-            OOS.SetToolTip(button6, "Shows trucks that were out of service by warehouse for the range selected.");
+            OOS.SetToolTip(button6, "Shows trucks that were not used and why, by warehouse for the range selected.");
 
         }
 
         private void button4_MouseHover(object sender, EventArgs e)
         {
             ToolTip Compl = new ToolTip();
-            Compl.SetToolTip(button4, "Used to show the count of completed entries by day for the range selected.");
+            Compl.SetToolTip(button4, "Shows fuel used and MPG for the range selected.");
 
         }
 
         private void button5_MouseHover(object sender, EventArgs e)
         {
             ToolTip Miss = new ToolTip();
-            Miss.SetToolTip(button5, "Use this report to see which warehouses have not completed their daily entries for a selected day.");
+            Miss.SetToolTip(button5, "Use this report to see which warehouses have not completed their daily entries for specific days.");
 
         }
 
-        private void button7_MouseHover(object sender, EventArgs e)
-        {
-            ToolTip NotUsed = new ToolTip();
-            NotUsed.SetToolTip(button7, "Shows count of unused trucks by warehouse for the range selected.");
-
-        }
-
+        
     }
     }
 

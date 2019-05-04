@@ -73,13 +73,13 @@ namespace FM
                         cmd.Parameters.AddWithValue("@Capacity", _capacity);
                         cmd.Parameters.AddWithValue("@LastChangedBy", _user);
                         cmd.Parameters.AddWithValue("@LastChangeDate", _date);
-                       
 
 
-                        try
-                        {
 
-                            cmd.ExecuteNonQuery();
+                    try
+                    {
+
+                        cmd.ExecuteNonQuery();
 
                             //cn.Close();
 
@@ -87,12 +87,19 @@ namespace FM
                             numTextBox.Text = "";
                             capacityTextBox.Text = "";
 
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show("Error" + ex.Message);
-                            //cn.Close();
-                        }
+                    }
+
+                    catch (SqlException se)
+                    {
+                        MessageBox.Show("This truck number already exists. Truck numbers must be unique." + se.Message);
+                        //cn.Close();
+                    }
+
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error" + ex.Message);
+                        //cn.Close();
+                    }
 
                     cn.Close();
                 }

@@ -17,6 +17,9 @@ namespace FM
       
         }
 
+        
+
+
         private void recordsBindingNavigatorSaveItem_Click(object sender, EventArgs e)
         {
             this.Validate();
@@ -33,10 +36,13 @@ namespace FM
             this.typeTableAdapter.Fill(this.gHBWFMDataSet.Type);
             // TODO: This line of code loads data into the 'gHBWFMDataSet.Status' table. You can move, or remove it, as needed.
             this.statusTableAdapter.Fill(this.gHBWFMDataSet.Status);
+
+            fillTrucks();
+
             // TODO: This line of code loads data into the 'gHBWFMDataSet.Records' table. You can move, or remove it, as needed.
             this.recordsTableAdapter.Fill(this.gHBWFMDataSet.Records);
 
-            fillTrucks();
+
 
         }
 
@@ -141,14 +147,18 @@ namespace FM
 
                         this.galsTextBox.Text = "0";
                         this.mileTextBox.Text = "0";
+                        this.fueltextBox.Text = "0";
                         
                         if (this.statusListBox.SelectedValue == null)
                         {
                             this.galsTextBox.Text = "0";
                             this.mileTextBox.Text = "0";
                             this.galsTextBox.Enabled = false;
+                            this.fueltextBox.Text = "0";
                             this.mileTextBox.Enabled = false;
                             this.oOSListBox.Enabled = false;
+                            this.fueltextBox.Enabled = false;
+
                         }
                         else
                         { string _status = this.statusListBox.SelectedValue.ToString();
@@ -157,7 +167,8 @@ namespace FM
                             {
                                 this.galsTextBox.Enabled = false;
                                 this.mileTextBox.Enabled = false;
-                                this.oOSListBox.Enabled = false;
+                                this.oOSListBox.Enabled = true;
+                                this.fueltextBox.Enabled = false;
 
                             }
 
@@ -166,6 +177,7 @@ namespace FM
                                 this.galsTextBox.Enabled = false;
                                 this.mileTextBox.Enabled = false;
                                 this.oOSListBox.Enabled = true;
+                                this.fueltextBox.Enabled = false;
 
                             }
 
@@ -174,6 +186,8 @@ namespace FM
                                 this.galsTextBox.Enabled = true;
                                 this.mileTextBox.Enabled = true;
                                 this.oOSListBox.Enabled = false;
+                                this.fueltextBox.Enabled = true;
+
                                 if (capacityTextBox.Text.ToString() == "n/a" || capacityTextBox.Text.ToString() == "0")
                                 {
                                     galsTextBox.Enabled = false;
@@ -243,20 +257,20 @@ namespace FM
 
             if ((statusListBox.GetItemText(statusListBox.SelectedItem).Trim() == "Full Run" || statusListBox.GetItemText(statusListBox.SelectedItem).Trim() == "Partial Run") && (this.mileTextBox.Text.Trim() == "" || this.mileTextBox.Text.Trim() == "0"))
             {
-                MessageBox.Show("You must enter the mileage driven.");
+                MessageBox.Show("You must enter the odometer reading.");
                 this.mileTextBox.Select();
             }
 
-            else if ((statusListBox.GetItemText(statusListBox.SelectedItem).Trim() == "Full Run" || statusListBox.GetItemText(statusListBox.SelectedItem).Trim() == "Partial Run") && (int.Parse(galsTextBox.Text)) < 1 && (this.typeTextBox.Text.Trim() != "Package" && this.typeTextBox.Text.Trim() != "Hybrid"))
+            else if ((statusListBox.GetItemText(statusListBox.SelectedItem).Trim() == "Full Run" || statusListBox.GetItemText(statusListBox.SelectedItem).Trim() == "Partial Run") && (int.Parse(galsTextBox.Text)) < 1 && (this.typeTextBox.Text.Trim() == "Bulk" ))
             {
                 MessageBox.Show("You must enter the gallons delivered");
                 this.galsTextBox.Select();
             }
 
-            else if ((statusListBox.GetItemText(statusListBox.SelectedItem).Trim() == "Out Of Service" ) && (oOSListBox.SelectedValue == null))
+            else if ((statusListBox.GetItemText(statusListBox.SelectedItem).Trim() == "Not Used" ) && (oOSListBox.SelectedValue == null))
             {
                 this.oOSListBox.Enabled = true;
-                MessageBox.Show("You must select the reason the truck was out of service.");
+                MessageBox.Show("You must select the reason the truck was not used.");
                 this.oOSListBox.Select();
             }
 
@@ -264,6 +278,7 @@ namespace FM
             {
                 string _status = this.statusListBox.SelectedValue.ToString();
                 int _type = 0;
+
                 if (typeTextBox.Text.Trim() == "Bulk")
                 { _type = 1; }
                 else if (typeTextBox.Text.Trim() == "Package")
@@ -273,6 +288,7 @@ namespace FM
                 else { _type = 4; }
                 int _miles = int.Parse(mileTextBox.Text);
                 int _gals = int.Parse(galsTextBox.Text);
+                int _fuel = int.Parse(fueltextBox.Text);
                 int _duty = 0;
                 if (dutyTextBox.Text.Trim() == "Frontline")
                 { _duty = 1; }
@@ -285,7 +301,7 @@ namespace FM
                 
 
                 if ((_type == 1 || _type == 4) && (_status == "1" || _status == "P"))
-                     { if (MessageBox.Show("Truck " + _num + " drove " + _miles + " miles and delivered " + _gals + " gallons on " + _date + "?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                     { if (MessageBox.Show("Truck " + _num + " has odometer reading of " + _miles + " , delivered " + _gals + " gallons and used "+ _fuel +" gallons of fuel on " + _date + "?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
                         // user clicked yes
                         var connString = GlobalVar.conString;
@@ -295,7 +311,7 @@ namespace FM
 
                         cmd.Connection = cn;
                         cn.Open();
-                        cmd.CommandText = "Insert into Records (Date, Warehouse, Truck, Status, Miles, Gallons, Type, UserID, Duty, Capacity) Values(@Date, @Warehouse, @Truck, @Status, @Miles, @Gallons, @Type, @UserID, @Duty, @Capacity)";
+                        cmd.CommandText = "Insert into Records (Date, Warehouse, Truck, Status, Miles, Gallons, Type, UserID, Duty, Capacity, Fuel) Values(@Date, @Warehouse, @Truck, @Status, @Miles, @Gallons, @Type, @UserID, @Duty, @Capacity, @Fuel)";
                         cmd.Parameters.AddWithValue("@Date", _date);
                         cmd.Parameters.AddWithValue("@Warehouse", _whse);
                         cmd.Parameters.AddWithValue("@Truck", _num);
@@ -306,6 +322,7 @@ namespace FM
                         cmd.Parameters.AddWithValue("@UserID", _user);
                         cmd.Parameters.AddWithValue("@Duty", _duty);
                         cmd.Parameters.AddWithValue("@Capacity", _capacity);
+                        cmd.Parameters.AddWithValue("@Fuel", _fuel);
 
 
 
@@ -336,7 +353,7 @@ namespace FM
                 }
 
                 else if ((_type == 2 || _type == 3) && (_status == "1" || _status == "P"))
-                {  if (MessageBox.Show("Truck " + _num + " drove " + _miles + " miles on " + _date + "?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {  if (MessageBox.Show("Truck " + _num + " has odometer reading of " + _miles + " , used " + _fuel + " gallons of fuel on " + _date + "?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
                         // user clicked yes
                         var connString = GlobalVar.conString;
@@ -346,7 +363,7 @@ namespace FM
 
                         cmd.Connection = cn;
                         cn.Open();
-                        cmd.CommandText = "Insert into Records (Date, Warehouse, Truck, Status, Miles, Gallons, Type, UserID, Duty, Capacity) Values(@Date, @Warehouse, @Truck, @Status, @Miles, @Gallons, @Type, @UserID, @Duty, @Capacity)";
+                        cmd.CommandText = "Insert into Records (Date, Warehouse, Truck, Status, Miles, Gallons, Type, UserID, Duty, Capacity, Fuel) Values(@Date, @Warehouse, @Truck, @Status, @Miles, @Gallons, @Type, @UserID, @Duty, @Capacity, @Fuel)";
                         cmd.Parameters.AddWithValue("@Date", _date);
                         cmd.Parameters.AddWithValue("@Warehouse", _whse);
                         cmd.Parameters.AddWithValue("@Truck", _num);
@@ -357,6 +374,7 @@ namespace FM
                         cmd.Parameters.AddWithValue("@UserID", _user);
                         cmd.Parameters.AddWithValue("@Duty", _duty);
                         cmd.Parameters.AddWithValue("@Capacity", _capacity);
+                        cmd.Parameters.AddWithValue("@Fuel", _fuel);
 
 
 
@@ -388,9 +406,9 @@ namespace FM
                 }
 
 
-                else if ( _status == "S")
+                else if ( _status == "0")
                 {
-                    if (MessageBox.Show("Truck " + _num + " was out of service on " + _date + " because of "+oOSListBox.Text.TrimEnd()+"?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    if (MessageBox.Show("Truck " + _num + " was not used on " + _date + " because: "+oOSListBox.Text.TrimEnd()+"?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
                         // user clicked yes
                         var connString = GlobalVar.conString;
@@ -443,8 +461,9 @@ namespace FM
                 }
 
 
-                else  
-                { if (MessageBox.Show("Truck " + _num + " was not used on " + _date + "?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                else
+                {
+                    if (MessageBox.Show("Truck " + _num + " was not used on " + _date + "?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
                         // user clicked yes
                         var connString = GlobalVar.conString;
@@ -473,16 +492,16 @@ namespace FM
 
                             cmd.ExecuteNonQuery();
 
-                           // cn.Close();
+                            // cn.Close();
 
-                           
+
                             fillTrucks();
 
                         }
                         catch (Exception ex)
                         {
                             MessageBox.Show("Error" + ex.Message);
-                           // cn.Close();
+                            // cn.Close();
                         }
 
                         cn.Close();
@@ -509,18 +528,22 @@ namespace FM
                 string _status = this.statusListBox.SelectedValue.ToString();
                 this.galsTextBox.Text = "0";
                 this.mileTextBox.Text = "0";
+                this.fueltextBox.Text = "0";
+
                 if (_status == "S")
                 {
                     this.oOSListBox.Enabled = true;
                     this.galsTextBox.Enabled = false;
                     this.mileTextBox.Enabled = false;
+                    this.fueltextBox.Enabled = false;
 
                 }
                 else if (_status == "0" )
                 {
-                    this.oOSListBox.Enabled = false;
+                    this.oOSListBox.Enabled = true;
                     this.galsTextBox.Enabled = false;
                     this.mileTextBox.Enabled = false;
+                    this.fueltextBox.Enabled = false;
 
                 }
                 else
@@ -528,6 +551,8 @@ namespace FM
                     this.oOSListBox.Enabled = false;
                     this.galsTextBox.Enabled = true;
                     this.mileTextBox.Enabled = true;
+                    this.fueltextBox.Enabled = true;
+
                     if (capacityTextBox.Text.ToString().Trim() == "n/a" || capacityTextBox.Text.ToString().Trim() == "0")
                     {
                         galsTextBox.Enabled = false;
@@ -566,7 +591,7 @@ namespace FM
             {
                 if (numberEntered < 0)
                 {
-                    MessageBox.Show("You cannot enter negative mileage");
+                    MessageBox.Show("You cannot enter negative odometer readings");
                     mileTextBox.Select();
                 }
             }
@@ -576,6 +601,37 @@ namespace FM
                 mileTextBox.Select();
             }
         }
+
+
+        private void fueltextBox_Validating(object sender, CancelEventArgs e)
+        {
+            int numberEntered;
+
+            if (int.TryParse(fueltextBox.Text, out numberEntered))
+            {
+                if (numberEntered < 0)
+                {
+                    MessageBox.Show("You cannot enter negative fuel gallons");
+                    fueltextBox.Select();
+                }
+            }
+            else
+            {
+                MessageBox.Show("You need to enter a valid number");
+                fueltextBox.Select();
+            }
+        }
+
+        
+
+
+
+
+
+
+
+
+
     }
 }
 

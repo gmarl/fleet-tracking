@@ -64,6 +64,10 @@
             this.oOSListBox = new System.Windows.Forms.ListBox();
             this.oOSBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.oOSTableAdapter = new FM.GHBWFMDataSetTableAdapters.OOSTableAdapter();
+            this.fueltextBox = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
             warehouseLabel = new System.Windows.Forms.Label();
             truckLabel = new System.Windows.Forms.Label();
             oOSLabel = new System.Windows.Forms.Label();
@@ -87,7 +91,7 @@
             // truckLabel
             // 
             truckLabel.AutoSize = true;
-            truckLabel.Location = new System.Drawing.Point(17, 53);
+            truckLabel.Location = new System.Drawing.Point(25, 53);
             truckLabel.Name = "truckLabel";
             truckLabel.Size = new System.Drawing.Size(38, 13);
             truckLabel.TabIndex = 6;
@@ -96,11 +100,11 @@
             // oOSLabel
             // 
             oOSLabel.AutoSize = true;
-            oOSLabel.Location = new System.Drawing.Point(26, 186);
+            oOSLabel.Location = new System.Drawing.Point(44, 186);
             oOSLabel.Name = "oOSLabel";
-            oOSLabel.Size = new System.Drawing.Size(73, 13);
+            oOSLabel.Size = new System.Drawing.Size(52, 13);
             oOSLabel.TabIndex = 41;
-            oOSLabel.Text = "OOS Reason:";
+            oOSLabel.Text = "Not Used";
             // 
             // recordsBindingSource
             // 
@@ -211,11 +215,11 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(384, 130);
+            this.label3.Location = new System.Drawing.Point(398, 130);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(65, 13);
+            this.label3.Size = new System.Drawing.Size(56, 13);
             this.label3.TabIndex = 30;
-            this.label3.Text = "Miles Driven";
+            this.label3.Text = "Odometer:";
             // 
             // label4
             // 
@@ -344,11 +348,52 @@
             // 
             this.oOSTableAdapter.ClearBeforeFill = true;
             // 
+            // fueltextBox
+            // 
+            this.fueltextBox.Location = new System.Drawing.Point(289, 154);
+            this.fueltextBox.Name = "fueltextBox";
+            this.fueltextBox.Size = new System.Drawing.Size(71, 20);
+            this.fueltextBox.TabIndex = 43;
+            this.fueltextBox.Text = "0";
+            this.fueltextBox.Validating += new System.ComponentModel.CancelEventHandler(this.fueltextBox_Validating);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(190, 157);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(93, 13);
+            this.label8.TabIndex = 44;
+            this.label8.Text = "Fuel Gallons Used";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(49, 199);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(47, 13);
+            this.label9.TabIndex = 45;
+            this.label9.Text = "Reason:";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.ForeColor = System.Drawing.Color.Red;
+            this.label10.Location = new System.Drawing.Point(371, 154);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(183, 13);
+            this.label10.TabIndex = 46;
+            this.label10.Text = "**Enter miles driven instead if rental.**";
+            // 
             // Records
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(566, 249);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.fueltextBox);
             this.Controls.Add(oOSLabel);
             this.Controls.Add(this.oOSListBox);
             this.Controls.Add(this.button2);
@@ -420,5 +465,9 @@
         private System.Windows.Forms.ListBox oOSListBox;
         private System.Windows.Forms.BindingSource oOSBindingSource;
         private GHBWFMDataSetTableAdapters.OOSTableAdapter oOSTableAdapter;
+        private System.Windows.Forms.TextBox fueltextBox;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label10;
     }
 }
