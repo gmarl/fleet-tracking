@@ -50,10 +50,16 @@
             this.typeTableAdapter = new FM.GHBWFMDataSetTableAdapters.TypeTableAdapter();
             this.dutyTableAdapter = new FM.GHBWFMDataSetTableAdapters.DutyTableAdapter();
             this.warehouseTableAdapter = new FM.GHBWFMDataSetTableAdapters.WarehouseTableAdapter();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.truckBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.truckTableAdapter = new FM.GHBWFMDataSetTableAdapters.TruckTableAdapter();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.Odometer = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.typeBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gHBWFMDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.warehouseBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dutyBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.truckBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -68,7 +74,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(210, 55);
+            this.label2.Location = new System.Drawing.Point(210, 52);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(34, 13);
             this.label2.TabIndex = 1;
@@ -77,7 +83,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(269, 106);
+            this.label3.Location = new System.Drawing.Point(269, 99);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(122, 13);
             this.label3.TabIndex = 2;
@@ -86,7 +92,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(388, 55);
+            this.label4.Location = new System.Drawing.Point(388, 52);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(32, 13);
             this.label4.TabIndex = 3;
@@ -95,7 +101,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(57, 106);
+            this.label5.Location = new System.Drawing.Point(55, 99);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(51, 13);
             this.label5.TabIndex = 4;
@@ -113,7 +119,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(106, 176);
+            this.button1.Location = new System.Drawing.Point(112, 193);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 6;
@@ -123,7 +129,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(364, 176);
+            this.button2.Location = new System.Drawing.Point(370, 193);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 7;
@@ -137,7 +143,7 @@
             this.typeListBox.DisplayMember = "Description";
             this.typeListBox.FormattingEnabled = true;
             this.typeListBox.IntegralHeight = false;
-            this.typeListBox.Location = new System.Drawing.Point(244, 55);
+            this.typeListBox.Location = new System.Drawing.Point(244, 52);
             this.typeListBox.Name = "typeListBox";
             this.typeListBox.Size = new System.Drawing.Size(90, 36);
             this.typeListBox.TabIndex = 8;
@@ -160,7 +166,7 @@
             this.whseListBox.DisplayMember = "Name";
             this.whseListBox.FormattingEnabled = true;
             this.whseListBox.IntegralHeight = false;
-            this.whseListBox.Location = new System.Drawing.Point(391, 106);
+            this.whseListBox.Location = new System.Drawing.Point(391, 99);
             this.whseListBox.Name = "whseListBox";
             this.whseListBox.Size = new System.Drawing.Size(122, 36);
             this.whseListBox.TabIndex = 9;
@@ -177,7 +183,7 @@
             this.dutyListBox.DisplayMember = "Description";
             this.dutyListBox.FormattingEnabled = true;
             this.dutyListBox.IntegralHeight = false;
-            this.dutyListBox.Location = new System.Drawing.Point(418, 55);
+            this.dutyListBox.Location = new System.Drawing.Point(418, 52);
             this.dutyListBox.Name = "dutyListBox";
             this.dutyListBox.Size = new System.Drawing.Size(95, 36);
             this.dutyListBox.TabIndex = 10;
@@ -197,7 +203,7 @@
             // 
             // capacityTextBox
             // 
-            this.capacityTextBox.Location = new System.Drawing.Point(106, 106);
+            this.capacityTextBox.Location = new System.Drawing.Point(104, 99);
             this.capacityTextBox.Name = "capacityTextBox";
             this.capacityTextBox.Size = new System.Drawing.Size(75, 20);
             this.capacityTextBox.TabIndex = 12;
@@ -215,11 +221,51 @@
             // 
             this.warehouseTableAdapter.ClearBeforeFill = true;
             // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.truckBindingSource, "Rental", true));
+            this.checkBox1.Location = new System.Drawing.Point(334, 154);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(57, 17);
+            this.checkBox1.TabIndex = 13;
+            this.checkBox1.Text = "Rental";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // truckBindingSource
+            // 
+            this.truckBindingSource.DataMember = "Truck";
+            this.truckBindingSource.DataSource = this.gHBWFMDataSet;
+            // 
+            // truckTableAdapter
+            // 
+            this.truckTableAdapter.ClearBeforeFill = true;
+            // 
+            // textBox1
+            // 
+            this.textBox1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.gHBWFMDataSet, "Truck.Odometer", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "N0"));
+            this.textBox1.Location = new System.Drawing.Point(155, 152);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(89, 20);
+            this.textBox1.TabIndex = 14;
+            // 
+            // Odometer
+            // 
+            this.Odometer.AutoSize = true;
+            this.Odometer.Location = new System.Drawing.Point(53, 155);
+            this.Odometer.Name = "Odometer";
+            this.Odometer.Size = new System.Drawing.Size(96, 13);
+            this.Odometer.TabIndex = 15;
+            this.Odometer.Text = "Odometer Reading";
+            // 
             // AddTrucks
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(565, 239);
+            this.Controls.Add(this.Odometer);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.capacityTextBox);
             this.Controls.Add(this.numTextBox);
             this.Controls.Add(this.dutyListBox);
@@ -241,6 +287,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gHBWFMDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.warehouseBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dutyBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.truckBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -268,5 +315,10 @@
         private GHBWFMDataSetTableAdapters.DutyTableAdapter dutyTableAdapter;
         private System.Windows.Forms.BindingSource warehouseBindingSource;
         private GHBWFMDataSetTableAdapters.WarehouseTableAdapter warehouseTableAdapter;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.BindingSource truckBindingSource;
+        private GHBWFMDataSetTableAdapters.TruckTableAdapter truckTableAdapter;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label Odometer;
     }
 }

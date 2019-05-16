@@ -1337,6 +1337,8 @@ namespace FM {
             
             private global::System.Data.DataColumn columnFuel;
             
+            private global::System.Data.DataColumn columnMilesDriven;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public RecordsDataTable() {
@@ -1476,6 +1478,14 @@ namespace FM {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn MilesDrivenColumn {
+                get {
+                    return this.columnMilesDriven;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -1511,7 +1521,7 @@ namespace FM {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public RecordsRow AddRecordsRow(System.DateTime Date, int Warehouse, string Truck, string Status, int Miles, int Gallons, int Type, int UserID, int Duty, int OOS, string Capacity, int Fuel) {
+            public RecordsRow AddRecordsRow(System.DateTime Date, int Warehouse, string Truck, string Status, int Miles, int Gallons, int Type, int UserID, int Duty, int OOS, string Capacity, int Fuel, int MilesDriven) {
                 RecordsRow rowRecordsRow = ((RecordsRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -1526,7 +1536,8 @@ namespace FM {
                         Duty,
                         OOS,
                         Capacity,
-                        Fuel};
+                        Fuel,
+                        MilesDriven};
                 rowRecordsRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowRecordsRow);
                 return rowRecordsRow;
@@ -1569,6 +1580,7 @@ namespace FM {
                 this.columnOOS = base.Columns["OOS"];
                 this.columnCapacity = base.Columns["Capacity"];
                 this.columnFuel = base.Columns["Fuel"];
+                this.columnMilesDriven = base.Columns["MilesDriven"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1600,6 +1612,8 @@ namespace FM {
                 base.Columns.Add(this.columnCapacity);
                 this.columnFuel = new global::System.Data.DataColumn("Fuel", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnFuel);
+                this.columnMilesDriven = new global::System.Data.DataColumn("MilesDriven", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMilesDriven);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnID}, true));
                 this.columnID.AutoIncrement = true;
@@ -2046,6 +2060,10 @@ namespace FM {
             
             private global::System.Data.DataColumn columnLastChangeDate;
             
+            private global::System.Data.DataColumn columnRental;
+            
+            private global::System.Data.DataColumn columnOdometer;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public TruckDataTable() {
@@ -2137,6 +2155,22 @@ namespace FM {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn RentalColumn {
+                get {
+                    return this.columnRental;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn OdometerColumn {
+                get {
+                    return this.columnOdometer;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -2172,7 +2206,7 @@ namespace FM {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public TruckRow AddTruckRow(string Num, int Type, int Duty, int Warehouse, string Capacity, int LastChangedBy, System.DateTime LastChangeDate) {
+            public TruckRow AddTruckRow(string Num, int Type, int Duty, int Warehouse, string Capacity, int LastChangedBy, System.DateTime LastChangeDate, string Rental, long Odometer) {
                 TruckRow rowTruckRow = ((TruckRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         Num,
@@ -2181,7 +2215,9 @@ namespace FM {
                         Warehouse,
                         Capacity,
                         LastChangedBy,
-                        LastChangeDate};
+                        LastChangeDate,
+                        Rental,
+                        Odometer};
                 rowTruckRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowTruckRow);
                 return rowTruckRow;
@@ -2218,6 +2254,8 @@ namespace FM {
                 this.columnCapacity = base.Columns["Capacity"];
                 this.columnLastChangedBy = base.Columns["LastChangedBy"];
                 this.columnLastChangeDate = base.Columns["LastChangeDate"];
+                this.columnRental = base.Columns["Rental"];
+                this.columnOdometer = base.Columns["Odometer"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2237,6 +2275,10 @@ namespace FM {
                 base.Columns.Add(this.columnLastChangedBy);
                 this.columnLastChangeDate = new global::System.Data.DataColumn("LastChangeDate", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnLastChangeDate);
+                this.columnRental = new global::System.Data.DataColumn("Rental", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnRental);
+                this.columnOdometer = new global::System.Data.DataColumn("Odometer", typeof(long), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnOdometer);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnNum}, true));
                 this.columnNum.AllowDBNull = false;
@@ -2249,6 +2291,7 @@ namespace FM {
                 this.columnCapacity.MaxLength = 10;
                 this.columnLastChangedBy.AllowDBNull = false;
                 this.columnLastChangeDate.AllowDBNull = false;
+                this.columnRental.MaxLength = 1;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -5315,6 +5358,22 @@ namespace FM {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public int MilesDriven {
+                get {
+                    try {
+                        return ((int)(this[this.tableRecords.MilesDrivenColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'MilesDriven\' in table \'Records\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableRecords.MilesDrivenColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsOOSNull() {
                 return this.IsNull(this.tableRecords.OOSColumn);
             }
@@ -5335,6 +5394,18 @@ namespace FM {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetFuelNull() {
                 this[this.tableRecords.FuelColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsMilesDrivenNull() {
+                return this.IsNull(this.tableRecords.MilesDrivenColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetMilesDrivenNull() {
+                this[this.tableRecords.MilesDrivenColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -5486,6 +5557,62 @@ namespace FM {
                 set {
                     this[this.tableTruck.LastChangeDateColumn] = value;
                 }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string Rental {
+                get {
+                    try {
+                        return ((string)(this[this.tableTruck.RentalColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Rental\' in table \'Truck\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableTruck.RentalColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public long Odometer {
+                get {
+                    try {
+                        return ((long)(this[this.tableTruck.OdometerColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Odometer\' in table \'Truck\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableTruck.OdometerColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsRentalNull() {
+                return this.IsNull(this.tableTruck.RentalColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetRentalNull() {
+                this[this.tableTruck.RentalColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsOdometerNull() {
+                return this.IsNull(this.tableTruck.OdometerColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetOdometerNull() {
+                this[this.tableTruck.OdometerColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -7503,10 +7630,11 @@ namespace FM.GHBWFMDataSetTableAdapters {
             tableMapping.ColumnMappings.Add("OOS", "OOS");
             tableMapping.ColumnMappings.Add("Fuel", "Fuel");
             tableMapping.ColumnMappings.Add("Capacity", "Capacity");
+            tableMapping.ColumnMappings.Add("MilesDriven", "MilesDriven");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [Records] WHERE (([ID] = @Original_ID) AND ([Date] = @Original_Date) AND ([Warehouse] = @Original_Warehouse) AND ([Truck] = @Original_Truck) AND ([Status] = @Original_Status) AND ([Miles] = @Original_Miles) AND ([Gallons] = @Original_Gallons) AND ([Type] = @Original_Type) AND ([UserID] = @Original_UserID) AND ([Duty] = @Original_Duty) AND ((@IsNull_OOS = 1 AND [OOS] IS NULL) OR ([OOS] = @Original_OOS)) AND ([Capacity] = @Original_Capacity) AND ((@IsNull_Fuel = 1 AND [Fuel] IS NULL) OR ([Fuel] = @Original_Fuel)))";
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [Records] WHERE (([ID] = @Original_ID) AND ([Date] = @Original_Date) AND ([Warehouse] = @Original_Warehouse) AND ([Truck] = @Original_Truck) AND ([Status] = @Original_Status) AND ([Miles] = @Original_Miles) AND ([Gallons] = @Original_Gallons) AND ([Type] = @Original_Type) AND ([UserID] = @Original_UserID) AND ([Duty] = @Original_Duty) AND ((@IsNull_OOS = 1 AND [OOS] IS NULL) OR ([OOS] = @Original_OOS)) AND ([Capacity] = @Original_Capacity) AND ((@IsNull_Fuel = 1 AND [Fuel] IS NULL) OR ([Fuel] = @Original_Fuel)) AND ((@IsNull_MilesDriven = 1 AND [MilesDriven] IS NULL) OR ([MilesDriven] = @Original_MilesDriven)))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Date", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Date", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
@@ -7523,10 +7651,12 @@ namespace FM.GHBWFMDataSetTableAdapters {
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Capacity", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Capacity", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Fuel", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Fuel", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Fuel", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Fuel", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_MilesDriven", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MilesDriven", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MilesDriven", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MilesDriven", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [Records] ([Date], [Warehouse], [Truck], [Status], [Miles], [Gallons], [Type], [UserID], [Duty], [OOS], [Capacity], [Fuel]) VALUES (@Date, @Warehouse, @Truck, @Status, @Miles, @Gallons, @Type, @UserID, @Duty, @OOS, @Capacity, @Fuel);
-SELECT ID, Date, Warehouse, Truck, Status, Miles, Gallons, Type, UserID, Duty, OOS, Capacity, Fuel FROM Records WHERE (ID = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [Records] ([Date], [Warehouse], [Truck], [Status], [Miles], [Gallons], [Type], [UserID], [Duty], [OOS], [Capacity], [Fuel], [MilesDriven]) VALUES (@Date, @Warehouse, @Truck, @Status, @Miles, @Gallons, @Type, @UserID, @Duty, @OOS, @Capacity, @Fuel, @MilesDriven);
+SELECT ID, Date, Warehouse, Truck, Status, Miles, Gallons, Type, UserID, Duty, OOS, Capacity, Fuel, MilesDriven FROM Records WHERE (ID = SCOPE_IDENTITY())";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Date", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Date", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Warehouse", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Warehouse", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -7540,10 +7670,11 @@ SELECT ID, Date, Warehouse, Truck, Status, Miles, Gallons, Type, UserID, Duty, O
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@OOS", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "OOS", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Capacity", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Capacity", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Fuel", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Fuel", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MilesDriven", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MilesDriven", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [Records] SET [Date] = @Date, [Warehouse] = @Warehouse, [Truck] = @Truck, [Status] = @Status, [Miles] = @Miles, [Gallons] = @Gallons, [Type] = @Type, [UserID] = @UserID, [Duty] = @Duty, [OOS] = @OOS, [Capacity] = @Capacity, [Fuel] = @Fuel WHERE (([ID] = @Original_ID) AND ([Date] = @Original_Date) AND ([Warehouse] = @Original_Warehouse) AND ([Truck] = @Original_Truck) AND ([Status] = @Original_Status) AND ([Miles] = @Original_Miles) AND ([Gallons] = @Original_Gallons) AND ([Type] = @Original_Type) AND ([UserID] = @Original_UserID) AND ([Duty] = @Original_Duty) AND ((@IsNull_OOS = 1 AND [OOS] IS NULL) OR ([OOS] = @Original_OOS)) AND ([Capacity] = @Original_Capacity) AND ((@IsNull_Fuel = 1 AND [Fuel] IS NULL) OR ([Fuel] = @Original_Fuel)));
-SELECT ID, Date, Warehouse, Truck, Status, Miles, Gallons, Type, UserID, Duty, OOS, Capacity, Fuel FROM Records WHERE (ID = @ID)";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [Records] SET [Date] = @Date, [Warehouse] = @Warehouse, [Truck] = @Truck, [Status] = @Status, [Miles] = @Miles, [Gallons] = @Gallons, [Type] = @Type, [UserID] = @UserID, [Duty] = @Duty, [OOS] = @OOS, [Capacity] = @Capacity, [Fuel] = @Fuel, [MilesDriven] = @MilesDriven WHERE (([ID] = @Original_ID) AND ([Date] = @Original_Date) AND ([Warehouse] = @Original_Warehouse) AND ([Truck] = @Original_Truck) AND ([Status] = @Original_Status) AND ([Miles] = @Original_Miles) AND ([Gallons] = @Original_Gallons) AND ([Type] = @Original_Type) AND ([UserID] = @Original_UserID) AND ([Duty] = @Original_Duty) AND ((@IsNull_OOS = 1 AND [OOS] IS NULL) OR ([OOS] = @Original_OOS)) AND ([Capacity] = @Original_Capacity) AND ((@IsNull_Fuel = 1 AND [Fuel] IS NULL) OR ([Fuel] = @Original_Fuel)) AND ((@IsNull_MilesDriven = 1 AND [MilesDriven] IS NULL) OR ([MilesDriven] = @Original_MilesDriven)));
+SELECT ID, Date, Warehouse, Truck, Status, Miles, Gallons, Type, UserID, Duty, OOS, Capacity, Fuel, MilesDriven FROM Records WHERE (ID = @ID)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Date", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Date", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Warehouse", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Warehouse", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -7557,6 +7688,7 @@ SELECT ID, Date, Warehouse, Truck, Status, Miles, Gallons, Type, UserID, Duty, O
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@OOS", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "OOS", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Capacity", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Capacity", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Fuel", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Fuel", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MilesDriven", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MilesDriven", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Date", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Date", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Warehouse", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Warehouse", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
@@ -7572,6 +7704,8 @@ SELECT ID, Date, Warehouse, Truck, Status, Miles, Gallons, Type, UserID, Duty, O
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Capacity", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Capacity", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Fuel", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Fuel", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Fuel", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Fuel", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_MilesDriven", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MilesDriven", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MilesDriven", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MilesDriven", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
@@ -7589,13 +7723,13 @@ SELECT ID, Date, Warehouse, Truck, Status, Miles, Gallons, Type, UserID, Duty, O
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT ID, Date, Warehouse, Truck, Status, Miles, Gallons, Type, UserID, Duty, OO" +
-                "S, Capacity, Fuel FROM Records";
+                "S, Capacity, Fuel, MilesDriven FROM Records";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[1].Connection = this.Connection;
-            this._commandCollection[1].CommandText = "SELECT Capacity, Date, Duty, Fuel, Gallons, ID, Miles, OOS, Status, Truck, Type, " +
-                "UserID, Warehouse FROM Records WHERE (Date = @Date) AND (Warehouse = @Whse) ORDE" +
-                "R BY Truck";
+            this._commandCollection[1].CommandText = "SELECT Capacity, Date, Duty, Fuel, Gallons, ID, Miles, MilesDriven, OOS, Status, " +
+                "Truck, Type, UserID, Warehouse, MilesDriven FROM Records WHERE (Date = @Date) AN" +
+                "D (Warehouse = @Whse) ORDER BY Truck";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Date", global::System.Data.SqlDbType.Date, 3, global::System.Data.ParameterDirection.Input, 0, 0, "Date", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Whse", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "Warehouse", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -7678,7 +7812,7 @@ SELECT ID, Date, Warehouse, Truck, Status, Miles, Gallons, Type, UserID, Duty, O
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_ID, System.DateTime Original_Date, int Original_Warehouse, string Original_Truck, string Original_Status, int Original_Miles, int Original_Gallons, int Original_Type, int Original_UserID, int Original_Duty, global::System.Nullable<int> Original_OOS, string Original_Capacity, global::System.Nullable<int> Original_Fuel) {
+        public virtual int Delete(int Original_ID, System.DateTime Original_Date, int Original_Warehouse, string Original_Truck, string Original_Status, int Original_Miles, int Original_Gallons, int Original_Type, int Original_UserID, int Original_Duty, global::System.Nullable<int> Original_OOS, string Original_Capacity, global::System.Nullable<int> Original_Fuel, global::System.Nullable<int> Original_MilesDriven) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_ID));
             this.Adapter.DeleteCommand.Parameters[1].Value = ((System.DateTime)(Original_Date));
             this.Adapter.DeleteCommand.Parameters[2].Value = ((int)(Original_Warehouse));
@@ -7721,6 +7855,14 @@ SELECT ID, Date, Warehouse, Truck, Status, Miles, Gallons, Type, UserID, Duty, O
                 this.Adapter.DeleteCommand.Parameters[13].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[14].Value = global::System.DBNull.Value;
             }
+            if ((Original_MilesDriven.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[15].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[16].Value = ((int)(Original_MilesDriven.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[15].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[16].Value = global::System.DBNull.Value;
+            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -7741,7 +7883,7 @@ SELECT ID, Date, Warehouse, Truck, Status, Miles, Gallons, Type, UserID, Duty, O
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(System.DateTime Date, int Warehouse, string Truck, string Status, int Miles, int Gallons, int Type, int UserID, int Duty, global::System.Nullable<int> OOS, string Capacity, global::System.Nullable<int> Fuel) {
+        public virtual int Insert(System.DateTime Date, int Warehouse, string Truck, string Status, int Miles, int Gallons, int Type, int UserID, int Duty, global::System.Nullable<int> OOS, string Capacity, global::System.Nullable<int> Fuel, global::System.Nullable<int> MilesDriven) {
             this.Adapter.InsertCommand.Parameters[0].Value = ((System.DateTime)(Date));
             this.Adapter.InsertCommand.Parameters[1].Value = ((int)(Warehouse));
             if ((Truck == null)) {
@@ -7779,6 +7921,12 @@ SELECT ID, Date, Warehouse, Truck, Status, Miles, Gallons, Type, UserID, Duty, O
             else {
                 this.Adapter.InsertCommand.Parameters[11].Value = global::System.DBNull.Value;
             }
+            if ((MilesDriven.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[12].Value = ((int)(MilesDriven.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[12].Value = global::System.DBNull.Value;
+            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -7812,6 +7960,7 @@ SELECT ID, Date, Warehouse, Truck, Status, Miles, Gallons, Type, UserID, Duty, O
                     global::System.Nullable<int> OOS, 
                     string Capacity, 
                     global::System.Nullable<int> Fuel, 
+                    global::System.Nullable<int> MilesDriven, 
                     int Original_ID, 
                     System.DateTime Original_Date, 
                     int Original_Warehouse, 
@@ -7825,6 +7974,7 @@ SELECT ID, Date, Warehouse, Truck, Status, Miles, Gallons, Type, UserID, Duty, O
                     global::System.Nullable<int> Original_OOS, 
                     string Original_Capacity, 
                     global::System.Nullable<int> Original_Fuel, 
+                    global::System.Nullable<int> Original_MilesDriven, 
                     int ID) {
             this.Adapter.UpdateCommand.Parameters[0].Value = ((System.DateTime)(Date));
             this.Adapter.UpdateCommand.Parameters[1].Value = ((int)(Warehouse));
@@ -7863,49 +8013,63 @@ SELECT ID, Date, Warehouse, Truck, Status, Miles, Gallons, Type, UserID, Duty, O
             else {
                 this.Adapter.UpdateCommand.Parameters[11].Value = global::System.DBNull.Value;
             }
-            this.Adapter.UpdateCommand.Parameters[12].Value = ((int)(Original_ID));
-            this.Adapter.UpdateCommand.Parameters[13].Value = ((System.DateTime)(Original_Date));
-            this.Adapter.UpdateCommand.Parameters[14].Value = ((int)(Original_Warehouse));
+            if ((MilesDriven.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[12].Value = ((int)(MilesDriven.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[12].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[13].Value = ((int)(Original_ID));
+            this.Adapter.UpdateCommand.Parameters[14].Value = ((System.DateTime)(Original_Date));
+            this.Adapter.UpdateCommand.Parameters[15].Value = ((int)(Original_Warehouse));
             if ((Original_Truck == null)) {
                 throw new global::System.ArgumentNullException("Original_Truck");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[15].Value = ((string)(Original_Truck));
+                this.Adapter.UpdateCommand.Parameters[16].Value = ((string)(Original_Truck));
             }
             if ((Original_Status == null)) {
                 throw new global::System.ArgumentNullException("Original_Status");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[16].Value = ((string)(Original_Status));
+                this.Adapter.UpdateCommand.Parameters[17].Value = ((string)(Original_Status));
             }
-            this.Adapter.UpdateCommand.Parameters[17].Value = ((int)(Original_Miles));
-            this.Adapter.UpdateCommand.Parameters[18].Value = ((int)(Original_Gallons));
-            this.Adapter.UpdateCommand.Parameters[19].Value = ((int)(Original_Type));
-            this.Adapter.UpdateCommand.Parameters[20].Value = ((int)(Original_UserID));
-            this.Adapter.UpdateCommand.Parameters[21].Value = ((int)(Original_Duty));
+            this.Adapter.UpdateCommand.Parameters[18].Value = ((int)(Original_Miles));
+            this.Adapter.UpdateCommand.Parameters[19].Value = ((int)(Original_Gallons));
+            this.Adapter.UpdateCommand.Parameters[20].Value = ((int)(Original_Type));
+            this.Adapter.UpdateCommand.Parameters[21].Value = ((int)(Original_UserID));
+            this.Adapter.UpdateCommand.Parameters[22].Value = ((int)(Original_Duty));
             if ((Original_OOS.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[22].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[23].Value = ((int)(Original_OOS.Value));
+                this.Adapter.UpdateCommand.Parameters[23].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[24].Value = ((int)(Original_OOS.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[22].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[23].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[23].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[24].Value = global::System.DBNull.Value;
             }
             if ((Original_Capacity == null)) {
                 throw new global::System.ArgumentNullException("Original_Capacity");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[24].Value = ((string)(Original_Capacity));
+                this.Adapter.UpdateCommand.Parameters[25].Value = ((string)(Original_Capacity));
             }
             if ((Original_Fuel.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[25].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[26].Value = ((int)(Original_Fuel.Value));
+                this.Adapter.UpdateCommand.Parameters[26].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[27].Value = ((int)(Original_Fuel.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[25].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[26].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[26].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[27].Value = global::System.DBNull.Value;
             }
-            this.Adapter.UpdateCommand.Parameters[27].Value = ((int)(ID));
+            if ((Original_MilesDriven.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[28].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[29].Value = ((int)(Original_MilesDriven.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[28].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[29].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[30].Value = ((int)(ID));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -7939,6 +8103,7 @@ SELECT ID, Date, Warehouse, Truck, Status, Miles, Gallons, Type, UserID, Duty, O
                     global::System.Nullable<int> OOS, 
                     string Capacity, 
                     global::System.Nullable<int> Fuel, 
+                    global::System.Nullable<int> MilesDriven, 
                     int Original_ID, 
                     System.DateTime Original_Date, 
                     int Original_Warehouse, 
@@ -7951,8 +8116,9 @@ SELECT ID, Date, Warehouse, Truck, Status, Miles, Gallons, Type, UserID, Duty, O
                     int Original_Duty, 
                     global::System.Nullable<int> Original_OOS, 
                     string Original_Capacity, 
-                    global::System.Nullable<int> Original_Fuel) {
-            return this.Update(Date, Warehouse, Truck, Status, Miles, Gallons, Type, UserID, Duty, OOS, Capacity, Fuel, Original_ID, Original_Date, Original_Warehouse, Original_Truck, Original_Status, Original_Miles, Original_Gallons, Original_Type, Original_UserID, Original_Duty, Original_OOS, Original_Capacity, Original_Fuel, Original_ID);
+                    global::System.Nullable<int> Original_Fuel, 
+                    global::System.Nullable<int> Original_MilesDriven) {
+            return this.Update(Date, Warehouse, Truck, Status, Miles, Gallons, Type, UserID, Duty, OOS, Capacity, Fuel, MilesDriven, Original_ID, Original_Date, Original_Warehouse, Original_Truck, Original_Status, Original_Miles, Original_Gallons, Original_Type, Original_UserID, Original_Duty, Original_OOS, Original_Capacity, Original_Fuel, Original_MilesDriven, Original_ID);
         }
     }
     
@@ -8424,10 +8590,12 @@ SELECT ID, Date, Warehouse, Truck, Status, Miles, Gallons, Type, UserID, Duty, O
             tableMapping.ColumnMappings.Add("Capacity", "Capacity");
             tableMapping.ColumnMappings.Add("LastChangedBy", "LastChangedBy");
             tableMapping.ColumnMappings.Add("LastChangeDate", "LastChangeDate");
+            tableMapping.ColumnMappings.Add("Rental", "Rental");
+            tableMapping.ColumnMappings.Add("Odometer", "Odometer");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[Truck] WHERE (([Num] = @Original_Num) AND ([Type] = @Original_Type) AND ([Duty] = @Original_Duty) AND ([Warehouse] = @Original_Warehouse) AND ([Capacity] = @Original_Capacity) AND ([LastChangedBy] = @Original_LastChangedBy) AND ([LastChangeDate] = @Original_LastChangeDate))";
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[Truck] WHERE (([Num] = @Original_Num) AND ([Type] = @Original_Type) AND ([Duty] = @Original_Duty) AND ([Warehouse] = @Original_Warehouse) AND ([Capacity] = @Original_Capacity) AND ([LastChangedBy] = @Original_LastChangedBy) AND ([LastChangeDate] = @Original_LastChangeDate) AND ((@IsNull_Rental = 1 AND [Rental] IS NULL) OR ([Rental] = @Original_Rental)) AND ((@IsNull_Odometer = 1 AND [Odometer] IS NULL) OR ([Odometer] = @Original_Odometer)))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Num", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Num", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Type", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Type", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
@@ -8436,10 +8604,14 @@ SELECT ID, Date, Warehouse, Truck, Status, Miles, Gallons, Type, UserID, Duty, O
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Capacity", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Capacity", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_LastChangedBy", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "LastChangedBy", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_LastChangeDate", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "LastChangeDate", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Rental", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Rental", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Rental", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Rental", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Odometer", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Odometer", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Odometer", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Odometer", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[Truck] ([Num], [Type], [Duty], [Warehouse], [Capacity], [LastChangedBy], [LastChangeDate]) VALUES (@Num, @Type, @Duty, @Warehouse, @Capacity, @LastChangedBy, @LastChangeDate);
-SELECT Num, Type, Duty, Warehouse, Capacity, LastChangedBy, LastChangeDate FROM Truck WHERE (Num = @Num)";
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[Truck] ([Num], [Type], [Duty], [Warehouse], [Capacity], [LastChangedBy], [LastChangeDate], [Rental], [Odometer]) VALUES (@Num, @Type, @Duty, @Warehouse, @Capacity, @LastChangedBy, @LastChangeDate, @Rental, @Odometer);
+SELECT Num, Type, Duty, Warehouse, Capacity, LastChangedBy, LastChangeDate, Rental, Odometer FROM Truck WHERE (Num = @Num)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Num", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Num", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Type", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Type", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -8448,10 +8620,12 @@ SELECT Num, Type, Duty, Warehouse, Capacity, LastChangedBy, LastChangeDate FROM 
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Capacity", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Capacity", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@LastChangedBy", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "LastChangedBy", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@LastChangeDate", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "LastChangeDate", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Rental", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Rental", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Odometer", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Odometer", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[Truck] SET [Num] = @Num, [Type] = @Type, [Duty] = @Duty, [Warehouse] = @Warehouse, [Capacity] = @Capacity, [LastChangedBy] = @LastChangedBy, [LastChangeDate] = @LastChangeDate WHERE (([Num] = @Original_Num) AND ([Type] = @Original_Type) AND ([Duty] = @Original_Duty) AND ([Warehouse] = @Original_Warehouse) AND ([Capacity] = @Original_Capacity) AND ([LastChangedBy] = @Original_LastChangedBy) AND ([LastChangeDate] = @Original_LastChangeDate));
-SELECT Num, Type, Duty, Warehouse, Capacity, LastChangedBy, LastChangeDate FROM Truck WHERE (Num = @Num)";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[Truck] SET [Num] = @Num, [Type] = @Type, [Duty] = @Duty, [Warehouse] = @Warehouse, [Capacity] = @Capacity, [LastChangedBy] = @LastChangedBy, [LastChangeDate] = @LastChangeDate, [Rental] = @Rental, [Odometer] = @Odometer WHERE (([Num] = @Original_Num) AND ([Type] = @Original_Type) AND ([Duty] = @Original_Duty) AND ([Warehouse] = @Original_Warehouse) AND ([Capacity] = @Original_Capacity) AND ([LastChangedBy] = @Original_LastChangedBy) AND ([LastChangeDate] = @Original_LastChangeDate) AND ((@IsNull_Rental = 1 AND [Rental] IS NULL) OR ([Rental] = @Original_Rental)) AND ((@IsNull_Odometer = 1 AND [Odometer] IS NULL) OR ([Odometer] = @Original_Odometer)));
+SELECT Num, Type, Duty, Warehouse, Capacity, LastChangedBy, LastChangeDate, Rental, Odometer FROM Truck WHERE (Num = @Num)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Num", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Num", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Type", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Type", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -8460,6 +8634,8 @@ SELECT Num, Type, Duty, Warehouse, Capacity, LastChangedBy, LastChangeDate FROM 
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Capacity", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Capacity", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@LastChangedBy", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "LastChangedBy", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@LastChangeDate", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "LastChangeDate", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Rental", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Rental", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Odometer", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Odometer", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Num", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Num", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Type", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Type", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Duty", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Duty", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
@@ -8467,6 +8643,10 @@ SELECT Num, Type, Duty, Warehouse, Capacity, LastChangedBy, LastChangeDate FROM 
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Capacity", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Capacity", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_LastChangedBy", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "LastChangedBy", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_LastChangeDate", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "LastChangeDate", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Rental", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Rental", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Rental", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Rental", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Odometer", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Odometer", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Odometer", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Odometer", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -8482,8 +8662,8 @@ SELECT Num, Type, Duty, Warehouse, Capacity, LastChangedBy, LastChangeDate FROM 
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT Num, Type, Duty, Warehouse, Capacity, LastChangedBy, LastChangeDate FROM d" +
-                "bo.Truck";
+            this._commandCollection[0].CommandText = "SELECT Num, Type, Duty, Warehouse, Capacity, LastChangedBy, LastChangeDate, Renta" +
+                "l, Odometer FROM dbo.Truck";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -8544,7 +8724,7 @@ SELECT Num, Type, Duty, Warehouse, Capacity, LastChangedBy, LastChangeDate FROM 
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(string Original_Num, int Original_Type, int Original_Duty, int Original_Warehouse, string Original_Capacity, int Original_LastChangedBy, System.DateTime Original_LastChangeDate) {
+        public virtual int Delete(string Original_Num, int Original_Type, int Original_Duty, int Original_Warehouse, string Original_Capacity, int Original_LastChangedBy, System.DateTime Original_LastChangeDate, string Original_Rental, global::System.Nullable<long> Original_Odometer) {
             if ((Original_Num == null)) {
                 throw new global::System.ArgumentNullException("Original_Num");
             }
@@ -8562,6 +8742,22 @@ SELECT Num, Type, Duty, Warehouse, Capacity, LastChangedBy, LastChangeDate FROM 
             }
             this.Adapter.DeleteCommand.Parameters[5].Value = ((int)(Original_LastChangedBy));
             this.Adapter.DeleteCommand.Parameters[6].Value = ((System.DateTime)(Original_LastChangeDate));
+            if ((Original_Rental == null)) {
+                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[8].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[8].Value = ((string)(Original_Rental));
+            }
+            if ((Original_Odometer.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[10].Value = ((long)(Original_Odometer.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[10].Value = global::System.DBNull.Value;
+            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -8582,7 +8778,7 @@ SELECT Num, Type, Duty, Warehouse, Capacity, LastChangedBy, LastChangeDate FROM 
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string Num, int Type, int Duty, int Warehouse, string Capacity, int LastChangedBy, System.DateTime LastChangeDate) {
+        public virtual int Insert(string Num, int Type, int Duty, int Warehouse, string Capacity, int LastChangedBy, System.DateTime LastChangeDate, string Rental, global::System.Nullable<long> Odometer) {
             if ((Num == null)) {
                 throw new global::System.ArgumentNullException("Num");
             }
@@ -8600,6 +8796,18 @@ SELECT Num, Type, Duty, Warehouse, Capacity, LastChangedBy, LastChangeDate FROM 
             }
             this.Adapter.InsertCommand.Parameters[5].Value = ((int)(LastChangedBy));
             this.Adapter.InsertCommand.Parameters[6].Value = ((System.DateTime)(LastChangeDate));
+            if ((Rental == null)) {
+                this.Adapter.InsertCommand.Parameters[7].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[7].Value = ((string)(Rental));
+            }
+            if ((Odometer.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[8].Value = ((long)(Odometer.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[8].Value = global::System.DBNull.Value;
+            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -8620,7 +8828,25 @@ SELECT Num, Type, Duty, Warehouse, Capacity, LastChangedBy, LastChangeDate FROM 
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string Num, int Type, int Duty, int Warehouse, string Capacity, int LastChangedBy, System.DateTime LastChangeDate, string Original_Num, int Original_Type, int Original_Duty, int Original_Warehouse, string Original_Capacity, int Original_LastChangedBy, System.DateTime Original_LastChangeDate) {
+        public virtual int Update(
+                    string Num, 
+                    int Type, 
+                    int Duty, 
+                    int Warehouse, 
+                    string Capacity, 
+                    int LastChangedBy, 
+                    System.DateTime LastChangeDate, 
+                    string Rental, 
+                    global::System.Nullable<long> Odometer, 
+                    string Original_Num, 
+                    int Original_Type, 
+                    int Original_Duty, 
+                    int Original_Warehouse, 
+                    string Original_Capacity, 
+                    int Original_LastChangedBy, 
+                    System.DateTime Original_LastChangeDate, 
+                    string Original_Rental, 
+                    global::System.Nullable<long> Original_Odometer) {
             if ((Num == null)) {
                 throw new global::System.ArgumentNullException("Num");
             }
@@ -8638,23 +8864,51 @@ SELECT Num, Type, Duty, Warehouse, Capacity, LastChangedBy, LastChangeDate FROM 
             }
             this.Adapter.UpdateCommand.Parameters[5].Value = ((int)(LastChangedBy));
             this.Adapter.UpdateCommand.Parameters[6].Value = ((System.DateTime)(LastChangeDate));
+            if ((Rental == null)) {
+                this.Adapter.UpdateCommand.Parameters[7].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[7].Value = ((string)(Rental));
+            }
+            if ((Odometer.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((long)(Odometer.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[8].Value = global::System.DBNull.Value;
+            }
             if ((Original_Num == null)) {
                 throw new global::System.ArgumentNullException("Original_Num");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((string)(Original_Num));
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((string)(Original_Num));
             }
-            this.Adapter.UpdateCommand.Parameters[8].Value = ((int)(Original_Type));
-            this.Adapter.UpdateCommand.Parameters[9].Value = ((int)(Original_Duty));
-            this.Adapter.UpdateCommand.Parameters[10].Value = ((int)(Original_Warehouse));
+            this.Adapter.UpdateCommand.Parameters[10].Value = ((int)(Original_Type));
+            this.Adapter.UpdateCommand.Parameters[11].Value = ((int)(Original_Duty));
+            this.Adapter.UpdateCommand.Parameters[12].Value = ((int)(Original_Warehouse));
             if ((Original_Capacity == null)) {
                 throw new global::System.ArgumentNullException("Original_Capacity");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[11].Value = ((string)(Original_Capacity));
+                this.Adapter.UpdateCommand.Parameters[13].Value = ((string)(Original_Capacity));
             }
-            this.Adapter.UpdateCommand.Parameters[12].Value = ((int)(Original_LastChangedBy));
-            this.Adapter.UpdateCommand.Parameters[13].Value = ((System.DateTime)(Original_LastChangeDate));
+            this.Adapter.UpdateCommand.Parameters[14].Value = ((int)(Original_LastChangedBy));
+            this.Adapter.UpdateCommand.Parameters[15].Value = ((System.DateTime)(Original_LastChangeDate));
+            if ((Original_Rental == null)) {
+                this.Adapter.UpdateCommand.Parameters[16].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[17].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[16].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[17].Value = ((string)(Original_Rental));
+            }
+            if ((Original_Odometer.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[18].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[19].Value = ((long)(Original_Odometer.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[18].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[19].Value = global::System.DBNull.Value;
+            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -8675,8 +8929,25 @@ SELECT Num, Type, Duty, Warehouse, Capacity, LastChangedBy, LastChangeDate FROM 
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(int Type, int Duty, int Warehouse, string Capacity, int LastChangedBy, System.DateTime LastChangeDate, string Original_Num, int Original_Type, int Original_Duty, int Original_Warehouse, string Original_Capacity, int Original_LastChangedBy, System.DateTime Original_LastChangeDate) {
-            return this.Update(Original_Num, Type, Duty, Warehouse, Capacity, LastChangedBy, LastChangeDate, Original_Num, Original_Type, Original_Duty, Original_Warehouse, Original_Capacity, Original_LastChangedBy, Original_LastChangeDate);
+        public virtual int Update(
+                    int Type, 
+                    int Duty, 
+                    int Warehouse, 
+                    string Capacity, 
+                    int LastChangedBy, 
+                    System.DateTime LastChangeDate, 
+                    string Rental, 
+                    global::System.Nullable<long> Odometer, 
+                    string Original_Num, 
+                    int Original_Type, 
+                    int Original_Duty, 
+                    int Original_Warehouse, 
+                    string Original_Capacity, 
+                    int Original_LastChangedBy, 
+                    System.DateTime Original_LastChangeDate, 
+                    string Original_Rental, 
+                    global::System.Nullable<long> Original_Odometer) {
+            return this.Update(Original_Num, Type, Duty, Warehouse, Capacity, LastChangedBy, LastChangeDate, Rental, Odometer, Original_Num, Original_Type, Original_Duty, Original_Warehouse, Original_Capacity, Original_LastChangedBy, Original_LastChangeDate, Original_Rental, Original_Odometer);
         }
     }
     

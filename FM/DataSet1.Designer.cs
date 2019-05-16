@@ -837,6 +837,8 @@ namespace FM {
             
             private global::System.Data.DataColumn columnPer;
             
+            private global::System.Data.DataColumn columnMilesDriven;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public RecordsDataTable() {
@@ -960,6 +962,14 @@ namespace FM {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn MilesDrivenColumn {
+                get {
+                    return this.columnMilesDriven;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -995,7 +1005,7 @@ namespace FM {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public RecordsRow AddRecordsRow(System.DateTime Date, WarehouseRow parentWarehouseRowByWarehouse_Records, string Truck, string Status, int Miles, int Gallons, int Type, int UserID, int Duty, string Per) {
+            public RecordsRow AddRecordsRow(System.DateTime Date, WarehouseRow parentWarehouseRowByWarehouse_Records, string Truck, string Status, int Miles, int Gallons, int Type, int UserID, int Duty, string Per, int MilesDriven) {
                 RecordsRow rowRecordsRow = ((RecordsRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -1008,7 +1018,8 @@ namespace FM {
                         Type,
                         UserID,
                         Duty,
-                        Per};
+                        Per,
+                        MilesDriven};
                 if ((parentWarehouseRowByWarehouse_Records != null)) {
                     columnValuesArray[2] = parentWarehouseRowByWarehouse_Records[0];
                 }
@@ -1052,6 +1063,7 @@ namespace FM {
                 this.columnUserID = base.Columns["UserID"];
                 this.columnDuty = base.Columns["Duty"];
                 this.columnPer = base.Columns["Per"];
+                this.columnMilesDriven = base.Columns["MilesDriven"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1079,6 +1091,8 @@ namespace FM {
                 base.Columns.Add(this.columnDuty);
                 this.columnPer = new global::System.Data.DataColumn("Per", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnPer);
+                this.columnMilesDriven = new global::System.Data.DataColumn("MilesDriven", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMilesDriven);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnID}, true));
                 this.columnID.AutoIncrement = true;
@@ -3329,6 +3343,22 @@ namespace FM {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public int MilesDriven {
+                get {
+                    try {
+                        return ((int)(this[this.tableRecords.MilesDrivenColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'MilesDriven\' in table \'Records\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableRecords.MilesDrivenColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public WarehouseRow WarehouseRow {
                 get {
                     return ((WarehouseRow)(this.GetParentRow(this.Table.ParentRelations["Warehouse_Records"])));
@@ -3348,6 +3378,18 @@ namespace FM {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetPerNull() {
                 this[this.tableRecords.PerColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsMilesDrivenNull() {
+                return this.IsNull(this.tableRecords.MilesDrivenColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetMilesDrivenNull() {
+                this[this.tableRecords.MilesDrivenColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4968,10 +5010,11 @@ namespace FM.DataSet1TableAdapters {
             tableMapping.ColumnMappings.Add("UserID", "UserID");
             tableMapping.ColumnMappings.Add("Duty", "Duty");
             tableMapping.ColumnMappings.Add("Per", "Per");
+            tableMapping.ColumnMappings.Add("MilesDriven", "MilesDriven");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[Records] WHERE (([ID] = @Original_ID) AND ([Date] = @Original_Date) AND ([Warehouse] = @Original_Warehouse) AND ([Truck] = @Original_Truck) AND ([Status] = @Original_Status) AND ([Miles] = @Original_Miles) AND ([Gallons] = @Original_Gallons) AND ([Type] = @Original_Type) AND ([UserID] = @Original_UserID) AND ([Duty] = @Original_Duty))";
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[Records] WHERE (([ID] = @Original_ID) AND ([Date] = @Original_Date) AND ([Warehouse] = @Original_Warehouse) AND ([Truck] = @Original_Truck) AND ([Status] = @Original_Status) AND ([Miles] = @Original_Miles) AND ([Gallons] = @Original_Gallons) AND ([Type] = @Original_Type) AND ([UserID] = @Original_UserID) AND ([Duty] = @Original_Duty) AND ((@IsNull_MilesDriven = 1 AND [MilesDriven] IS NULL) OR ([MilesDriven] = @Original_MilesDriven)))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Date", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Date", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
@@ -4983,10 +5026,12 @@ namespace FM.DataSet1TableAdapters {
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Type", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Type", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_UserID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "UserID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Duty", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Duty", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_MilesDriven", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MilesDriven", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MilesDriven", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MilesDriven", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[Records] SET [Date] = @Date, [Warehouse] = @Warehouse, [Truck] = @Truck, [Status] = @Status, [Miles] = @Miles, [Gallons] = @Gallons, [Type] = @Type, [UserID] = @UserID, [Duty] = @Duty WHERE (([ID] = @Original_ID) AND ([Date] = @Original_Date) AND ([Warehouse] = @Original_Warehouse) AND ([Truck] = @Original_Truck) AND ([Status] = @Original_Status) AND ([Miles] = @Original_Miles) AND ([Gallons] = @Original_Gallons) AND ([Type] = @Original_Type) AND ([UserID] = @Original_UserID) AND ([Duty] = @Original_Duty));
-SELECT ID, { fn CONCAT(YEAR(Date), '-', format(MONTH(Date), '00')) } AS Per, Date, Warehouse, Truck, Status, Miles, Gallons, Type, UserID, Duty FROM Records WHERE (ID = @ID)";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[Records] SET [Date] = @Date, [Warehouse] = @Warehouse, [Truck] = @Truck, [Status] = @Status, [Miles] = @Miles, [Gallons] = @Gallons, [Type] = @Type, [UserID] = @UserID, [Duty] = @Duty, [MilesDriven] = @MilesDriven WHERE (([ID] = @Original_ID) AND ([Date] = @Original_Date) AND ([Warehouse] = @Original_Warehouse) AND ([Truck] = @Original_Truck) AND ([Status] = @Original_Status) AND ([Miles] = @Original_Miles) AND ([Gallons] = @Original_Gallons) AND ([Type] = @Original_Type) AND ([UserID] = @Original_UserID) AND ([Duty] = @Original_Duty) AND ((@IsNull_MilesDriven = 1 AND [MilesDriven] IS NULL) OR ([MilesDriven] = @Original_MilesDriven)));
+SELECT ID, { fn CONCAT(YEAR(Date), '-', format(MONTH(Date), '00')) } AS Per, Date, Warehouse, Truck, Status, Miles, Gallons, Type, UserID, Duty, MilesDriven FROM Records WHERE (ID = @ID)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Date", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Date", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Warehouse", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Warehouse", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -4997,6 +5042,7 @@ SELECT ID, { fn CONCAT(YEAR(Date), '-', format(MONTH(Date), '00')) } AS Per, Dat
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Type", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Type", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@UserID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "UserID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Duty", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Duty", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MilesDriven", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MilesDriven", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Date", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Date", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Warehouse", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Warehouse", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
@@ -5007,6 +5053,8 @@ SELECT ID, { fn CONCAT(YEAR(Date), '-', format(MONTH(Date), '00')) } AS Per, Dat
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Type", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Type", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_UserID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "UserID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Duty", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Duty", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_MilesDriven", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MilesDriven", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MilesDriven", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MilesDriven", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
@@ -5024,7 +5072,8 @@ SELECT ID, { fn CONCAT(YEAR(Date), '-', format(MONTH(Date), '00')) } AS Per, Dat
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT ID, concat(year(date),\'-\',format(month(date),\'00\')) as Per, Date, Warehous" +
-                "e, Truck, Status, Miles, Gallons, Type, UserID, Duty FROM dbo.Records";
+                "e, Truck, Status, Miles, Gallons, Type, UserID, Duty, MilesDriven FROM dbo.Recor" +
+                "ds";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -5085,7 +5134,7 @@ SELECT ID, { fn CONCAT(YEAR(Date), '-', format(MONTH(Date), '00')) } AS Per, Dat
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_ID, System.DateTime Original_Date, int Original_Warehouse, string Original_Truck, string Original_Status, int Original_Miles, int Original_Gallons, int Original_Type, int Original_UserID, int Original_Duty) {
+        public virtual int Delete(int Original_ID, System.DateTime Original_Date, int Original_Warehouse, string Original_Truck, string Original_Status, int Original_Miles, int Original_Gallons, int Original_Type, int Original_UserID, int Original_Duty, global::System.Nullable<int> Original_MilesDriven) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_ID));
             this.Adapter.DeleteCommand.Parameters[1].Value = ((System.DateTime)(Original_Date));
             this.Adapter.DeleteCommand.Parameters[2].Value = ((int)(Original_Warehouse));
@@ -5106,6 +5155,14 @@ SELECT ID, { fn CONCAT(YEAR(Date), '-', format(MONTH(Date), '00')) } AS Per, Dat
             this.Adapter.DeleteCommand.Parameters[7].Value = ((int)(Original_Type));
             this.Adapter.DeleteCommand.Parameters[8].Value = ((int)(Original_UserID));
             this.Adapter.DeleteCommand.Parameters[9].Value = ((int)(Original_Duty));
+            if ((Original_MilesDriven.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[10].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[11].Value = ((int)(Original_MilesDriven.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[10].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[11].Value = global::System.DBNull.Value;
+            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -5136,6 +5193,7 @@ SELECT ID, { fn CONCAT(YEAR(Date), '-', format(MONTH(Date), '00')) } AS Per, Dat
                     int Type, 
                     int UserID, 
                     int Duty, 
+                    global::System.Nullable<int> MilesDriven, 
                     int Original_ID, 
                     System.DateTime Original_Date, 
                     int Original_Warehouse, 
@@ -5146,6 +5204,7 @@ SELECT ID, { fn CONCAT(YEAR(Date), '-', format(MONTH(Date), '00')) } AS Per, Dat
                     int Original_Type, 
                     int Original_UserID, 
                     int Original_Duty, 
+                    global::System.Nullable<int> Original_MilesDriven, 
                     int ID) {
             this.Adapter.UpdateCommand.Parameters[0].Value = ((System.DateTime)(Date));
             this.Adapter.UpdateCommand.Parameters[1].Value = ((int)(Warehouse));
@@ -5166,27 +5225,41 @@ SELECT ID, { fn CONCAT(YEAR(Date), '-', format(MONTH(Date), '00')) } AS Per, Dat
             this.Adapter.UpdateCommand.Parameters[6].Value = ((int)(Type));
             this.Adapter.UpdateCommand.Parameters[7].Value = ((int)(UserID));
             this.Adapter.UpdateCommand.Parameters[8].Value = ((int)(Duty));
-            this.Adapter.UpdateCommand.Parameters[9].Value = ((int)(Original_ID));
-            this.Adapter.UpdateCommand.Parameters[10].Value = ((System.DateTime)(Original_Date));
-            this.Adapter.UpdateCommand.Parameters[11].Value = ((int)(Original_Warehouse));
+            if ((MilesDriven.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((int)(MilesDriven.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[9].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[10].Value = ((int)(Original_ID));
+            this.Adapter.UpdateCommand.Parameters[11].Value = ((System.DateTime)(Original_Date));
+            this.Adapter.UpdateCommand.Parameters[12].Value = ((int)(Original_Warehouse));
             if ((Original_Truck == null)) {
                 throw new global::System.ArgumentNullException("Original_Truck");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[12].Value = ((string)(Original_Truck));
+                this.Adapter.UpdateCommand.Parameters[13].Value = ((string)(Original_Truck));
             }
             if ((Original_Status == null)) {
                 throw new global::System.ArgumentNullException("Original_Status");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[13].Value = ((string)(Original_Status));
+                this.Adapter.UpdateCommand.Parameters[14].Value = ((string)(Original_Status));
             }
-            this.Adapter.UpdateCommand.Parameters[14].Value = ((int)(Original_Miles));
-            this.Adapter.UpdateCommand.Parameters[15].Value = ((int)(Original_Gallons));
-            this.Adapter.UpdateCommand.Parameters[16].Value = ((int)(Original_Type));
-            this.Adapter.UpdateCommand.Parameters[17].Value = ((int)(Original_UserID));
-            this.Adapter.UpdateCommand.Parameters[18].Value = ((int)(Original_Duty));
-            this.Adapter.UpdateCommand.Parameters[19].Value = ((int)(ID));
+            this.Adapter.UpdateCommand.Parameters[15].Value = ((int)(Original_Miles));
+            this.Adapter.UpdateCommand.Parameters[16].Value = ((int)(Original_Gallons));
+            this.Adapter.UpdateCommand.Parameters[17].Value = ((int)(Original_Type));
+            this.Adapter.UpdateCommand.Parameters[18].Value = ((int)(Original_UserID));
+            this.Adapter.UpdateCommand.Parameters[19].Value = ((int)(Original_Duty));
+            if ((Original_MilesDriven.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[20].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[21].Value = ((int)(Original_MilesDriven.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[20].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[21].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[22].Value = ((int)(ID));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -5217,6 +5290,7 @@ SELECT ID, { fn CONCAT(YEAR(Date), '-', format(MONTH(Date), '00')) } AS Per, Dat
                     int Type, 
                     int UserID, 
                     int Duty, 
+                    global::System.Nullable<int> MilesDriven, 
                     int Original_ID, 
                     System.DateTime Original_Date, 
                     int Original_Warehouse, 
@@ -5226,8 +5300,9 @@ SELECT ID, { fn CONCAT(YEAR(Date), '-', format(MONTH(Date), '00')) } AS Per, Dat
                     int Original_Gallons, 
                     int Original_Type, 
                     int Original_UserID, 
-                    int Original_Duty) {
-            return this.Update(Date, Warehouse, Truck, Status, Miles, Gallons, Type, UserID, Duty, Original_ID, Original_Date, Original_Warehouse, Original_Truck, Original_Status, Original_Miles, Original_Gallons, Original_Type, Original_UserID, Original_Duty, Original_ID);
+                    int Original_Duty, 
+                    global::System.Nullable<int> Original_MilesDriven) {
+            return this.Update(Date, Warehouse, Truck, Status, Miles, Gallons, Type, UserID, Duty, MilesDriven, Original_ID, Original_Date, Original_Warehouse, Original_Truck, Original_Status, Original_Miles, Original_Gallons, Original_Type, Original_UserID, Original_Duty, Original_MilesDriven, Original_ID);
         }
     }
     

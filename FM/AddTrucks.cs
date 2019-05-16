@@ -13,6 +13,8 @@ namespace FM
 
         private void AddTrucks_Load(object sender, EventArgs e)
         {
+            // TODO: This line of code loads data into the 'gHBWFMDataSet.Truck' table. You can move, or remove it, as needed.
+            this.truckTableAdapter.Fill(this.gHBWFMDataSet.Truck);
             // TODO: This line of code loads data into the 'gHBWFMDataSet.Warehouse' table. You can move, or remove it, as needed.
             this.warehouseTableAdapter.Fill(this.gHBWFMDataSet.Warehouse);
             // TODO: This line of code loads data into the 'gHBWFMDataSet.Duty' table. You can move, or remove it, as needed.

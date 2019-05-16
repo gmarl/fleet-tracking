@@ -30,6 +30,8 @@ namespace FM
 
         private void Records_Load(object sender, EventArgs e)
         {
+            // TODO: This line of code loads data into the 'gHBWFMDataSet.Truck' table. You can move, or remove it, as needed.
+            this.truckTableAdapter.Fill(this.gHBWFMDataSet.Truck);
             // TODO: This line of code loads data into the 'gHBWFMDataSet.OOS' table. You can move, or remove it, as needed.
             this.oOSTableAdapter.Fill(this.gHBWFMDataSet.OOS);
             // TODO: This line of code loads data into the 'gHBWFMDataSet.Type' table. You can move, or remove it, as needed.
