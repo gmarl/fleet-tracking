@@ -224,7 +224,7 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.truckBindingSource, "Rental", true));
+            this.checkBox1.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.truckBindingSource, "Rental", true));
             this.checkBox1.Location = new System.Drawing.Point(334, 154);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(57, 17);

@@ -55,9 +55,9 @@ namespace FM
                 string _date = System.DateTime.Now.ToShortDateString();
                 string _num = numTextBox.Text.ToString().Trim();
                 string _capacity = capacityTextBox.Text.ToString().Trim();
+                string _rental = checkBox1.Text = checkBox1.Checked ? "Y" : "N";
 
-               
-                    if (MessageBox.Show("Add Truck number "+_num +" as duty "+dutyListBox.GetItemText(dutyListBox.SelectedItem).Trim()+" and type "+typeListBox.GetItemText(typeListBox.SelectedItem).Trim()+" with capacity of "+_capacity+"?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                if (MessageBox.Show("Add Truck number "+_num +" as duty "+dutyListBox.GetItemText(dutyListBox.SelectedItem).Trim()+" and type "+typeListBox.GetItemText(typeListBox.SelectedItem).Trim()+" with capacity of "+_capacity+" and Rental = "+_rental+"?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
                         // user clicked yes
                         var connString = GlobalVar.conString;
@@ -67,7 +67,7 @@ namespace FM
 
                         cmd.Connection = cn;
                         cn.Open();
-                        cmd.CommandText = "Insert into Truck (Num, Type, Duty, Warehouse, Capacity, LastChangedBy, LastChangeDate) Values(@Num, @Type, @Duty, @Warehouse, @Capacity, @LastChangedBy, @LastChangeDate)";
+                        cmd.CommandText = "Insert into Truck (Num, Type, Duty, Warehouse, Capacity, LastChangedBy, LastChangeDate, Rental) Values(@Num, @Type, @Duty, @Warehouse, @Capacity, @LastChangedBy, @LastChangeDate, @Rental)";
                         cmd.Parameters.AddWithValue("@Num", _num);
                         cmd.Parameters.AddWithValue("@Type", _type);
                         cmd.Parameters.AddWithValue("@Duty", _duty);
@@ -75,6 +75,7 @@ namespace FM
                         cmd.Parameters.AddWithValue("@Capacity", _capacity);
                         cmd.Parameters.AddWithValue("@LastChangedBy", _user);
                         cmd.Parameters.AddWithValue("@LastChangeDate", _date);
+                        cmd.Parameters.AddWithValue("@Rental", _rental);
 
 
 
