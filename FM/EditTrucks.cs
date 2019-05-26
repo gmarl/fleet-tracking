@@ -38,12 +38,15 @@ namespace FM
             string _whse = "";
             string _cap = "";
             string _duty = "";
+            string _odometer = "";
+            string _rental = "";
+
             SqlConnection con = new SqlConnection();
             con.ConnectionString = GlobalVar.conString;
             con.Open();
 
 
-            using (SqlCommand StrQuer = new SqlCommand("SELECT Type.Description, Duty.Description as Duty, Warehouse.Name as whse, Capacity FROM Truck, Duty, Type, Warehouse WHERE truck.duty = duty.id and truck.type = type.id and truck.warehouse = warehouse.id and Truck.Num = @Num", con))
+            using (SqlCommand StrQuer = new SqlCommand("SELECT Type.Description, Duty.Description as Duty, Warehouse.Name as whse, Capacity, Rental, Odometer FROM Truck, Duty, Type, Warehouse WHERE truck.duty = duty.id and truck.type = type.id and truck.warehouse = warehouse.id and Truck.Num = @Num", con))
             {
                 StrQuer.Parameters.AddWithValue("@Num", _num);
                 SqlDataReader dr = StrQuer.ExecuteReader();
@@ -55,6 +58,8 @@ namespace FM
                     _duty = dr.GetValue(1).ToString().Trim();
                     _whse = dr.GetValue(2).ToString().Trim();
                     _cap = dr.GetValue(3).ToString().Trim();
+                    _rental = dr.GetValue(4).ToString().Trim();
+                    _odometer = dr.GetValue(5).ToString().Trim();
 
 
 
@@ -71,8 +76,30 @@ namespace FM
                     oldDutyTextBox.Text = _duty;
                     oldTypeTextBox.Text = _type;
                     oldWhseTextBox.Text = _whse;
+                    oldOdometerTextBox.Text = _odometer;
+                    if (_rental == "Y")
+                    {
+                        oldRentalCheckBox.Checked = true;
+                        newRentalcheckBox.Checked = true;                        
+                    }
+
+                    else
+                    {
+                        oldRentalCheckBox.Checked = false;
+                        newRentalcheckBox.Checked = false;
+                    }
+
+
                     con.Close();
+
                     newCapTextBox.Text = _cap;
+                    newOdometerTextBox.Text = _odometer;
+                    int index = newWhseListBox.FindString(_whse);
+                    newWhseListBox.SetSelected(index, true);
+                    int indexType = newTypeListBox.FindString(_type);
+                    newTypeListBox.SetSelected(indexType, true);
+                    int indexDuty = newDutyListBox.FindString(_duty);
+                    newDutyListBox.SetSelected(indexDuty, true);
                 }
 
                 else
@@ -104,9 +131,18 @@ namespace FM
                 string _date = System.DateTime.Now.ToShortDateString();
                 string _num = oldNumTextBox.Text.ToString().Trim();
                 string _capacity = newCapTextBox.Text.ToString().Trim();
+                int _odometer2 = int.Parse(newOdometerTextBox.Text);
+                string _rental2 = "";
+                if (newRentalcheckBox.Checked == true)
+                {
+                    _rental2 = "Y";
+                }
+                else
+                {
+                    _rental2 = "N";
+                }
 
-
-                if (MessageBox.Show("Change Truck Number " + _num + " from " + oldDutyTextBox.Text.ToString().Trim() + ", type " + oldTypeTextBox.Text.ToString().Trim() + " with capacity of " + _capacity + " and assigned to " + oldWhseTextBox.Text.ToString().Trim() + "    TO:     " + newDutyListBox.GetItemText(newDutyListBox.SelectedItem).ToString().Trim() + ", type " + newTypeListBox.GetItemText(newTypeListBox.SelectedItem).ToString().Trim() + " with capacity of " + newCapTextBox.Text.ToString().Trim() + " and assigned to " + newWhseListBox.GetItemText(newWhseListBox.SelectedItem).ToString().Trim() + "?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                if (MessageBox.Show("Change Truck Number " + _num + " from " + oldDutyTextBox.Text.ToString().Trim() + ", type " + oldTypeTextBox.Text.ToString().Trim() + " with capacity of " + _capacity + " and assigned to " + oldWhseTextBox.Text.ToString().Trim() + "    TO:     " + newDutyListBox.GetItemText(newDutyListBox.SelectedItem).ToString().Trim() + ", type " + newTypeListBox.GetItemText(newTypeListBox.SelectedItem).ToString().Trim() + " with capacity of " + newCapTextBox.Text.ToString().Trim() + " assigned to " + newWhseListBox.GetItemText(newWhseListBox.SelectedItem).ToString().Trim() + " with odometer reading of " + newOdometerTextBox.Text.ToString().Trim() + $" and rental = {_rental2} ?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     // user clicked yes
                     var connString = GlobalVar.conString;
@@ -116,7 +152,7 @@ namespace FM
 
                     cmd.Connection = cn;
                     cn.Open();
-                    cmd.CommandText = "Update Truck Set Type = @Type, Duty = @Duty, Warehouse = @Warehouse, Capacity = @Capacity, LastChangedBy = @LastChangedBy, LastChangeDate = @LastChangeDate Where (Num = @Num)";// Values(@Type, @Duty, @Warehouse, @Capacity, @LastChangedBy, @LastChangeDate, @Num)";
+                    cmd.CommandText = "Update Truck Set Type = @Type, Duty = @Duty, Warehouse = @Warehouse, Capacity = @Capacity, LastChangedBy = @LastChangedBy, LastChangeDate = @LastChangeDate, Odometer = @Odometer, Rental = @Rental Where (Num = @Num)";// Values(@Type, @Duty, @Warehouse, @Capacity, @LastChangedBy, @LastChangeDate, @Num)";
                     cmd.Parameters.AddWithValue("@Num", _num);
                     cmd.Parameters.AddWithValue("@Type", _type2);
                     cmd.Parameters.AddWithValue("@Duty", _duty2);
@@ -124,6 +160,8 @@ namespace FM
                     cmd.Parameters.AddWithValue("@Capacity", _capacity);
                     cmd.Parameters.AddWithValue("@LastChangedBy", _user);
                     cmd.Parameters.AddWithValue("@LastChangeDate", _date);
+                    cmd.Parameters.AddWithValue("@Odometer", _odometer2);
+                    cmd.Parameters.AddWithValue("@Rental", _rental2);
 
 
 
@@ -140,6 +178,8 @@ namespace FM
                         oldWhseTextBox.Text = "";
                         oldTypeTextBox.Text = "";
                         oldDutyTextBox.Text = "";
+                        oldOdometerTextBox.Text = "";
+                        oldRentalCheckBox.Checked = false;
 
                     }
                     catch (Exception ex)
@@ -154,12 +194,19 @@ namespace FM
 
         private void EditTrucks_Load(object sender, EventArgs e)
         {
+            // TODO: This line of code loads data into the 'gHBWFMDataSet.Truck' table. You can move, or remove it, as needed.
+            this.truckTableAdapter.Fill(this.gHBWFMDataSet.Truck);
             // TODO: This line of code loads data into the 'gHBWFMDataSet.Warehouse' table. You can move, or remove it, as needed.
             this.warehouseTableAdapter.Fill(this.gHBWFMDataSet.Warehouse);
             // TODO: This line of code loads data into the 'gHBWFMDataSet.Duty' table. You can move, or remove it, as needed.
             this.dutyTableAdapter.Fill(this.gHBWFMDataSet.Duty);
             // TODO: This line of code loads data into the 'gHBWFMDataSet.Type' table. You can move, or remove it, as needed.
             this.typeTableAdapter.Fill(this.gHBWFMDataSet.Type);
+
+        }
+
+        private void rentalTextBox1_TextChanged(object sender, EventArgs e)
+        {
 
         }
     }

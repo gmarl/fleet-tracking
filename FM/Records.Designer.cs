@@ -67,12 +67,14 @@
             this.fueltextBox = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
+            this.drivenLabel = new System.Windows.Forms.Label();
+            this.LastOdomTextBox = new System.Windows.Forms.TextBox();
             this.truckBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.label11 = new System.Windows.Forms.Label();
             this.truckTableAdapter = new FM.GHBWFMDataSetTableAdapters.TruckTableAdapter();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.rentalCheckBox = new System.Windows.Forms.CheckBox();
+            this.drivenTextBox = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
             warehouseLabel = new System.Windows.Forms.Label();
             truckLabel = new System.Windows.Forms.Label();
             oOSLabel = new System.Windows.Forms.Label();
@@ -221,7 +223,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(398, 153);
+            this.label3.Location = new System.Drawing.Point(397, 148);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(56, 13);
             this.label3.TabIndex = 30;
@@ -256,7 +258,7 @@
             // 
             // mileTextBox
             // 
-            this.mileTextBox.Location = new System.Drawing.Point(460, 150);
+            this.mileTextBox.Location = new System.Drawing.Point(459, 145);
             this.mileTextBox.Name = "mileTextBox";
             this.mileTextBox.Size = new System.Drawing.Size(81, 20);
             this.mileTextBox.TabIndex = 3;
@@ -381,24 +383,29 @@
             this.label9.TabIndex = 45;
             this.label9.Text = "Reason:";
             // 
-            // label10
+            // drivenLabel
             // 
-            this.label10.AutoSize = true;
-            this.label10.ForeColor = System.Drawing.Color.Red;
-            this.label10.Location = new System.Drawing.Point(371, 179);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(183, 13);
-            this.label10.TabIndex = 46;
-            this.label10.Text = "**Enter miles driven instead if rental.**";
+            this.drivenLabel.AutoSize = true;
+            this.drivenLabel.ForeColor = System.Drawing.Color.Red;
+            this.drivenLabel.Location = new System.Drawing.Point(371, 206);
+            this.drivenLabel.Name = "drivenLabel";
+            this.drivenLabel.Size = new System.Drawing.Size(183, 13);
+            this.drivenLabel.TabIndex = 46;
+            this.drivenLabel.Text = "**Enter miles driven instead if rental.**";
             // 
-            // textBox2
+            // LastOdomTextBox
             // 
-            this.textBox2.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.truckBindingSource, "Odometer", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "N0"));
-            this.textBox2.Location = new System.Drawing.Point(460, 103);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(80, 20);
-            this.textBox2.TabIndex = 47;
+            this.LastOdomTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.truckBindingSource, "Odometer", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "N0"));
+            this.LastOdomTextBox.Location = new System.Drawing.Point(460, 103);
+            this.LastOdomTextBox.Name = "LastOdomTextBox";
+            this.LastOdomTextBox.ReadOnly = true;
+            this.LastOdomTextBox.Size = new System.Drawing.Size(80, 20);
+            this.LastOdomTextBox.TabIndex = 47;
+            // 
+            // truckBindingSource
+            // 
+            this.truckBindingSource.DataMember = "Truck";
+            this.truckBindingSource.DataSource = this.gHBWFMDataSet;
             // 
             // label11
             // 
@@ -409,35 +416,50 @@
             this.label11.TabIndex = 48;
             this.label11.Text = "Last Odometer Reading";
             // 
-            // truckBindingSource
-            // 
-            this.truckBindingSource.DataMember = "Truck";
-            this.truckBindingSource.DataSource = this.gHBWFMDataSet;
-            // 
             // truckTableAdapter
             // 
             this.truckTableAdapter.ClearBeforeFill = true;
             // 
-            // checkBox1
+            // rentalCheckBox
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.truckBindingSource, "Rental", true));
-            this.checkBox1.Location = new System.Drawing.Point(220, 102);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(57, 17);
-            this.checkBox1.TabIndex = 50;
-            this.checkBox1.Text = "Rental";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.rentalCheckBox.AutoSize = true;
+            this.rentalCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.truckBindingSource, "Rental", true));
+            this.rentalCheckBox.Enabled = false;
+            this.rentalCheckBox.Location = new System.Drawing.Point(220, 102);
+            this.rentalCheckBox.Name = "rentalCheckBox";
+            this.rentalCheckBox.Size = new System.Drawing.Size(57, 17);
+            this.rentalCheckBox.TabIndex = 50;
+            this.rentalCheckBox.Text = "Rental";
+            this.rentalCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // drivenTextBox
+            // 
+            this.drivenTextBox.Location = new System.Drawing.Point(460, 172);
+            this.drivenTextBox.Name = "drivenTextBox";
+            this.drivenTextBox.Size = new System.Drawing.Size(81, 20);
+            this.drivenTextBox.TabIndex = 51;
+            this.drivenTextBox.Text = "0";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(386, 175);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(68, 13);
+            this.label12.TabIndex = 52;
+            this.label12.Text = "Miles Driven:";
             // 
             // Records
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(566, 304);
-            this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.drivenTextBox);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.rentalCheckBox);
             this.Controls.Add(this.label11);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.label10);
+            this.Controls.Add(this.LastOdomTextBox);
+            this.Controls.Add(this.drivenLabel);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.fueltextBox);
@@ -516,11 +538,13 @@
         private System.Windows.Forms.TextBox fueltextBox;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Label drivenLabel;
+        private System.Windows.Forms.TextBox LastOdomTextBox;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.BindingSource truckBindingSource;
         private GHBWFMDataSetTableAdapters.TruckTableAdapter truckTableAdapter;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox rentalCheckBox;
+        private System.Windows.Forms.TextBox drivenTextBox;
+        private System.Windows.Forms.Label label12;
     }
 }

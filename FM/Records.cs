@@ -77,12 +77,6 @@ namespace FM
             else if (GlobalVar._whse == 9)
             { this.warehouseTextBox.Text = "Westbrook"; }
 
-            else if (GlobalVar._whse == 10)
-            { this.warehouseTextBox.Text = "Wilton"; }
-
-            else if (GlobalVar._whse == 11)
-            { this.warehouseTextBox.Text = "Liverpool"; }
-
             else if (GlobalVar._whse == 12)
             { this.warehouseTextBox.Text = "Kingston"; }
 
@@ -219,7 +213,7 @@ namespace FM
             con.Open();
 
 
-            using (SqlCommand StrQuer = new SqlCommand("Select Type.Description, Duty.Description, Truck.Capacity From Type, Duty, Truck Where Duty.ID = Truck.Duty AND Type.ID = Truck.Type AND Truck.Num = @Num", con))
+            using (SqlCommand StrQuer = new SqlCommand("Select Type.Description, Duty.Description, Truck.Capacity, Truck.Odometer, Truck.Rental From Type, Duty, Truck Where Duty.ID = Truck.Duty AND Type.ID = Truck.Type AND Truck.Num = @Num", con))
             {
                 StrQuer.Parameters.AddWithValue("@Num", _num);
                 SqlDataReader dr = StrQuer.ExecuteReader();
@@ -230,6 +224,25 @@ namespace FM
                     this.typeTextBox.Text = dr.GetValue(0).ToString();
                     this.dutyTextBox.Text = dr.GetValue(1).ToString();
                     this.capacityTextBox.Text = dr.GetValue(2).ToString();
+                    this.LastOdomTextBox.Text = dr.GetValue(3).ToString();
+                    string _rental = dr.GetValue(4).ToString();
+                    if (_rental == "Y")
+                    {
+                        this.rentalCheckBox.Checked = true;
+                        this.drivenLabel.Visible = true;
+                        this.drivenTextBox.Enabled = true;
+                        this.mileTextBox.Enabled = false;
+
+                    }
+                    else
+                    {
+                        this.rentalCheckBox.Checked = false;
+                        this.drivenLabel.Visible = false;
+                        this.drivenTextBox.Enabled = false;
+                        this.mileTextBox.Enabled = true;
+                    }
+
+
                      }
             }
 
