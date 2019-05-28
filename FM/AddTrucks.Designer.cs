@@ -53,7 +53,7 @@
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.truckBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.truckTableAdapter = new FM.GHBWFMDataSetTableAdapters.TruckTableAdapter();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.odometerTextBox = new System.Windows.Forms.TextBox();
             this.Odometer = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.typeBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gHBWFMDataSet)).BeginInit();
@@ -231,6 +231,7 @@
             this.checkBox1.TabIndex = 13;
             this.checkBox1.Text = "Rental";
             this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // truckBindingSource
             // 
@@ -241,13 +242,13 @@
             // 
             this.truckTableAdapter.ClearBeforeFill = true;
             // 
-            // textBox1
+            // odometerTextBox
             // 
-            this.textBox1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.gHBWFMDataSet, "Truck.Odometer", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "N0"));
-            this.textBox1.Location = new System.Drawing.Point(155, 152);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(89, 20);
-            this.textBox1.TabIndex = 14;
+            this.odometerTextBox.Location = new System.Drawing.Point(155, 152);
+            this.odometerTextBox.Name = "odometerTextBox";
+            this.odometerTextBox.Size = new System.Drawing.Size(89, 20);
+            this.odometerTextBox.TabIndex = 14;
+            this.odometerTextBox.Text = "0";
             // 
             // Odometer
             // 
@@ -264,7 +265,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(565, 239);
             this.Controls.Add(this.Odometer);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.odometerTextBox);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.capacityTextBox);
             this.Controls.Add(this.numTextBox);
@@ -318,7 +319,7 @@
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.BindingSource truckBindingSource;
         private GHBWFMDataSetTableAdapters.TruckTableAdapter truckTableAdapter;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox odometerTextBox;
         private System.Windows.Forms.Label Odometer;
     }
 }
