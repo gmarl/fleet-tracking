@@ -387,11 +387,11 @@
             // 
             this.drivenLabel.AutoSize = true;
             this.drivenLabel.ForeColor = System.Drawing.Color.Red;
-            this.drivenLabel.Location = new System.Drawing.Point(371, 206);
+            this.drivenLabel.Location = new System.Drawing.Point(383, 206);
             this.drivenLabel.Name = "drivenLabel";
-            this.drivenLabel.Size = new System.Drawing.Size(183, 13);
+            this.drivenLabel.Size = new System.Drawing.Size(158, 13);
             this.drivenLabel.TabIndex = 46;
-            this.drivenLabel.Text = "**Enter miles driven instead if rental.**";
+            this.drivenLabel.Text = "**Enter miles driven for rentals.**";
             // 
             // LastOdomTextBox
             // 

@@ -413,8 +413,8 @@ namespace FM
                         cmd2.Connection = cn2;
                         cn2.Open();
                         cmd2.CommandText = " DECLARE @Miles int, @Truck char(10) SET @Miles = " +_miles + " SET @Truck = '" + _num + "' Update Truck SET Odometer = @Miles WHERE Num = @Truck ";
-                        cmd2.Parameters.AddWithValue("@Truck", _num);
-                        cmd.Parameters.AddWithValue("@Miles", _miles);
+                       // cmd2.Parameters.AddWithValue("@Truck", _num);
+                       // cmd.Parameters.AddWithValue("@Miles", _miles);
                         
 
                         try
@@ -496,8 +496,8 @@ namespace FM
                         cmd2.Connection = cn2;
                         cn2.Open();
                         cmd2.CommandText = " DECLARE @Miles int, @Truck char(10) SET @Miles = " + _miles + " SET @Truck = '" + _num + "' Update Truck SET Odometer = @Miles WHERE Num = @Truck ";
-                        cmd2.Parameters.AddWithValue("@Truck", _num);
-                        cmd.Parameters.AddWithValue("@Miles", _miles);
+                   //     cmd2.Parameters.AddWithValue("@Truck", _num);
+                   //     cmd.Parameters.AddWithValue("@Miles", _miles);
 
 
                         try
@@ -582,8 +582,8 @@ namespace FM
                         cmd2.Connection = cn2;
                         cn2.Open();
                         cmd2.CommandText = " DECLARE @Miles int, @Truck char(10) SET @Miles = " + _miles + " SET @Truck = '" + _num + "' Update Truck SET Odometer = @Miles WHERE Num = @Truck ";
-                        cmd2.Parameters.AddWithValue("@Truck", _num);
-                        cmd.Parameters.AddWithValue("@Miles", _miles);
+                      //  cmd2.Parameters.AddWithValue("@Truck", _num);
+                      //  cmd.Parameters.AddWithValue("@Miles", _miles);
 
 
                         try
@@ -667,8 +667,8 @@ namespace FM
                         cmd2.Connection = cn2;
                         cn2.Open();
                         cmd2.CommandText = " DECLARE @Miles int, @Truck char(10) SET @Miles = " + _miles + " SET @Truck = '" + _num + "' Update Truck SET Odometer = @Miles WHERE Num = @Truck ";
-                        cmd2.Parameters.AddWithValue("@Truck", _num);
-                        cmd.Parameters.AddWithValue("@Miles", _miles);
+                     //   cmd2.Parameters.AddWithValue("@Truck", _num);
+                     //   cmd.Parameters.AddWithValue("@Miles", _miles);
 
 
                         try
@@ -736,8 +736,24 @@ namespace FM
                 {
                     this.oOSListBox.Enabled = false;
                     this.galsTextBox.Enabled = true;
-                    this.mileTextBox.Enabled = true;
                     this.fueltextBox.Enabled = true;
+
+                    if (this.rentalCheckBox.Checked == true)
+                    {
+                        this.mileTextBox.Enabled = false;
+                        this.drivenLabel.Visible = true;
+                        this.drivenTextBox.Enabled = true;
+
+                    }
+                    else
+                    {
+                        this.mileTextBox.Enabled = true;
+                        this.drivenLabel.Visible = false;
+                        this.drivenTextBox.Enabled = false;
+                    }
+
+
+                    
 
                     if (capacityTextBox.Text.ToString().Trim() == "n/a" || capacityTextBox.Text.ToString().Trim() == "0")
                     {
