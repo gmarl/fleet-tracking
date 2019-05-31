@@ -439,6 +439,7 @@
             this.drivenTextBox.Size = new System.Drawing.Size(81, 20);
             this.drivenTextBox.TabIndex = 51;
             this.drivenTextBox.Text = "0";
+            this.drivenTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.drivenTextBox_Validating);
             // 
             // label12
             // 

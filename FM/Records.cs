@@ -144,6 +144,9 @@ namespace FM
                         this.galsTextBox.Text = "0";
                         this.mileTextBox.Text = "0";
                         this.fueltextBox.Text = "0";
+                        this.drivenTextBox.Text = "0";
+                        this.rentalCheckBox.Checked = false;
+                        this.drivenLabel.Visible = false;
                         
                         if (this.statusListBox.SelectedValue == null)
                         {
@@ -154,6 +157,7 @@ namespace FM
                             this.mileTextBox.Enabled = false;
                             this.oOSListBox.Enabled = false;
                             this.fueltextBox.Enabled = false;
+                            this.drivenTextBox.Enabled = false;
 
                         }
                         else
@@ -165,7 +169,7 @@ namespace FM
                                 this.mileTextBox.Enabled = false;
                                 this.oOSListBox.Enabled = true;
                                 this.fueltextBox.Enabled = false;
-
+                                this.drivenTextBox.Enabled = false;
                             }
 
                             else if ( _status == "S")
@@ -174,6 +178,7 @@ namespace FM
                                 this.mileTextBox.Enabled = false;
                                 this.oOSListBox.Enabled = true;
                                 this.fueltextBox.Enabled = false;
+                                this.drivenTextBox.Enabled = false;
 
                             }
 
@@ -184,7 +189,7 @@ namespace FM
                                 this.oOSListBox.Enabled = false;
                                 this.fueltextBox.Enabled = true;
 
-                                if (capacityTextBox.Text.ToString() == "n/a" || capacityTextBox.Text.ToString() == "0")
+                                if (capacityTextBox.Text.ToString() == "n/a" || capacityTextBox.Text.ToString() == "0" || capacityTextBox.Text.ToString() == "")
                                 {
                                     galsTextBox.Enabled = false;
                                 }
@@ -270,10 +275,24 @@ namespace FM
         {
 
 
-            if ((statusListBox.GetItemText(statusListBox.SelectedItem).Trim() == "Full Run" || statusListBox.GetItemText(statusListBox.SelectedItem).Trim() == "Partial Run") && (this.mileTextBox.Text.Trim() == "" || this.mileTextBox.Text.Trim() == "0"))
+            if ((statusListBox.GetItemText(statusListBox.SelectedItem).Trim() == "Full Run" || statusListBox.GetItemText(statusListBox.SelectedItem).Trim() == "Partial Run") && ((this.mileTextBox.Text.Trim() == "" || this.mileTextBox.Text.Trim() == "0") && this.rentalCheckBox.Checked == false))
             {
                 MessageBox.Show("You must enter the odometer reading.");
                 this.mileTextBox.Select();
+                this.drivenTextBox.Text = "0";
+                this.drivenLabel.Visible = false;
+                this.drivenTextBox.Enabled = false;
+            }
+
+            else if ((statusListBox.GetItemText(statusListBox.SelectedItem).Trim() == "Full Run" || statusListBox.GetItemText(statusListBox.SelectedItem).Trim() == "Partial Run") && ((this.drivenTextBox.Text.Trim() == "" || this.drivenTextBox.Text.Trim() == "0") && this.rentalCheckBox.Checked == true))
+            {
+                MessageBox.Show("You must enter the miles driven.");
+                this.drivenTextBox.Enabled = false;
+                this.drivenTextBox.Select();
+                this.mileTextBox.Enabled = false;
+                this.mileTextBox.Text = "0";
+                this.drivenLabel.Visible = true;
+                
             }
 
             else if ((statusListBox.GetItemText(statusListBox.SelectedItem).Trim() == "Full Run" || statusListBox.GetItemText(statusListBox.SelectedItem).Trim() == "Partial Run") && (int.Parse(galsTextBox.Text)) < 1 && (this.typeTextBox.Text.Trim() == "Bulk" ))
@@ -301,7 +320,33 @@ namespace FM
                 else if (typeTextBox.Text.Trim() == "Hybrid")
                 { _type = 3; }
                 else { _type = 4; }
-                int _miles = int.Parse(mileTextBox.Text);
+                int _miles = 0;
+                int _driven = 0;
+                
+                if(this.rentalCheckBox.Checked == true)
+                {
+                    _miles = 0;
+                    _driven = int.Parse(drivenTextBox.Text);
+                    
+                }
+
+                else if (_status == "0")
+                {
+                    _miles = int.Parse(LastOdomTextBox.Text);
+                    _driven = 0;
+                }
+
+                else
+                {
+                    _miles = int.Parse(mileTextBox.Text);
+                    _driven = int.Parse(mileTextBox.Text) - int.Parse(LastOdomTextBox.Text);
+                    
+                }
+                
+               
+
+
+
                 int _gals = int.Parse(galsTextBox.Text);
                 int _fuel = int.Parse(fueltextBox.Text);
                 int _duty = 0;
@@ -316,7 +361,7 @@ namespace FM
                 
 
                 if ((_type == 1 || _type == 4) && (_status == "1" || _status == "P"))
-                     { if (MessageBox.Show("Truck " + _num + " has odometer reading of " + _miles + " , delivered " + _gals + " gallons and used "+ _fuel +" gallons of fuel on " + _date + "?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                     { if (MessageBox.Show("Truck " + _num + " has odometer reading of " + _miles + " , delivered " + _gals + " gallons, drove " + _driven + " miles and used "+ _fuel +" gallons of fuel on " + _date + "?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
                         // user clicked yes
                         var connString = GlobalVar.conString;
@@ -326,7 +371,7 @@ namespace FM
 
                         cmd.Connection = cn;
                         cn.Open();
-                        cmd.CommandText = "Insert into Records (Date, Warehouse, Truck, Status, Miles, Gallons, Type, UserID, Duty, Capacity, Fuel) Values(@Date, @Warehouse, @Truck, @Status, @Miles, @Gallons, @Type, @UserID, @Duty, @Capacity, @Fuel)";
+                        cmd.CommandText = "Insert into Records (Date, Warehouse, Truck, Status, Miles, Gallons, Type, UserID, Duty, Capacity, Fuel, MilesDriven ) Values(@Date, @Warehouse, @Truck, @Status, @Miles, @Gallons, @Type, @UserID, @Duty, @Capacity, @Fuel, @MilesDriven)";
                         cmd.Parameters.AddWithValue("@Date", _date);
                         cmd.Parameters.AddWithValue("@Warehouse", _whse);
                         cmd.Parameters.AddWithValue("@Truck", _num);
@@ -338,6 +383,7 @@ namespace FM
                         cmd.Parameters.AddWithValue("@Duty", _duty);
                         cmd.Parameters.AddWithValue("@Capacity", _capacity);
                         cmd.Parameters.AddWithValue("@Fuel", _fuel);
+                        cmd.Parameters.AddWithValue("@MilesDriven", _driven);
 
 
 
@@ -358,6 +404,36 @@ namespace FM
                            // cn.Close();
                         }
                         cn.Close();
+
+                        var connString2 = GlobalVar.conString;
+                        SqlConnection cn2 = new SqlConnection(connString2);
+                        SqlCommand cmd2 = new SqlCommand();
+
+
+                        cmd2.Connection = cn2;
+                        cn2.Open();
+                        cmd2.CommandText = " DECLARE @Miles int, @Truck char(10) SET @Miles = " +_miles + " SET @Truck = '" + _num + "' Update Truck SET Odometer = @Miles WHERE Num = @Truck ";
+                        cmd2.Parameters.AddWithValue("@Truck", _num);
+                        cmd.Parameters.AddWithValue("@Miles", _miles);
+                        
+
+                        try
+                        {
+
+                            cmd2.ExecuteNonQuery();
+
+                            //cn.Close();
+
+
+
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Error" + ex.Message);
+                            // cn.Close();
+                        }
+                        cn2.Close();
+
                     }
                     else
                     {
@@ -368,7 +444,7 @@ namespace FM
                 }
 
                 else if ((_type == 2 || _type == 3) && (_status == "1" || _status == "P"))
-                {  if (MessageBox.Show("Truck " + _num + " has odometer reading of " + _miles + " , used " + _fuel + " gallons of fuel on " + _date + "?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {  if (MessageBox.Show("Truck " + _num + " has odometer reading of " + _miles + " , drove " + _driven + " miles and used " + _fuel + " gallons of fuel on " + _date + "?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
                         // user clicked yes
                         var connString = GlobalVar.conString;
@@ -378,7 +454,7 @@ namespace FM
 
                         cmd.Connection = cn;
                         cn.Open();
-                        cmd.CommandText = "Insert into Records (Date, Warehouse, Truck, Status, Miles, Gallons, Type, UserID, Duty, Capacity, Fuel) Values(@Date, @Warehouse, @Truck, @Status, @Miles, @Gallons, @Type, @UserID, @Duty, @Capacity, @Fuel)";
+                        cmd.CommandText = "Insert into Records (Date, Warehouse, Truck, Status, Miles, Gallons, Type, UserID, Duty, Capacity, Fuel, MilesDriven) Values(@Date, @Warehouse, @Truck, @Status, @Miles, @Gallons, @Type, @UserID, @Duty, @Capacity, @Fuel, @MilesDriven)";
                         cmd.Parameters.AddWithValue("@Date", _date);
                         cmd.Parameters.AddWithValue("@Warehouse", _whse);
                         cmd.Parameters.AddWithValue("@Truck", _num);
@@ -390,6 +466,7 @@ namespace FM
                         cmd.Parameters.AddWithValue("@Duty", _duty);
                         cmd.Parameters.AddWithValue("@Capacity", _capacity);
                         cmd.Parameters.AddWithValue("@Fuel", _fuel);
+                        cmd.Parameters.AddWithValue("@MilesDriven", _driven);
 
 
 
@@ -410,6 +487,35 @@ namespace FM
                             //cn.Close();
                         }
                         cn.Close();
+
+                        var connString2 = GlobalVar.conString;
+                        SqlConnection cn2 = new SqlConnection(connString2);
+                        SqlCommand cmd2 = new SqlCommand();
+
+
+                        cmd2.Connection = cn2;
+                        cn2.Open();
+                        cmd2.CommandText = " DECLARE @Miles int, @Truck char(10) SET @Miles = " + _miles + " SET @Truck = '" + _num + "' Update Truck SET Odometer = @Miles WHERE Num = @Truck ";
+                        cmd2.Parameters.AddWithValue("@Truck", _num);
+                        cmd.Parameters.AddWithValue("@Miles", _miles);
+
+
+                        try
+                        {
+
+                            cmd2.ExecuteNonQuery();
+
+                            //cn.Close();
+
+
+
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Error" + ex.Message);
+                            // cn.Close();
+                        }
+                        cn2.Close();
 
                     }
                     else
@@ -433,7 +539,7 @@ namespace FM
 
                         cmd.Connection = cn;
                         cn.Open();
-                        cmd.CommandText = "Insert into Records (Date, Warehouse, Truck, Status, Miles, Gallons, Type, UserID, Duty, OOS, Capacity) Values(@Date, @Warehouse, @Truck, @Status, @Miles, @Gallons, @Type, @UserID, @Duty, @OOS, @Capacity)";
+                        cmd.CommandText = "Insert into Records (Date, Warehouse, Truck, Status, Miles, Gallons, Type, UserID, Duty, OOS, Capacity, MilesDriven) Values(@Date, @Warehouse, @Truck, @Status, @Miles, @Gallons, @Type, @UserID, @Duty, @OOS, @Capacity, @MilesDriven)";
                         cmd.Parameters.AddWithValue("@Date", _date);
                         cmd.Parameters.AddWithValue("@Warehouse", _whse);
                         cmd.Parameters.AddWithValue("@Truck", _num);
@@ -445,6 +551,7 @@ namespace FM
                         cmd.Parameters.AddWithValue("@Duty", _duty);
                         cmd.Parameters.AddWithValue("@OOS", oOSListBox.SelectedValue);
                         cmd.Parameters.AddWithValue("@Capacity", _capacity);
+                        cmd.Parameters.AddWithValue("@MilesDriven", _driven);
 
 
 
@@ -466,6 +573,36 @@ namespace FM
                         }
 
                         cn.Close();
+
+                        var connString2 = GlobalVar.conString;
+                        SqlConnection cn2 = new SqlConnection(connString2);
+                        SqlCommand cmd2 = new SqlCommand();
+
+
+                        cmd2.Connection = cn2;
+                        cn2.Open();
+                        cmd2.CommandText = " DECLARE @Miles int, @Truck char(10) SET @Miles = " + _miles + " SET @Truck = '" + _num + "' Update Truck SET Odometer = @Miles WHERE Num = @Truck ";
+                        cmd2.Parameters.AddWithValue("@Truck", _num);
+                        cmd.Parameters.AddWithValue("@Miles", _miles);
+
+
+                        try
+                        {
+
+                            cmd2.ExecuteNonQuery();
+
+                            //cn.Close();
+
+
+
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Error" + ex.Message);
+                            // cn.Close();
+                        }
+                        cn2.Close();
+
                     }
                     else
                     {
@@ -488,7 +625,7 @@ namespace FM
 
                         cmd.Connection = cn;
                         cn.Open();
-                        cmd.CommandText = "Insert into Records (Date, Warehouse, Truck, Status, Miles, Gallons, Type, UserID, Duty,  Capacity) Values(@Date, @Warehouse, @Truck, @Status, @Miles, @Gallons, @Type, @UserID, @Duty,  @Capacity)";
+                        cmd.CommandText = "Insert into Records (Date, Warehouse, Truck, Status, Miles, Gallons, Type, UserID, Duty, Capacity, MilesDriven) Values(@Date, @Warehouse, @Truck, @Status, @Miles, @Gallons, @Type, @UserID, @Duty, @Capacity, @MilesDriven)";
                         cmd.Parameters.AddWithValue("@Date", _date);
                         cmd.Parameters.AddWithValue("@Warehouse", _whse);
                         cmd.Parameters.AddWithValue("@Truck", _num);
@@ -499,6 +636,7 @@ namespace FM
                         cmd.Parameters.AddWithValue("@UserID", _user);
                         cmd.Parameters.AddWithValue("@Duty", _duty);
                         cmd.Parameters.AddWithValue("@Capacity", _capacity);
+                        cmd.Parameters.AddWithValue("@MilesDriven", _driven);
 
 
 
@@ -520,6 +658,37 @@ namespace FM
                         }
 
                         cn.Close();
+
+                        var connString2 = GlobalVar.conString;
+                        SqlConnection cn2 = new SqlConnection(connString2);
+                        SqlCommand cmd2 = new SqlCommand();
+
+
+                        cmd2.Connection = cn2;
+                        cn2.Open();
+                        cmd2.CommandText = " DECLARE @Miles int, @Truck char(10) SET @Miles = " + _miles + " SET @Truck = '" + _num + "' Update Truck SET Odometer = @Miles WHERE Num = @Truck ";
+                        cmd2.Parameters.AddWithValue("@Truck", _num);
+                        cmd.Parameters.AddWithValue("@Miles", _miles);
+
+
+                        try
+                        {
+
+                            cmd2.ExecuteNonQuery();
+
+                            //cn.Close();
+
+
+
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Error" + ex.Message);
+                            // cn.Close();
+                        }
+                        cn2.Close();
+
+
                     }
                     else
                     {
@@ -544,6 +713,7 @@ namespace FM
                 this.galsTextBox.Text = "0";
                 this.mileTextBox.Text = "0";
                 this.fueltextBox.Text = "0";
+                this.drivenTextBox.Text = "0";
 
                 if (_status == "S")
                 {
@@ -551,6 +721,7 @@ namespace FM
                     this.galsTextBox.Enabled = false;
                     this.mileTextBox.Enabled = false;
                     this.fueltextBox.Enabled = false;
+                    this.drivenTextBox.Enabled = false;
 
                 }
                 else if (_status == "0" )
@@ -559,7 +730,7 @@ namespace FM
                     this.galsTextBox.Enabled = false;
                     this.mileTextBox.Enabled = false;
                     this.fueltextBox.Enabled = false;
-
+                    this.drivenTextBox.Enabled = false;
                 }
                 else
                 {
@@ -637,9 +808,26 @@ namespace FM
             }
         }
 
-        
 
 
+        private void drivenTextBox_Validating(object sender, CancelEventArgs e)
+        {
+            int numberEntered;
+
+            if (int.TryParse(drivenTextBox.Text, out numberEntered))
+            {
+                if (numberEntered < 0)
+                {
+                    MessageBox.Show("You cannot enter negative miles");
+                    drivenTextBox.Select();
+                }
+            }
+            else
+            {
+                MessageBox.Show("You need to enter a valid number");
+                fueltextBox.Select();
+            }
+        }
 
 
 
