@@ -11,7 +11,7 @@ namespace FM
         /// </summary>
         //public const string conString = "Data Source=GHB-RNET-01\\FLEETMGMNT;Initial Catalog=GHBWFM;Integrated Security=True";
 
-        public const string conString = "Data Source=20-LT-6425C34\\SQLEXPRESS;Initial Catalog=GHBWFM;Integrated Security=True";
+        public const string conString = "Data Source=GHB-RNET-01\\FLEETMGMNT;Initial Catalog=GHBWFM;Integrated Security=True";
         /// <summary>
         /// Access routine for global variable.
         /// </summary>

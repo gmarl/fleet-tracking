@@ -26,8 +26,8 @@ namespace FM.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=20-LT-6425C34\\SQLEXPRESS;Initial Catalog=GHBWFM;Integrated Security=T" +
-            "rue")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=GHB-RNET-01\\FLEETMGMNT;Initial Catalog=GHBWFM;Integrated Security=Tru" +
+            "e")]
         public string GHBWFMConnectionString {
             get {
                 return ((string)(this["GHBWFMConnectionString"]));
