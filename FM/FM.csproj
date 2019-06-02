@@ -27,8 +27,8 @@
     <ProductName>GHBW Fleet Trcking</ProductName>
     <PublisherName>Ma%28r%29lware</PublisherName>
     <SuiteName>GHBWFM</SuiteName>
-    <ApplicationRevision>53</ApplicationRevision>
-    <ApplicationVersion>1.0.1.53</ApplicationVersion>
+    <ApplicationRevision>56</ApplicationRevision>
+    <ApplicationVersion>1.0.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>

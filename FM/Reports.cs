@@ -27,7 +27,7 @@ namespace FM
         {
             string start = dateTimePicker1.Value.ToString("yyyy-MM-dd");
             string before = dateTimePicker2.Value.ToString("yyyy-MM-dd");
-            String rvSQL = "SELECT Warehouse.Name AS Warehouse, concat(year(date), '-', format(month(date), '00')) as Per, Records.date, SUM(Records.Miles) AS Miles, '" + start + "' AS Start, '" + before + "' AS Before "
+            String rvSQL = "SELECT Warehouse.Name AS Warehouse, concat(year(date), '-', format(month(date), '00')) as Per, SUM(Records.MilesDriven) AS Miles, '" + start + "' AS Start, '" + before + "' AS Before "
             + "FROM Records INNER JOIN "
             + "Warehouse ON Records.Warehouse = Warehouse.ID "
             + "WHERE(Records.Date >= '"+start+"') AND(Records.Date < '"+before+"') "
@@ -113,9 +113,9 @@ namespace FM
             String rvSQL = "SELECT REP.Name AS Warehouse, SUM(REP.Gallons) AS Gallons, "
                 + "COUNT(REP.Per) AS Runs, CONVERT(int, ROUND(SUM(REP.Gallons) / SUM(CAST(REP.Capacity "
                 + "AS decimal)), 3) * 100) AS Capacity_Percent, SUM(REP.Gallons) / count(distinct "
-                + "rep.date) AS GalsPerDay, SUM(CAST(REP.Gallons AS decimal)) / SUM(CAST(REP.Miles AS decimal))"
+                + "rep.date) AS GalsPerDay, SUM(CAST(REP.Gallons AS decimal)) / SUM(CAST(REP.MilesDriven AS decimal))"
                 + "AS GalsPerMile, '" + start + "' AS Start, '" + before + "' AS Before, REP.PER FROM "
-                + "(SELECT Warehouse.Name, Records.Gallons, Records.Capacity, Records.Miles, "
+                + "(SELECT Warehouse.Name, Records.Gallons, Records.Capacity, Records.MilesDriven, "
                 + "concat(year(date), '-', format(month(date), '00')) as Per, records.id, records.truck, "
                 + "records.date FROM  Records INNER JOIN Warehouse ON Records.Warehouse = Warehouse.ID "
                 + "INNER JOIN Type ON Records.Type = Type.ID INNER JOIN Truck ON Records.Truck = Truck.Num"
@@ -182,10 +182,10 @@ namespace FM
             string start = dateTimePicker1.Value.ToString("yyyy-MM-dd");
             string before = dateTimePicker2.Value.ToString("yyyy-MM-dd");
             String rvSQL = "SELECT Warehouse.Name, Records.Truck, SUM(isnull(Records.Fuel,0)) AS Fuel, "
-                + "SUM(Records.Miles) AS Miles, MPG = CASE WHEN SUM(isnull(Records.Fuel,0)) = 0 THEN 0 "
-                + "ELSE SUM(isnull(Records.Miles,0))/ SUM(isnull(Records.Fuel, 0)) END, '" + start + "' AS Start, '" + before + "' AS Before  "
+                + "SUM(Records.MilesDriven) AS Miles, MPG = CASE WHEN SUM(isnull(Records.Fuel,0)) = 0 THEN 0 "
+                + "ELSE SUM(isnull(Records.MilesDriven,0))/ SUM(isnull(Records.Fuel, 0)) END, '" + start + "' AS Start, '" + before + "' AS Before  "
                 + "FROM Warehouse, Records WHERE Records.Warehouse = Warehouse.id and (Records.Date >= '" + start + "')"
-                + "AND (Records.Date < '" + before + "') and records.miles > 0 GROUP BY Warehouse.Name, Records.Truck ORDER BY "
+                + "AND (Records.Date < '" + before + "') and records.milesDriven > 0 GROUP BY Warehouse.Name, Records.Truck ORDER BY "
                 + " Warehouse.Name, Records.Truck";
                 
             using (SqlConnection sqlConn = new SqlConnection(GlobalVar.conString))

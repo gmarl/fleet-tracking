@@ -7728,8 +7728,8 @@ SELECT ID, Date, Warehouse, Truck, Status, Miles, Gallons, Type, UserID, Duty, O
             this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[1].Connection = this.Connection;
             this._commandCollection[1].CommandText = "SELECT Capacity, Date, Duty, Fuel, Gallons, ID, Miles, MilesDriven, OOS, Status, " +
-                "Truck, Type, UserID, Warehouse, MilesDriven FROM Records WHERE (Date = @Date) AN" +
-                "D (Warehouse = @Whse) ORDER BY Truck";
+                "Truck, Type, UserID, Warehouse FROM Records WHERE (Date = @Date) AND (Warehouse " +
+                "= @Whse) ORDER BY Truck";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Date", global::System.Data.SqlDbType.Date, 3, global::System.Data.ParameterDirection.Input, 0, 0, "Date", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Whse", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "Warehouse", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -11243,9 +11243,9 @@ GROUP BY Warehouse.Name";
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = @"SELECT Warehouse.Name, Records.Truck, SUM(isnull(Records.Fuel,0)) AS Fuel, 
-                SUM(Records.Miles) AS Miles, (SUM(isnull(Records.Fuel,0)) / SUM(Records.Miles)) AS MPG, @Start AS Start, @Before AS Before 
+                SUM(Records.MilesDriven) AS Miles, (SUM(isnull(Records.Fuel,0)) / SUM(Records.MilesDriven)) AS MPG, @Start AS Start, @Before AS Before 
                 FROM Warehouse, Records WHERE Records.Warehouse = Warehouse.id and (Records.Date >= @Start)
-                AND (Records.Date < @Before) and records.miles > 0 GROUP BY Warehouse.Name, Records.Truck ORDER BY  Warehouse.Name, Records.Truck";
+                AND (Records.Date < @Before) and records.milesdriven > 0 GROUP BY Warehouse.Name, Records.Truck ORDER BY  Warehouse.Name, Records.Truck";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Start", global::System.Data.SqlDbType.Date, 3, global::System.Data.ParameterDirection.Input, 0, 0, "Date", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Before", global::System.Data.SqlDbType.Date, 3, global::System.Data.ParameterDirection.Input, 0, 0, "Date", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
