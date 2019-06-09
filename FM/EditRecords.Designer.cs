@@ -35,6 +35,9 @@
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -53,17 +56,15 @@
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.recordsBindingNavigatorSaveItem = new System.Windows.Forms.ToolStripButton();
             this.recordsDataGridView = new System.Windows.Forms.DataGridView();
+            this.recordsTableAdapter = new FM.GHBWFMDataSetTableAdapters.RecordsTableAdapter();
+            this.tableAdapterManager = new FM.GHBWFMDataSetTableAdapters.TableAdapterManager();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.recordsTableAdapter = new FM.GHBWFMDataSetTableAdapters.RecordsTableAdapter();
-            this.tableAdapterManager = new FM.GHBWFMDataSetTableAdapters.TableAdapterManager();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
+            this.MilesDriven = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.recordsBindingNavigator)).BeginInit();
@@ -76,7 +77,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(10, 24);
+            this.label2.Location = new System.Drawing.Point(11, 24);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(99, 13);
             this.label2.TabIndex = 3;
@@ -108,7 +109,7 @@
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Location = new System.Drawing.Point(668, 28);
+            this.groupBox1.Location = new System.Drawing.Point(778, 40);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(170, 72);
             this.groupBox1.TabIndex = 7;
@@ -124,12 +125,42 @@
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.label8);
-            this.groupBox2.Location = new System.Drawing.Point(668, 136);
+            this.groupBox2.Location = new System.Drawing.Point(778, 148);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(170, 136);
             this.groupBox2.TabIndex = 9;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "OOS (Not Used) Choices:";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(11, 55);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(137, 13);
+            this.label5.TabIndex = 11;
+            this.label5.Text = "3 - Weather Prevented Use";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(11, 42);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(127, 13);
+            this.label9.TabIndex = 12;
+            this.label9.Text = "2 - Needed But No Driver";
+            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(10, 29);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(80, 13);
+            this.label10.TabIndex = 13;
+            this.label10.Text = "1 - Not Needed";
+            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label1
             // 
@@ -195,7 +226,7 @@
             this.recordsBindingNavigator.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
             this.recordsBindingNavigator.Name = "recordsBindingNavigator";
             this.recordsBindingNavigator.PositionItem = this.bindingNavigatorPositionItem;
-            this.recordsBindingNavigator.Size = new System.Drawing.Size(855, 25);
+            this.recordsBindingNavigator.Size = new System.Drawing.Size(963, 25);
             this.recordsBindingNavigator.TabIndex = 10;
             this.recordsBindingNavigator.Text = "bindingNavigator1";
             // 
@@ -287,6 +318,7 @@
             // 
             // recordsDataGridView
             // 
+            this.recordsDataGridView.AllowUserToAddRows = false;
             this.recordsDataGridView.AutoGenerateColumns = false;
             this.recordsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.recordsDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -295,12 +327,31 @@
             this.dataGridViewTextBoxColumn6,
             this.dataGridViewTextBoxColumn7,
             this.dataGridViewTextBoxColumn11,
-            this.dataGridViewTextBoxColumn13});
+            this.dataGridViewTextBoxColumn13,
+            this.MilesDriven});
             this.recordsDataGridView.DataSource = this.recordsBindingSource;
             this.recordsDataGridView.Location = new System.Drawing.Point(12, 41);
             this.recordsDataGridView.Name = "recordsDataGridView";
-            this.recordsDataGridView.Size = new System.Drawing.Size(650, 220);
+            this.recordsDataGridView.Size = new System.Drawing.Size(746, 220);
             this.recordsDataGridView.TabIndex = 10;
+            // 
+            // recordsTableAdapter
+            // 
+            this.recordsTableAdapter.ClearBeforeFill = true;
+            // 
+            // tableAdapterManager
+            // 
+            this.tableAdapterManager.BackupDataSetBeforeUpdate = false;
+            this.tableAdapterManager.DatesTableAdapter = null;
+            this.tableAdapterManager.DutyTableAdapter = null;
+            this.tableAdapterManager.OOSTableAdapter = null;
+            this.tableAdapterManager.RecordsTableAdapter = this.recordsTableAdapter;
+            this.tableAdapterManager.StatusTableAdapter = null;
+            this.tableAdapterManager.TruckTableAdapter = null;
+            this.tableAdapterManager.TypeTableAdapter = null;
+            this.tableAdapterManager.UpdateOrder = FM.GHBWFMDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
+            this.tableAdapterManager.UsersTableAdapter = null;
+            this.tableAdapterManager.WarehouseTableAdapter = null;
             // 
             // dataGridViewTextBoxColumn4
             // 
@@ -318,7 +369,7 @@
             // dataGridViewTextBoxColumn6
             // 
             this.dataGridViewTextBoxColumn6.DataPropertyName = "Miles";
-            this.dataGridViewTextBoxColumn6.HeaderText = "Miles";
+            this.dataGridViewTextBoxColumn6.HeaderText = "Odometer";
             this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
             // 
             // dataGridViewTextBoxColumn7
@@ -339,59 +390,17 @@
             this.dataGridViewTextBoxColumn13.HeaderText = "Fuel";
             this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
             // 
-            // recordsTableAdapter
+            // MilesDriven
             // 
-            this.recordsTableAdapter.ClearBeforeFill = true;
-            // 
-            // tableAdapterManager
-            // 
-            this.tableAdapterManager.BackupDataSetBeforeUpdate = false;
-            this.tableAdapterManager.DatesTableAdapter = null;
-            this.tableAdapterManager.DutyTableAdapter = null;
-            this.tableAdapterManager.OOSTableAdapter = null;
-            this.tableAdapterManager.RecordsTableAdapter = this.recordsTableAdapter;
-            this.tableAdapterManager.StatusTableAdapter = null;
-            this.tableAdapterManager.TruckTableAdapter = null;
-            this.tableAdapterManager.TypeTableAdapter = null;
-            this.tableAdapterManager.UpdateOrder = FM.GHBWFMDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
-            this.tableAdapterManager.UsersTableAdapter = null;
-            this.tableAdapterManager.WarehouseTableAdapter = null;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(11, 55);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(137, 13);
-            this.label5.TabIndex = 11;
-            this.label5.Text = "3 - Weather Prevented Use";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(11, 42);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(127, 13);
-            this.label9.TabIndex = 12;
-            this.label9.Text = "2 - Needed But No Driver";
-            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(10, 29);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(80, 13);
-            this.label10.TabIndex = 13;
-            this.label10.Text = "1 - Not Needed";
-            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.MilesDriven.DataPropertyName = "MilesDriven";
+            this.MilesDriven.HeaderText = "Miles Driven";
+            this.MilesDriven.Name = "MilesDriven";
             // 
             // EditRecords
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(855, 344);
+            this.ClientSize = new System.Drawing.Size(963, 344);
             this.Controls.Add(this.recordsDataGridView);
             this.Controls.Add(this.recordsBindingNavigator);
             this.Controls.Add(this.groupBox2);
@@ -441,14 +450,15 @@
         private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
         private System.Windows.Forms.ToolStripButton recordsBindingNavigatorSaveItem;
         private System.Windows.Forms.DataGridView recordsDataGridView;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label10;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MilesDriven;
     }
 }

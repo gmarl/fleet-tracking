@@ -344,7 +344,20 @@ namespace FM
                 }
                 
                
+                if (_driven < 0 || _driven > 1000)
 
+                {
+
+                    MessageBox.Show("The current entry would result in " + _driven +" miles driven. You must either correct the current odometer reading or correct the previous odometer reading in the 'Edit Trucks' section.");
+                    this.mileTextBox.Select();
+
+
+                }
+
+
+
+                else
+                { 
 
 
                 int _gals = int.Parse(galsTextBox.Text);
@@ -358,344 +371,346 @@ namespace FM
                 string _date = GlobalVar._date.ToShortDateString();
                 string _num = this.listBox1.SelectedValue.ToString().Trim();
                 string _capacity = this.capacityTextBox.Text.Trim();
-                
 
-                if ((_type == 1 || _type == 4) && (_status == "1" || _status == "P"))
-                     { if (MessageBox.Show("Truck " + _num + " has odometer reading of " + _miles + " , delivered " + _gals + " gallons, drove " + _driven + " miles and used "+ _fuel +" gallons of fuel on " + _date + "?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+
+                    if ((_type == 1 || _type == 4) && (_status == "1" || _status == "P"))
                     {
-                        // user clicked yes
-                        var connString = GlobalVar.conString;
-                        SqlConnection cn = new SqlConnection(connString);
-                        SqlCommand cmd = new SqlCommand();
-
-
-                        cmd.Connection = cn;
-                        cn.Open();
-                        cmd.CommandText = "Insert into Records (Date, Warehouse, Truck, Status, Miles, Gallons, Type, UserID, Duty, Capacity, Fuel, MilesDriven ) Values(@Date, @Warehouse, @Truck, @Status, @Miles, @Gallons, @Type, @UserID, @Duty, @Capacity, @Fuel, @MilesDriven)";
-                        cmd.Parameters.AddWithValue("@Date", _date);
-                        cmd.Parameters.AddWithValue("@Warehouse", _whse);
-                        cmd.Parameters.AddWithValue("@Truck", _num);
-                        cmd.Parameters.AddWithValue("@Status", _status);
-                        cmd.Parameters.AddWithValue("@Miles", _miles);
-                        cmd.Parameters.AddWithValue("@Gallons", _gals);
-                        cmd.Parameters.AddWithValue("@Type", _type);
-                        cmd.Parameters.AddWithValue("@UserID", _user);
-                        cmd.Parameters.AddWithValue("@Duty", _duty);
-                        cmd.Parameters.AddWithValue("@Capacity", _capacity);
-                        cmd.Parameters.AddWithValue("@Fuel", _fuel);
-                        cmd.Parameters.AddWithValue("@MilesDriven", _driven);
-
-
-
-                        try
+                        if (MessageBox.Show("Truck " + _num + " has odometer reading of " + _miles + " , delivered " + _gals + " gallons, drove " + _driven + " miles and used " + _fuel + " gallons of fuel on " + _date + "?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                         {
+                            // user clicked yes
+                            var connString = GlobalVar.conString;
+                            SqlConnection cn = new SqlConnection(connString);
+                            SqlCommand cmd = new SqlCommand();
 
-                            cmd.ExecuteNonQuery();
 
-                            //cn.Close();
+                            cmd.Connection = cn;
+                            cn.Open();
+                            cmd.CommandText = "Insert into Records (Date, Warehouse, Truck, Status, Miles, Gallons, Type, UserID, Duty, Capacity, Fuel, MilesDriven ) Values(@Date, @Warehouse, @Truck, @Status, @Miles, @Gallons, @Type, @UserID, @Duty, @Capacity, @Fuel, @MilesDriven)";
+                            cmd.Parameters.AddWithValue("@Date", _date);
+                            cmd.Parameters.AddWithValue("@Warehouse", _whse);
+                            cmd.Parameters.AddWithValue("@Truck", _num);
+                            cmd.Parameters.AddWithValue("@Status", _status);
+                            cmd.Parameters.AddWithValue("@Miles", _miles);
+                            cmd.Parameters.AddWithValue("@Gallons", _gals);
+                            cmd.Parameters.AddWithValue("@Type", _type);
+                            cmd.Parameters.AddWithValue("@UserID", _user);
+                            cmd.Parameters.AddWithValue("@Duty", _duty);
+                            cmd.Parameters.AddWithValue("@Capacity", _capacity);
+                            cmd.Parameters.AddWithValue("@Fuel", _fuel);
+                            cmd.Parameters.AddWithValue("@MilesDriven", _driven);
 
-                            
-                            fillTrucks();
+
+
+                            try
+                            {
+
+                                cmd.ExecuteNonQuery();
+
+                                //cn.Close();
+
+
+                                fillTrucks();
+
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show("Error" + ex.Message);
+                                // cn.Close();
+                            }
+                            cn.Close();
+
+                            var connString2 = GlobalVar.conString;
+                            SqlConnection cn2 = new SqlConnection(connString2);
+                            SqlCommand cmd2 = new SqlCommand();
+
+
+                            cmd2.Connection = cn2;
+                            cn2.Open();
+                            cmd2.CommandText = " DECLARE @Miles int, @Truck char(10) SET @Miles = " + _miles + " SET @Truck = '" + _num + "' Update Truck SET Odometer = @Miles WHERE Num = @Truck ";
+                            // cmd2.Parameters.AddWithValue("@Truck", _num);
+                            // cmd.Parameters.AddWithValue("@Miles", _miles);
+
+
+                            try
+                            {
+
+                                cmd2.ExecuteNonQuery();
+
+                                //cn.Close();
+
+
+
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show("Error" + ex.Message);
+                                // cn.Close();
+                            }
+                            cn2.Close();
 
                         }
-                        catch (Exception ex)
+                        else
                         {
-                            MessageBox.Show("Error" + ex.Message);
-                           // cn.Close();
+                            // user clicked no
                         }
-                        cn.Close();
 
-                        var connString2 = GlobalVar.conString;
-                        SqlConnection cn2 = new SqlConnection(connString2);
-                        SqlCommand cmd2 = new SqlCommand();
-
-
-                        cmd2.Connection = cn2;
-                        cn2.Open();
-                        cmd2.CommandText = " DECLARE @Miles int, @Truck char(10) SET @Miles = " +_miles + " SET @Truck = '" + _num + "' Update Truck SET Odometer = @Miles WHERE Num = @Truck ";
-                       // cmd2.Parameters.AddWithValue("@Truck", _num);
-                       // cmd.Parameters.AddWithValue("@Miles", _miles);
-                        
-
-                        try
-                        {
-
-                            cmd2.ExecuteNonQuery();
-
-                            //cn.Close();
-
-
-
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show("Error" + ex.Message);
-                            // cn.Close();
-                        }
-                        cn2.Close();
 
                     }
+
+                    else if ((_type == 2 || _type == 3) && (_status == "1" || _status == "P"))
+                    {
+                        if (MessageBox.Show("Truck " + _num + " has odometer reading of " + _miles + " , drove " + _driven + " miles and used " + _fuel + " gallons of fuel on " + _date + "?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                        {
+                            // user clicked yes
+                            var connString = GlobalVar.conString;
+                            SqlConnection cn = new SqlConnection(connString);
+                            SqlCommand cmd = new SqlCommand();
+
+
+                            cmd.Connection = cn;
+                            cn.Open();
+                            cmd.CommandText = "Insert into Records (Date, Warehouse, Truck, Status, Miles, Gallons, Type, UserID, Duty, Capacity, Fuel, MilesDriven) Values(@Date, @Warehouse, @Truck, @Status, @Miles, @Gallons, @Type, @UserID, @Duty, @Capacity, @Fuel, @MilesDriven)";
+                            cmd.Parameters.AddWithValue("@Date", _date);
+                            cmd.Parameters.AddWithValue("@Warehouse", _whse);
+                            cmd.Parameters.AddWithValue("@Truck", _num);
+                            cmd.Parameters.AddWithValue("@Status", _status);
+                            cmd.Parameters.AddWithValue("@Miles", _miles);
+                            cmd.Parameters.AddWithValue("@Gallons", 0);
+                            cmd.Parameters.AddWithValue("@Type", _type);
+                            cmd.Parameters.AddWithValue("@UserID", _user);
+                            cmd.Parameters.AddWithValue("@Duty", _duty);
+                            cmd.Parameters.AddWithValue("@Capacity", _capacity);
+                            cmd.Parameters.AddWithValue("@Fuel", _fuel);
+                            cmd.Parameters.AddWithValue("@MilesDriven", _driven);
+
+
+
+                            try
+                            {
+
+                                cmd.ExecuteNonQuery();
+
+                                //cn.Close();
+
+
+                                fillTrucks();
+
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show("Error" + ex.Message);
+                                //cn.Close();
+                            }
+                            cn.Close();
+
+                            var connString2 = GlobalVar.conString;
+                            SqlConnection cn2 = new SqlConnection(connString2);
+                            SqlCommand cmd2 = new SqlCommand();
+
+
+                            cmd2.Connection = cn2;
+                            cn2.Open();
+                            cmd2.CommandText = " DECLARE @Miles int, @Truck char(10) SET @Miles = " + _miles + " SET @Truck = '" + _num + "' Update Truck SET Odometer = @Miles WHERE Num = @Truck ";
+                            //     cmd2.Parameters.AddWithValue("@Truck", _num);
+                            //     cmd.Parameters.AddWithValue("@Miles", _miles);
+
+
+                            try
+                            {
+
+                                cmd2.ExecuteNonQuery();
+
+                                //cn.Close();
+
+
+
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show("Error" + ex.Message);
+                                // cn.Close();
+                            }
+                            cn2.Close();
+
+                        }
+                        else
+                        {
+                            // user clicked no
+                        }
+
+
+                    }
+
+
+                    else if (_status == "0")
+                    {
+                        if (MessageBox.Show("Truck " + _num + " was not used on " + _date + " because: " + oOSListBox.Text.TrimEnd() + "?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                        {
+                            // user clicked yes
+                            var connString = GlobalVar.conString;
+                            SqlConnection cn = new SqlConnection(connString);
+                            SqlCommand cmd = new SqlCommand();
+
+
+                            cmd.Connection = cn;
+                            cn.Open();
+                            cmd.CommandText = "Insert into Records (Date, Warehouse, Truck, Status, Miles, Gallons, Type, UserID, Duty, OOS, Capacity, MilesDriven) Values(@Date, @Warehouse, @Truck, @Status, @Miles, @Gallons, @Type, @UserID, @Duty, @OOS, @Capacity, @MilesDriven)";
+                            cmd.Parameters.AddWithValue("@Date", _date);
+                            cmd.Parameters.AddWithValue("@Warehouse", _whse);
+                            cmd.Parameters.AddWithValue("@Truck", _num);
+                            cmd.Parameters.AddWithValue("@Status", _status);
+                            cmd.Parameters.AddWithValue("@Miles", _miles);
+                            cmd.Parameters.AddWithValue("@Gallons", _gals);
+                            cmd.Parameters.AddWithValue("@Type", _type);
+                            cmd.Parameters.AddWithValue("@UserID", _user);
+                            cmd.Parameters.AddWithValue("@Duty", _duty);
+                            cmd.Parameters.AddWithValue("@OOS", oOSListBox.SelectedValue);
+                            cmd.Parameters.AddWithValue("@Capacity", _capacity);
+                            cmd.Parameters.AddWithValue("@MilesDriven", _driven);
+
+
+
+                            try
+                            {
+
+                                cmd.ExecuteNonQuery();
+
+                                //cn.Close();
+
+
+                                fillTrucks();
+
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show("Error" + ex.Message);
+                                //cn.Close();
+                            }
+
+                            cn.Close();
+
+                            var connString2 = GlobalVar.conString;
+                            SqlConnection cn2 = new SqlConnection(connString2);
+                            SqlCommand cmd2 = new SqlCommand();
+
+
+                            cmd2.Connection = cn2;
+                            cn2.Open();
+                            cmd2.CommandText = " DECLARE @Miles int, @Truck char(10) SET @Miles = " + _miles + " SET @Truck = '" + _num + "' Update Truck SET Odometer = @Miles WHERE Num = @Truck ";
+                            //  cmd2.Parameters.AddWithValue("@Truck", _num);
+                            //  cmd.Parameters.AddWithValue("@Miles", _miles);
+
+
+                            try
+                            {
+
+                                cmd2.ExecuteNonQuery();
+
+                                //cn.Close();
+
+
+
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show("Error" + ex.Message);
+                                // cn.Close();
+                            }
+                            cn2.Close();
+
+                        }
+                        else
+                        {
+                            // user clicked no
+                        }
+
+
+                    }
+
+
                     else
                     {
-                        // user clicked no
-                    }
-
-                    
-                }
-
-                else if ((_type == 2 || _type == 3) && (_status == "1" || _status == "P"))
-                {  if (MessageBox.Show("Truck " + _num + " has odometer reading of " + _miles + " , drove " + _driven + " miles and used " + _fuel + " gallons of fuel on " + _date + "?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                    {
-                        // user clicked yes
-                        var connString = GlobalVar.conString;
-                        SqlConnection cn = new SqlConnection(connString);
-                        SqlCommand cmd = new SqlCommand();
-
-
-                        cmd.Connection = cn;
-                        cn.Open();
-                        cmd.CommandText = "Insert into Records (Date, Warehouse, Truck, Status, Miles, Gallons, Type, UserID, Duty, Capacity, Fuel, MilesDriven) Values(@Date, @Warehouse, @Truck, @Status, @Miles, @Gallons, @Type, @UserID, @Duty, @Capacity, @Fuel, @MilesDriven)";
-                        cmd.Parameters.AddWithValue("@Date", _date);
-                        cmd.Parameters.AddWithValue("@Warehouse", _whse);
-                        cmd.Parameters.AddWithValue("@Truck", _num);
-                        cmd.Parameters.AddWithValue("@Status", _status);
-                        cmd.Parameters.AddWithValue("@Miles", _miles);
-                        cmd.Parameters.AddWithValue("@Gallons", 0);
-                        cmd.Parameters.AddWithValue("@Type", _type);
-                        cmd.Parameters.AddWithValue("@UserID", _user);
-                        cmd.Parameters.AddWithValue("@Duty", _duty);
-                        cmd.Parameters.AddWithValue("@Capacity", _capacity);
-                        cmd.Parameters.AddWithValue("@Fuel", _fuel);
-                        cmd.Parameters.AddWithValue("@MilesDriven", _driven);
-
-
-
-                        try
+                        if (MessageBox.Show("Truck " + _num + " was not used on " + _date + "?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                         {
-
-                            cmd.ExecuteNonQuery();
-
-                            //cn.Close();
-
-                            
-                            fillTrucks();
-
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show("Error" + ex.Message);
-                            //cn.Close();
-                        }
-                        cn.Close();
-
-                        var connString2 = GlobalVar.conString;
-                        SqlConnection cn2 = new SqlConnection(connString2);
-                        SqlCommand cmd2 = new SqlCommand();
+                            // user clicked yes
+                            var connString = GlobalVar.conString;
+                            SqlConnection cn = new SqlConnection(connString);
+                            SqlCommand cmd = new SqlCommand();
 
 
-                        cmd2.Connection = cn2;
-                        cn2.Open();
-                        cmd2.CommandText = " DECLARE @Miles int, @Truck char(10) SET @Miles = " + _miles + " SET @Truck = '" + _num + "' Update Truck SET Odometer = @Miles WHERE Num = @Truck ";
-                   //     cmd2.Parameters.AddWithValue("@Truck", _num);
-                   //     cmd.Parameters.AddWithValue("@Miles", _miles);
-
-
-                        try
-                        {
-
-                            cmd2.ExecuteNonQuery();
-
-                            //cn.Close();
+                            cmd.Connection = cn;
+                            cn.Open();
+                            cmd.CommandText = "Insert into Records (Date, Warehouse, Truck, Status, Miles, Gallons, Type, UserID, Duty, Capacity, MilesDriven) Values(@Date, @Warehouse, @Truck, @Status, @Miles, @Gallons, @Type, @UserID, @Duty, @Capacity, @MilesDriven)";
+                            cmd.Parameters.AddWithValue("@Date", _date);
+                            cmd.Parameters.AddWithValue("@Warehouse", _whse);
+                            cmd.Parameters.AddWithValue("@Truck", _num);
+                            cmd.Parameters.AddWithValue("@Status", _status);
+                            cmd.Parameters.AddWithValue("@Miles", _miles);
+                            cmd.Parameters.AddWithValue("@Gallons", _gals);
+                            cmd.Parameters.AddWithValue("@Type", _type);
+                            cmd.Parameters.AddWithValue("@UserID", _user);
+                            cmd.Parameters.AddWithValue("@Duty", _duty);
+                            cmd.Parameters.AddWithValue("@Capacity", _capacity);
+                            cmd.Parameters.AddWithValue("@MilesDriven", _driven);
 
 
 
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show("Error" + ex.Message);
-                            // cn.Close();
-                        }
-                        cn2.Close();
+                            try
+                            {
 
-                    }
-                    else
-                    {
-                        // user clicked no
-                    }
+                                cmd.ExecuteNonQuery();
+
+                                // cn.Close();
 
 
-                }
+                                fillTrucks();
+
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show("Error" + ex.Message);
+                                // cn.Close();
+                            }
+
+                            cn.Close();
+
+                            var connString2 = GlobalVar.conString;
+                            SqlConnection cn2 = new SqlConnection(connString2);
+                            SqlCommand cmd2 = new SqlCommand();
 
 
-                else if ( _status == "0")
-                {
-                    if (MessageBox.Show("Truck " + _num + " was not used on " + _date + " because: "+oOSListBox.Text.TrimEnd()+"?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                    {
-                        // user clicked yes
-                        var connString = GlobalVar.conString;
-                        SqlConnection cn = new SqlConnection(connString);
-                        SqlCommand cmd = new SqlCommand();
+                            cmd2.Connection = cn2;
+                            cn2.Open();
+                            cmd2.CommandText = " DECLARE @Miles int, @Truck char(10) SET @Miles = " + _miles + " SET @Truck = '" + _num + "' Update Truck SET Odometer = @Miles WHERE Num = @Truck ";
+                            //   cmd2.Parameters.AddWithValue("@Truck", _num);
+                            //   cmd.Parameters.AddWithValue("@Miles", _miles);
 
 
-                        cmd.Connection = cn;
-                        cn.Open();
-                        cmd.CommandText = "Insert into Records (Date, Warehouse, Truck, Status, Miles, Gallons, Type, UserID, Duty, OOS, Capacity, MilesDriven) Values(@Date, @Warehouse, @Truck, @Status, @Miles, @Gallons, @Type, @UserID, @Duty, @OOS, @Capacity, @MilesDriven)";
-                        cmd.Parameters.AddWithValue("@Date", _date);
-                        cmd.Parameters.AddWithValue("@Warehouse", _whse);
-                        cmd.Parameters.AddWithValue("@Truck", _num);
-                        cmd.Parameters.AddWithValue("@Status", _status);
-                        cmd.Parameters.AddWithValue("@Miles", _miles);
-                        cmd.Parameters.AddWithValue("@Gallons", _gals);
-                        cmd.Parameters.AddWithValue("@Type", _type);
-                        cmd.Parameters.AddWithValue("@UserID", _user);
-                        cmd.Parameters.AddWithValue("@Duty", _duty);
-                        cmd.Parameters.AddWithValue("@OOS", oOSListBox.SelectedValue);
-                        cmd.Parameters.AddWithValue("@Capacity", _capacity);
-                        cmd.Parameters.AddWithValue("@MilesDriven", _driven);
+                            try
+                            {
+
+                                cmd2.ExecuteNonQuery();
+
+                                //cn.Close();
 
 
 
-                        try
-                        {
-
-                            cmd.ExecuteNonQuery();
-
-                            //cn.Close();
-
-                           
-                            fillTrucks();
-
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show("Error" + ex.Message);
-                            //cn.Close();
-                        }
-
-                        cn.Close();
-
-                        var connString2 = GlobalVar.conString;
-                        SqlConnection cn2 = new SqlConnection(connString2);
-                        SqlCommand cmd2 = new SqlCommand();
-
-
-                        cmd2.Connection = cn2;
-                        cn2.Open();
-                        cmd2.CommandText = " DECLARE @Miles int, @Truck char(10) SET @Miles = " + _miles + " SET @Truck = '" + _num + "' Update Truck SET Odometer = @Miles WHERE Num = @Truck ";
-                      //  cmd2.Parameters.AddWithValue("@Truck", _num);
-                      //  cmd.Parameters.AddWithValue("@Miles", _miles);
-
-
-                        try
-                        {
-
-                            cmd2.ExecuteNonQuery();
-
-                            //cn.Close();
-
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show("Error" + ex.Message);
+                                // cn.Close();
+                            }
+                            cn2.Close();
 
 
                         }
-                        catch (Exception ex)
+                        else
                         {
-                            MessageBox.Show("Error" + ex.Message);
-                            // cn.Close();
+                            // user clicked no
                         }
-                        cn2.Close();
 
                     }
-                    else
-                    {
-                        // user clicked no
-                    }
-
-
-                }
-
-
-                else
-                {
-                    if (MessageBox.Show("Truck " + _num + " was not used on " + _date + "?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                    {
-                        // user clicked yes
-                        var connString = GlobalVar.conString;
-                        SqlConnection cn = new SqlConnection(connString);
-                        SqlCommand cmd = new SqlCommand();
-
-
-                        cmd.Connection = cn;
-                        cn.Open();
-                        cmd.CommandText = "Insert into Records (Date, Warehouse, Truck, Status, Miles, Gallons, Type, UserID, Duty, Capacity, MilesDriven) Values(@Date, @Warehouse, @Truck, @Status, @Miles, @Gallons, @Type, @UserID, @Duty, @Capacity, @MilesDriven)";
-                        cmd.Parameters.AddWithValue("@Date", _date);
-                        cmd.Parameters.AddWithValue("@Warehouse", _whse);
-                        cmd.Parameters.AddWithValue("@Truck", _num);
-                        cmd.Parameters.AddWithValue("@Status", _status);
-                        cmd.Parameters.AddWithValue("@Miles", _miles);
-                        cmd.Parameters.AddWithValue("@Gallons", _gals);
-                        cmd.Parameters.AddWithValue("@Type", _type);
-                        cmd.Parameters.AddWithValue("@UserID", _user);
-                        cmd.Parameters.AddWithValue("@Duty", _duty);
-                        cmd.Parameters.AddWithValue("@Capacity", _capacity);
-                        cmd.Parameters.AddWithValue("@MilesDriven", _driven);
-
-
-
-                        try
-                        {
-
-                            cmd.ExecuteNonQuery();
-
-                            // cn.Close();
-
-
-                            fillTrucks();
-
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show("Error" + ex.Message);
-                            // cn.Close();
-                        }
-
-                        cn.Close();
-
-                        var connString2 = GlobalVar.conString;
-                        SqlConnection cn2 = new SqlConnection(connString2);
-                        SqlCommand cmd2 = new SqlCommand();
-
-
-                        cmd2.Connection = cn2;
-                        cn2.Open();
-                        cmd2.CommandText = " DECLARE @Miles int, @Truck char(10) SET @Miles = " + _miles + " SET @Truck = '" + _num + "' Update Truck SET Odometer = @Miles WHERE Num = @Truck ";
-                     //   cmd2.Parameters.AddWithValue("@Truck", _num);
-                     //   cmd.Parameters.AddWithValue("@Miles", _miles);
-
-
-                        try
-                        {
-
-                            cmd2.ExecuteNonQuery();
-
-                            //cn.Close();
-
-
-
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show("Error" + ex.Message);
-                            // cn.Close();
-                        }
-                        cn2.Close();
-
-
-                    }
-                    else
-                    {
-                        // user clicked no
-                    }
-
-
                 }
             }
         }
