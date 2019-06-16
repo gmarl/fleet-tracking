@@ -106,10 +106,10 @@ namespace FM
                             // user clicked yes
                             var connString = GlobalVar.conString;
                             SqlConnection cn = new SqlConnection(connString);
-                            SqlCommand cmd = new SqlCommand();
-
-
-                            cmd.Connection = cn;
+                            SqlCommand cmd = new SqlCommand
+                            {
+                                Connection = cn
+                            };
                             cn.Open();
                             cmd.CommandText = "Insert into Truck (Num, Type, Duty, Warehouse, Capacity, LastChangedBy, LastChangeDate, Rental, Odometer) Values(@Num, @Type, @Duty, @Warehouse, @Capacity, @LastChangedBy, @LastChangeDate, @Rental, @Odometer)";
                             cmd.Parameters.AddWithValue("@Num", _num);

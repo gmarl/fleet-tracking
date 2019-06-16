@@ -26,8 +26,10 @@ namespace FM
 
                 string LoginID = textBox1.Text;
                 string Password = textBox2.Text;
-                SqlConnection con = new SqlConnection();
-                con.ConnectionString = GlobalVar.conString;
+                SqlConnection con = new SqlConnection
+                {
+                    ConnectionString = GlobalVar.conString
+                };
                 con.Open();
 
 

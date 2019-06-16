@@ -74,8 +74,10 @@ namespace FM
                         }
 
 
-                        SqlConnection con = new SqlConnection();
-                        con.ConnectionString = GlobalVar.conString;
+                        SqlConnection con = new SqlConnection
+                        {
+                            ConnectionString = GlobalVar.conString
+                        };
                         con.Open();
 
 

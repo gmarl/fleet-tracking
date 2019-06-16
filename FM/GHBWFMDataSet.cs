@@ -4,7 +4,7 @@
 
     public partial class GHBWFMDataSet
     {
-        partial class FuelMileageDataTable
+        public partial class FuelMileageDataTable
         {
         }
     }

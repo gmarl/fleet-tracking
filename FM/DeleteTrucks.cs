@@ -28,8 +28,10 @@ namespace FM
             string _capacity = "";
             string _whse = "";
             string _duty = "";
-            SqlConnection con = new SqlConnection();
-            con.ConnectionString = GlobalVar.conString;
+            SqlConnection con = new SqlConnection
+            {
+                ConnectionString = GlobalVar.conString
+            };
             con.Open();
 
 
@@ -75,11 +77,11 @@ namespace FM
                     // user clicked yes
                     var connString = GlobalVar.conString;
                     SqlConnection cn = new SqlConnection(connString);
-                    SqlCommand cmd = new SqlCommand();
-
-
-                    cmd.Connection = cn;
-                    cn.Open();
+                SqlCommand cmd = new SqlCommand
+                {
+                    Connection = cn
+                };
+                cn.Open();
                     cmd.CommandText = "Delete from Truck Where Truck.num = @Num";
                     cmd.Parameters.AddWithValue("@Num", numTextBox.Text.Trim());
                 

@@ -4,7 +4,7 @@
 
     public partial class DataSet1
     {
-        partial class MileageDataTable
+        public partial class MileageDataTable
         {
         }
     }

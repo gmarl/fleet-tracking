@@ -12,15 +12,15 @@ namespace FM
 
     public partial class SQL_Reports : Form
     {
-        StringFormat strFormat; //Used to format the grid rows.
-        ArrayList arrColumnLefts = new ArrayList();//Used to save left coordinates of columns
-        ArrayList arrColumnWidths = new ArrayList();//Used to save column widths
-        int iCellHeight = 0; //Used to get/set the datagridview cell height
-        int iTotalWidth = 0; //
-        int iRow = 0;//Used as counter
-        bool bFirstPage = false; //Used to check whether we are printing first page
-        bool bNewPage = false;// Used to check whether we are printing a new page
-        int iHeaderHeight = 0; //Used for the header height
+        private StringFormat strFormat; //Used to format the grid rows.
+        private ArrayList arrColumnLefts = new ArrayList();//Used to save left coordinates of columns
+        private ArrayList arrColumnWidths = new ArrayList();//Used to save column widths
+        private int iCellHeight = 0; //Used to get/set the datagridview cell height
+        private int iTotalWidth = 0; //
+        private int iRow = 0;//Used as counter
+        private bool bFirstPage = false; //Used to check whether we are printing first page
+        private bool bNewPage = false;// Used to check whether we are printing a new page
+        private int iHeaderHeight = 0; //Used for the header height
 
         public SQL_Reports()
         {
@@ -43,9 +43,10 @@ namespace FM
 
                 // Populate a new data table and bind it to the BindingSource.
 
-                System.Data.DataTable table = new System.Data.DataTable();
-
-                table.Locale = System.Globalization.CultureInfo.InvariantCulture;
+                System.Data.DataTable table = new System.Data.DataTable
+                {
+                    Locale = System.Globalization.CultureInfo.InvariantCulture
+                };
 
                 dataAdapter.Fill(table);
 
@@ -147,9 +148,11 @@ namespace FM
         private void printGrid_Click(object sender, EventArgs e)
         {
             //Open the print dialog
-            PrintDialog printDialog = new PrintDialog();
-            printDialog.Document = printDocument1;
-            printDialog.UseEXDialog = true;
+            PrintDialog printDialog = new PrintDialog
+            {
+                Document = printDocument1,
+                UseEXDialog = true
+            };
             //Get the document
             if (DialogResult.OK == printDialog.ShowDialog())
             {
@@ -293,10 +296,12 @@ namespace FM
         {
             try
             {
-                strFormat = new StringFormat();
-                strFormat.Alignment = StringAlignment.Near;
-                strFormat.LineAlignment = StringAlignment.Center;
-                strFormat.Trimming = StringTrimming.EllipsisCharacter;
+                strFormat = new StringFormat
+                {
+                    Alignment = StringAlignment.Near,
+                    LineAlignment = StringAlignment.Center,
+                    Trimming = StringTrimming.EllipsisCharacter
+                };
 
                 arrColumnLefts.Clear();
                 arrColumnWidths.Clear();

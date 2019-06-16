@@ -42,10 +42,12 @@ namespace FM
                 this.reportViewer1.Reset();
                 this.reportViewer1.ProcessingMode = ProcessingMode.Local;
                 this.reportViewer1.LocalReport.ReportEmbeddedResource = "FM.Mileage.rdlc";
-                ReportDataSource reportDataSource = new ReportDataSource();
-                // Must match the DataSet in the RDLC
-                reportDataSource.Name = "DataSet1";
-                reportDataSource.Value = ds.Tables[0];
+                ReportDataSource reportDataSource = new ReportDataSource
+                {
+                    // Must match the DataSet in the RDLC
+                    Name = "DataSet1",
+                    Value = ds.Tables[0]
+                };
                 this.reportViewer1.LocalReport.DataSources.Add(reportDataSource);
                 this.reportViewer1.RefreshReport();
             }
@@ -81,10 +83,12 @@ namespace FM
                 this.reportViewer1.Reset();
                 this.reportViewer1.ProcessingMode = ProcessingMode.Local;
                 this.reportViewer1.LocalReport.ReportEmbeddedResource = "FM.Gallons.rdlc";
-                ReportDataSource reportDataSource = new ReportDataSource();
-                // Must match the DataSet in the RDLC
-                reportDataSource.Name = "DataSet1";
-                reportDataSource.Value = ds.Tables[0];
+                ReportDataSource reportDataSource = new ReportDataSource
+                {
+                    // Must match the DataSet in the RDLC
+                    Name = "DataSet1",
+                    Value = ds.Tables[0]
+                };
                 this.reportViewer1.LocalReport.DataSources.Add(reportDataSource);
                 this.reportViewer1.RefreshReport();
             }
@@ -133,10 +137,12 @@ namespace FM
                 this.reportViewer1.Reset();
                 this.reportViewer1.ProcessingMode = ProcessingMode.Local;
                 this.reportViewer1.LocalReport.ReportEmbeddedResource = "FM.Stats.rdlc";
-                ReportDataSource reportDataSource = new ReportDataSource();
-                // Must match the DataSet in the RDLC
-                reportDataSource.Name = "DataSet1";
-                reportDataSource.Value = ds.Tables[0];
+                ReportDataSource reportDataSource = new ReportDataSource
+                {
+                    // Must match the DataSet in the RDLC
+                    Name = "DataSet1",
+                    Value = ds.Tables[0]
+                };
                 this.reportViewer1.LocalReport.DataSources.Add(reportDataSource);
                 this.reportViewer1.RefreshReport();
             }
@@ -166,11 +172,13 @@ namespace FM
                     this.reportViewer1.Reset();
                     this.reportViewer1.ProcessingMode = ProcessingMode.Local;
                     this.reportViewer1.LocalReport.ReportEmbeddedResource = "FM.MissingEntries.rdlc";
-                    ReportDataSource reportDataSource = new ReportDataSource();
+                ReportDataSource reportDataSource = new ReportDataSource
+                {
                     // Must match the DataSet in the RDLC
-                    reportDataSource.Name = "DataSet1";
-                    reportDataSource.Value = ds.Tables[0];
-                    this.reportViewer1.LocalReport.DataSources.Add(reportDataSource);
+                    Name = "DataSet1",
+                    Value = ds.Tables[0]
+                };
+                this.reportViewer1.LocalReport.DataSources.Add(reportDataSource);
                     this.reportViewer1.RefreshReport();
                 
             }
@@ -198,10 +206,12 @@ namespace FM
                 this.reportViewer1.Reset();
                 this.reportViewer1.ProcessingMode = ProcessingMode.Local;
                 this.reportViewer1.LocalReport.ReportEmbeddedResource = "FM.FuelMileage.rdlc";
-                ReportDataSource reportDataSource = new ReportDataSource();
-                // Must match the DataSet in the RDLC
-                reportDataSource.Name = "DataSet1";
-                reportDataSource.Value = ds.Tables[0];
+                ReportDataSource reportDataSource = new ReportDataSource
+                {
+                    // Must match the DataSet in the RDLC
+                    Name = "DataSet1",
+                    Value = ds.Tables[0]
+                };
                 this.reportViewer1.LocalReport.DataSources.Add(reportDataSource);
                 this.reportViewer1.RefreshReport();
             }
@@ -228,10 +238,12 @@ namespace FM
                 this.reportViewer1.Reset();
                 this.reportViewer1.ProcessingMode = ProcessingMode.Local;
                 this.reportViewer1.LocalReport.ReportEmbeddedResource = "FM.OOS.rdlc";
-                ReportDataSource reportDataSource = new ReportDataSource();
-                // Must match the DataSet in the RDLC
-                reportDataSource.Name = "DataSet1";
-                reportDataSource.Value = ds.Tables[0];
+                ReportDataSource reportDataSource = new ReportDataSource
+                {
+                    // Must match the DataSet in the RDLC
+                    Name = "DataSet1",
+                    Value = ds.Tables[0]
+                };
                 this.reportViewer1.LocalReport.DataSources.Add(reportDataSource);
                 this.reportViewer1.RefreshReport();
             }
@@ -257,10 +269,12 @@ namespace FM
                 this.reportViewer1.Reset();
                 this.reportViewer1.ProcessingMode = ProcessingMode.Local;
                 this.reportViewer1.LocalReport.ReportEmbeddedResource = "FM.NotUsed.rdlc";
-                ReportDataSource reportDataSource = new ReportDataSource();
-                // Must match the DataSet in the RDLC
-                reportDataSource.Name = "DataSet1";
-                reportDataSource.Value = ds.Tables[0];
+                ReportDataSource reportDataSource = new ReportDataSource
+                {
+                    // Must match the DataSet in the RDLC
+                    Name = "DataSet1",
+                    Value = ds.Tables[0]
+                };
                 this.reportViewer1.LocalReport.DataSources.Add(reportDataSource);
                 this.reportViewer1.RefreshReport();
             }

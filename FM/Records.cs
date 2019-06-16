@@ -12,7 +12,7 @@ namespace FM
         {
             InitializeComponent();
             this.textBox1.Text = GlobalVar._date.ToShortDateString();
-            setwhse();
+            Setwhse();
             this.userTextBox.Text = GlobalVar._userid.ToString();
       
         }
@@ -20,7 +20,7 @@ namespace FM
         
 
 
-        private void recordsBindingNavigatorSaveItem_Click(object sender, EventArgs e)
+        private void RecordsBindingNavigatorSaveItem_Click(object sender, EventArgs e)
         {
             this.Validate();
             this.recordsBindingSource.EndEdit();
@@ -39,7 +39,7 @@ namespace FM
             // TODO: This line of code loads data into the 'gHBWFMDataSet.Status' table. You can move, or remove it, as needed.
             this.statusTableAdapter.Fill(this.gHBWFMDataSet.Status);
 
-            fillTrucks();
+            FillTrucks();
 
             // TODO: This line of code loads data into the 'gHBWFMDataSet.Records' table. You can move, or remove it, as needed.
             this.recordsTableAdapter.Fill(this.gHBWFMDataSet.Records);
@@ -48,7 +48,7 @@ namespace FM
 
         }
 
-        public void setwhse()
+        public void Setwhse()
         {
             if (GlobalVar._whse == 1)
             { this.warehouseTextBox.Text = "Canterbury"; }
@@ -87,8 +87,7 @@ namespace FM
             { this.warehouseTextBox.Text = "Youngwood"; }
         }
 
-
-        void fillTrucks()
+        private void FillTrucks()
         {
             var connString = GlobalVar.conString;
 
@@ -107,9 +106,11 @@ namespace FM
                     {
                         int _whse = GlobalVar._whse;
                         string _date = GlobalVar._date.ToShortDateString();
-                        SqlCommand cmd = new SqlCommand();
-                        cmd.Connection = c;
-                        cmd.CommandText = "Insert into Dates (Date, Warehouse) Values(@Date, @Warehouse)";
+                        SqlCommand cmd = new SqlCommand
+                        {
+                            Connection = c,
+                            CommandText = "Insert into Dates (Date, Warehouse) Values(@Date, @Warehouse)"
+                        };
                         cmd.Parameters.AddWithValue("@Date", _date);
                         cmd.Parameters.AddWithValue("@Warehouse", _whse);
 
@@ -210,11 +211,13 @@ namespace FM
             }
         }
 
-         void fillRemainder()
+        private void FillRemainder()
         {
             string _num = this.listBox1.SelectedValue.ToString();
-            SqlConnection con = new SqlConnection();
-            con.ConnectionString = GlobalVar.conString;
+            SqlConnection con = new SqlConnection
+            {
+                ConnectionString = GlobalVar.conString
+            };
             con.Open();
 
 
@@ -253,11 +256,11 @@ namespace FM
 
         }
 
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void ListBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             
-                        fillRemainder();
-            statusListBox_SelectedIndexChanged(sender, e);
+                        FillRemainder();
+            StatusListBox_SelectedIndexChanged(sender, e);
                     }
 
                 
@@ -265,13 +268,13 @@ namespace FM
             
         
 
-        private void button2_Click(object sender, EventArgs e)
+        private void Button2_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Button1_Click(object sender, EventArgs e)
         {
 
 
@@ -432,10 +435,10 @@ namespace FM
                                         // user clicked yes
                                        // var connString = GlobalVar.conString;
                                         SqlConnection cn = new SqlConnection(connString);
-                                        SqlCommand cmd = new SqlCommand();
-
-
-                                        cmd.Connection = cn;
+                                        SqlCommand cmd = new SqlCommand
+                                        {
+                                            Connection = cn
+                                        };
                                         cn.Open();
                                         cmd.CommandText = "Insert into Records (Date, Warehouse, Truck, Status, Miles, Gallons, Type, UserID, Duty, Capacity, Fuel, MilesDriven ) Values(@Date, @Warehouse, @Truck, @Status, @Miles, @Gallons, @Type, @UserID, @Duty, @Capacity, @Fuel, @MilesDriven)";
                                         cmd.Parameters.AddWithValue("@Date", _date);
@@ -461,7 +464,7 @@ namespace FM
                                             //cn.Close();
 
 
-                                            fillTrucks();
+                                            FillTrucks();
 
                                         }
                                         catch (Exception ex)
@@ -473,10 +476,10 @@ namespace FM
 
                                         var connString2 = GlobalVar.conString;
                                         SqlConnection cn2 = new SqlConnection(connString2);
-                                        SqlCommand cmd2 = new SqlCommand();
-
-
-                                        cmd2.Connection = cn2;
+                                        SqlCommand cmd2 = new SqlCommand
+                                        {
+                                            Connection = cn2
+                                        };
                                         cn2.Open();
                                         cmd2.CommandText = " DECLARE @Miles int, @Truck char(10) SET @Miles = " + _miles + " SET @Truck = '" + _num + "' Update Truck SET Odometer = @Miles WHERE Num = @Truck ";
                                         // cmd2.Parameters.AddWithValue("@Truck", _num);
@@ -516,10 +519,10 @@ namespace FM
                                         // user clicked yes
                                        // var connString = GlobalVar.conString;
                                         SqlConnection cn = new SqlConnection(connString);
-                                        SqlCommand cmd = new SqlCommand();
-
-
-                                        cmd.Connection = cn;
+                                        SqlCommand cmd = new SqlCommand
+                                        {
+                                            Connection = cn
+                                        };
                                         cn.Open();
                                         cmd.CommandText = "Insert into Records (Date, Warehouse, Truck, Status, Miles, Gallons, Type, UserID, Duty, Capacity, Fuel, MilesDriven) Values(@Date, @Warehouse, @Truck, @Status, @Miles, @Gallons, @Type, @UserID, @Duty, @Capacity, @Fuel, @MilesDriven)";
                                         cmd.Parameters.AddWithValue("@Date", _date);
@@ -545,7 +548,7 @@ namespace FM
                                             //cn.Close();
 
 
-                                            fillTrucks();
+                                            FillTrucks();
 
                                         }
                                         catch (Exception ex)
@@ -557,10 +560,10 @@ namespace FM
 
                                         var connString2 = GlobalVar.conString;
                                         SqlConnection cn2 = new SqlConnection(connString2);
-                                        SqlCommand cmd2 = new SqlCommand();
-
-
-                                        cmd2.Connection = cn2;
+                                        SqlCommand cmd2 = new SqlCommand
+                                        {
+                                            Connection = cn2
+                                        };
                                         cn2.Open();
                                         cmd2.CommandText = " DECLARE @Miles int, @Truck char(10) SET @Miles = " + _miles + " SET @Truck = '" + _num + "' Update Truck SET Odometer = @Miles WHERE Num = @Truck ";
                                         //     cmd2.Parameters.AddWithValue("@Truck", _num);
@@ -601,10 +604,10 @@ namespace FM
                                         // user clicked yes
                                         //var connString = GlobalVar.conString;
                                         SqlConnection cn = new SqlConnection(connString);
-                                        SqlCommand cmd = new SqlCommand();
-
-
-                                        cmd.Connection = cn;
+                                        SqlCommand cmd = new SqlCommand
+                                        {
+                                            Connection = cn
+                                        };
                                         cn.Open();
                                         cmd.CommandText = "Insert into Records (Date, Warehouse, Truck, Status, Miles, Gallons, Type, UserID, Duty, OOS, Capacity, MilesDriven) Values(@Date, @Warehouse, @Truck, @Status, @Miles, @Gallons, @Type, @UserID, @Duty, @OOS, @Capacity, @MilesDriven)";
                                         cmd.Parameters.AddWithValue("@Date", _date);
@@ -630,7 +633,7 @@ namespace FM
                                             //cn.Close();
 
 
-                                            fillTrucks();
+                                            FillTrucks();
 
                                         }
                                         catch (Exception ex)
@@ -643,10 +646,10 @@ namespace FM
 
                                         var connString2 = GlobalVar.conString;
                                         SqlConnection cn2 = new SqlConnection(connString2);
-                                        SqlCommand cmd2 = new SqlCommand();
-
-
-                                        cmd2.Connection = cn2;
+                                        SqlCommand cmd2 = new SqlCommand
+                                        {
+                                            Connection = cn2
+                                        };
                                         cn2.Open();
                                         cmd2.CommandText = " DECLARE @Miles int, @Truck char(10) SET @Miles = " + _miles + " SET @Truck = '" + _num + "' Update Truck SET Odometer = @Miles WHERE Num = @Truck ";
                                         //  cmd2.Parameters.AddWithValue("@Truck", _num);
@@ -687,10 +690,10 @@ namespace FM
                                         // user clicked yes
                                         //var connString = GlobalVar.conString;
                                         SqlConnection cn = new SqlConnection(connString);
-                                        SqlCommand cmd = new SqlCommand();
-
-
-                                        cmd.Connection = cn;
+                                        SqlCommand cmd = new SqlCommand
+                                        {
+                                            Connection = cn
+                                        };
                                         cn.Open();
                                         cmd.CommandText = "Insert into Records (Date, Warehouse, Truck, Status, Miles, Gallons, Type, UserID, Duty, Capacity, MilesDriven) Values(@Date, @Warehouse, @Truck, @Status, @Miles, @Gallons, @Type, @UserID, @Duty, @Capacity, @MilesDriven)";
                                         cmd.Parameters.AddWithValue("@Date", _date);
@@ -715,7 +718,7 @@ namespace FM
                                             // cn.Close();
 
 
-                                            fillTrucks();
+                                            FillTrucks();
 
                                         }
                                         catch (Exception ex)
@@ -728,10 +731,10 @@ namespace FM
 
                                         var connString2 = GlobalVar.conString;
                                         SqlConnection cn2 = new SqlConnection(connString2);
-                                        SqlCommand cmd2 = new SqlCommand();
-
-
-                                        cmd2.Connection = cn2;
+                                        SqlCommand cmd2 = new SqlCommand
+                                        {
+                                            Connection = cn2
+                                        };
                                         cn2.Open();
                                         cmd2.CommandText = " DECLARE @Miles int, @Truck char(10) SET @Miles = " + _miles + " SET @Truck = '" + _num + "' Update Truck SET Odometer = @Miles WHERE Num = @Truck ";
                                         //   cmd2.Parameters.AddWithValue("@Truck", _num);
@@ -774,7 +777,7 @@ namespace FM
             }
         }
 
-        private void statusListBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void StatusListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (this.statusListBox.SelectedValue == null)
             {
@@ -850,11 +853,10 @@ namespace FM
 
 
 
-        private void galsTextBox_Validating(object sender, CancelEventArgs e)
+        private void GalsTextBox_Validating(object sender, CancelEventArgs e)
         {
-            int numberEntered;
 
-            if (int.TryParse(galsTextBox.Text, out numberEntered))
+            if (int.TryParse(galsTextBox.Text, out int numberEntered))
             {
                 if (numberEntered < 0)
                 {
@@ -862,7 +864,7 @@ namespace FM
                     galsTextBox.Select();
                 }
             }
-            else 
+            else
             {
                 MessageBox.Show("You need to enter a valid number");
                 galsTextBox.Select();
@@ -870,11 +872,10 @@ namespace FM
 
         }
 
-        private void mileTextBox_Validating(object sender, CancelEventArgs e)
+        private void MileTextBox_Validating(object sender, CancelEventArgs e)
         {
-            int numberEntered;
 
-            if (int.TryParse(mileTextBox.Text, out numberEntered))
+            if (int.TryParse(mileTextBox.Text, out int numberEntered))
             {
                 if (numberEntered < 0)
                 {
@@ -890,11 +891,10 @@ namespace FM
         }
 
 
-        private void fueltextBox_Validating(object sender, CancelEventArgs e)
+        private void FueltextBox_Validating(object sender, CancelEventArgs e)
         {
-            int numberEntered;
 
-            if (int.TryParse(fueltextBox.Text, out numberEntered))
+            if (int.TryParse(fueltextBox.Text, out int numberEntered))
             {
                 if (numberEntered < 0)
                 {
@@ -911,11 +911,10 @@ namespace FM
 
 
 
-        private void drivenTextBox_Validating(object sender, CancelEventArgs e)
+        private void DrivenTextBox_Validating(object sender, CancelEventArgs e)
         {
-            int numberEntered;
 
-            if (int.TryParse(drivenTextBox.Text, out numberEntered))
+            if (int.TryParse(drivenTextBox.Text, out int numberEntered))
             {
                 if (numberEntered < 0)
                 {

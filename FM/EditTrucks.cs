@@ -41,8 +41,10 @@ namespace FM
             string _odometer = "";
             string _rental = "";
 
-            SqlConnection con = new SqlConnection();
-            con.ConnectionString = GlobalVar.conString;
+            SqlConnection con = new SqlConnection
+            {
+                ConnectionString = GlobalVar.conString
+            };
             con.Open();
 
 
@@ -147,10 +149,10 @@ namespace FM
                     // user clicked yes
                     var connString = GlobalVar.conString;
                     SqlConnection cn = new SqlConnection(connString);
-                    SqlCommand cmd = new SqlCommand();
-
-
-                    cmd.Connection = cn;
+                    SqlCommand cmd = new SqlCommand
+                    {
+                        Connection = cn
+                    };
                     cn.Open();
                     cmd.CommandText = "Update Truck Set Type = @Type, Duty = @Duty, Warehouse = @Warehouse, Capacity = @Capacity, LastChangedBy = @LastChangedBy, LastChangeDate = @LastChangeDate, Odometer = @Odometer, Rental = @Rental Where (Num = @Num)";// Values(@Type, @Duty, @Warehouse, @Capacity, @LastChangedBy, @LastChangeDate, @Num)";
                     cmd.Parameters.AddWithValue("@Num", _num);

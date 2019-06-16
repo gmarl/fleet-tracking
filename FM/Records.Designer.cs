@@ -192,7 +192,7 @@
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(68, 56);
             this.listBox1.TabIndex = 0;
-            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
+            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.ListBox1_SelectedIndexChanged);
             // 
             // statusBindingSource1
             // 
@@ -209,7 +209,7 @@
             this.statusListBox.Size = new System.Drawing.Size(101, 43);
             this.statusListBox.TabIndex = 1;
             this.statusListBox.ValueMember = "ID";
-            this.statusListBox.SelectedIndexChanged += new System.EventHandler(this.statusListBox_SelectedIndexChanged);
+            this.statusListBox.SelectedIndexChanged += new System.EventHandler(this.StatusListBox_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -263,7 +263,7 @@
             this.mileTextBox.Size = new System.Drawing.Size(81, 20);
             this.mileTextBox.TabIndex = 3;
             this.mileTextBox.Text = "0";
-            this.mileTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.mileTextBox_Validating);
+            this.mileTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.MileTextBox_Validating);
             // 
             // galsTextBox
             // 
@@ -272,7 +272,7 @@
             this.galsTextBox.Size = new System.Drawing.Size(71, 20);
             this.galsTextBox.TabIndex = 2;
             this.galsTextBox.Text = "0";
-            this.galsTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.galsTextBox_Validating);
+            this.galsTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.GalsTextBox_Validating);
             // 
             // typeTextBox
             // 
@@ -323,7 +323,7 @@
             this.button1.TabIndex = 4;
             this.button1.Text = "OK/Next";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // button2
             // 
@@ -333,7 +333,7 @@
             this.button2.TabIndex = 5;
             this.button2.Text = "Cancel";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.button2.Click += new System.EventHandler(this.Button2_Click);
             // 
             // oOSListBox
             // 
@@ -363,7 +363,7 @@
             this.fueltextBox.Size = new System.Drawing.Size(71, 20);
             this.fueltextBox.TabIndex = 43;
             this.fueltextBox.Text = "0";
-            this.fueltextBox.Validating += new System.ComponentModel.CancelEventHandler(this.fueltextBox_Validating);
+            this.fueltextBox.Validating += new System.ComponentModel.CancelEventHandler(this.FueltextBox_Validating);
             // 
             // label8
             // 
@@ -439,7 +439,7 @@
             this.drivenTextBox.Size = new System.Drawing.Size(81, 20);
             this.drivenTextBox.TabIndex = 51;
             this.drivenTextBox.Text = "0";
-            this.drivenTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.drivenTextBox_Validating);
+            this.drivenTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.DrivenTextBox_Validating);
             // 
             // label12
             // 
